@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EVA | AI Banking Service Hub</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="#top" aria-label="EVA home">
+        <span class="brand-mark">E</span>
+        <span>
+          <strong>EVA</strong>
+          <small>AI Banking Service Hub</small>
+        </span>
+      </a>
+      <nav class="top-nav" aria-label="Primary navigation">
+        <a href="#platform">Platform</a>
+        <a href="#knowledge">Knowledge base</a>
+        <a href="#solution">Technical solution</a>
+        <a href="#chat">Product chat</a>
+      </nav>
+      <a class="header-action" href="#chat">Ask EVA</a>
+    </header>
+
+    <main id="top">
+      <section class="hero">
+        <img class="hero-image" src="./assets/eva-banking-hub-hero.png" alt="" />
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+          <div class="eyebrow">From IVR to AI-driven self-service</div>
+          <h1>EVA resolves banking requests before the queue begins.</h1>
+          <p>
+            An AI-first customer service platform for banks: one governed agent across voice,
+            chat, mobile, and web that understands intent, verifies identity, calls banking APIs,
+            and completes the customer journey.
+          </p>
+          <div class="hero-actions">
+            <a class="primary-action" href="#solution">View technical flow</a>
+            <a class="secondary-action" href="#knowledge">Open knowledge base</a>
+          </div>
+          <div class="metric-strip" aria-label="Business impact">
+            <div><strong>30-60%</strong><span>operator contacts reduced</span></div>
+            <div><strong>0 wait</strong><span>for high-volume requests</span></div>
+            <div><strong>+NPS</strong><span>faster full resolution</span></div>
+            <div><strong>new revenue</strong><span>timely cross-sell</span></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section split" id="platform">
+        <div>
+          <p class="section-kicker">Platform proposition</p>
+          <h2>A single service brain where banks currently have IVR, chatbots, scripts, and disconnected logic.</h2>
+        </div>
+        <div class="capability-grid">
+          <article>
+            <span>01</span>
+            <h3>True resolution</h3>
+            <p>Intent, identity, API calls, decisioning, and confirmation in one controlled service flow.</p>
+          </article>
+          <article>
+            <span>02</span>
+            <h3>Bank-grade context</h3>
+            <p>Customer, product, risk, channel, and interaction context without making clients repeat data.</p>
+          </article>
+          <article>
+            <span>03</span>
+            <h3>On-demand integration</h3>
+            <p>Core systems are called only when needed, improving speed and lowering unnecessary load.</p>
+          </article>
+          <article>
+            <span>04</span>
+            <h3>Proactive AI</h3>
+            <p>Fraud alerts, reminders, application nudges, and compliant next-best offers.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section knowledge" id="knowledge">
+        <div class="section-heading">
+          <p class="section-kicker">Customer knowledge base</p>
+          <h2>Give corporate buyers a place to inspect the product, not just read a pitch.</h2>
+        </div>
+        <div class="knowledge-shell">
+          <aside class="kb-nav" aria-label="Knowledge base topics">
+            <button class="kb-button active" data-topic="overview">Executive overview</button>
+            <button class="kb-button" data-topic="usecases">Use cases</button>
+            <button class="kb-button" data-topic="security">Security and compliance</button>
+            <button class="kb-button" data-topic="mvp">MVP scope</button>
+          </aside>
+          <article class="kb-panel" id="kb-panel" aria-live="polite"></article>
+        </div>
+      </section>
+
+      <section class="section solution" id="solution">
+        <div>
+          <p class="section-kicker">Technical solution</p>
+          <h2>Resolver architecture for banks that need governance, auditability, and real backend action.</h2>
+          <p class="solution-copy">
+            EVA is positioned as an orchestration layer between channels, identity, banking APIs,
+            decision rules, and human escalation. The same logic can serve voice, chat, mobile, and web.
+          </p>
+        </div>
+        <div class="flow-board">
+          <div class="flow-step"><strong>1</strong><span>Intent</span><p>Detect customer goal and urgency.</p></div>
+          <div class="flow-step"><strong>2</strong><span>Identity</span><p>Verify customer and authorization level.</p></div>
+          <div class="flow-step"><strong>3</strong><span>Context</span><p>Load customer, product, channel, and risk signals.</p></div>
+          <div class="flow-step"><strong>4</strong><span>API</span><p>Call card, account, CRM, loan, or access systems.</p></div>
+          <div class="flow-step"><strong>5</strong><span>Resolution</span><p>Complete the task, confirm, log, and suggest next step.</p></div>
+        </div>
+      </section>
+
+      <section class="section chat-section" id="chat">
+        <div class="chat-intro">
+          <p class="section-kicker">Product chat</p>
+          <h2>Let a customer ask about EVA in the same place they review the solution.</h2>
+          <p>
+            This demo chat is seeded with EVA product knowledge. It answers common buyer questions about
+            value, scope, architecture, security posture, and MVP use cases.
+          </p>
+        </div>
+        <div class="chat-card">
+          <div class="chat-header">
+            <span class="status-dot"></span>
+            <div><strong>EVA product assistant</strong><small>Demo knowledge mode</small></div>
+          </div>
+          <div class="chat-messages" id="chat-messages" aria-live="polite"></div>
+          <form class="chat-form" id="chat-form">
+            <input id="chat-input" autocomplete="off" placeholder="Ask about architecture, MVP, ROI, or security..." />
+            <button type="submit">Send</button>
+          </form>
+          <div class="quick-prompts">
+            <button data-question="What makes EVA different from a chatbot?">Why not chatbot?</button>
+            <button data-question="What is the MVP scope?">MVP scope</button>
+            <button data-question="How does EVA integrate with banking systems?">Integration</button>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script src="./script.js"></script>
+  </body>
+</html>
