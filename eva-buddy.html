@@ -1,0 +1,1570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EVA & Virtual Buddy - O2 AI Products</title>
+<style>
+  :root {
+    --primary:     #0019A5;
+    --primary-mid: #00A1E0;
+    --primary-light: #00C8C8;
+    --accent-green: #00C389;
+    --eva-primary: #0019A5;
+    --eva-mid:     #00A1E0;
+    --eva-light:   #00C8C8;
+    --eva-bg:      #f0f4ff;
+    --eva-border:  #c5d5f0;
+    --buddy-primary: #003D6B;
+    --buddy-mid:     #1A7FAD;
+    --buddy-light:   #4FAFCF;
+    --buddy-bg:      #eaf4fb;
+    --buddy-border:  #a8d4ea;
+    --text-primary: #1A1A2E;
+    --text-secondary: #555;
+    --text-tertiary: #777;
+    --bg-light: #F4F6FB;
+    --bg-white: #ffffff;
+    --border-color: #E8ECF5;
+    --shadow-sm: 0 2px 12px rgba(0,0,0,0.07);
+    --shadow-md: 0 4px 20px rgba(0,0,0,0.07);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    background: var(--bg-light);
+    color: var(--text-primary);
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  header {
+    background: var(--bg-white);
+    box-shadow: var(--shadow-sm);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  nav {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 70px;
+  }
+
+  .logo {
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: var(--primary);
+    text-decoration: none;
+  }
+
+  nav ul {
+    list-style: none;
+    display: flex;
+    gap: 30px;
+    align-items: center;
+  }
+
+  nav a {
+    text-decoration: none;
+    color: var(--text-primary);
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: color 0.2s;
+  }
+
+  nav a:hover,
+  nav a.active {
+    color: var(--primary);
+  }
+
+  .container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  .page-header {
+    text-align: center;
+    padding: 60px 20px 40px;
+  }
+
+  .page-header h1 {
+    font-size: 2.8rem;
+    font-weight: 800;
+    color: var(--primary);
+    margin-bottom: 12px;
+  }
+
+  .page-header p {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .legend-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin: 40px 0 60px;
+  }
+
+  .legend-card {
+    background: var(--bg-white);
+    border-radius: 12px;
+    padding: 28px;
+    border: 2px solid;
+    display: flex;
+    gap: 20px;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .legend-eva { border-color: var(--eva-primary); }
+  .legend-buddy { border-color: var(--buddy-primary); }
+
+  .legend-icon {
+    font-size: 2.5rem;
+    flex-shrink: 0;
+  }
+
+  .legend-card h3 {
+    font-size: 1.2rem;
+    font-weight: 800;
+    margin-bottom: 8px;
+  }
+
+  .legend-eva h3 { color: var(--eva-primary); }
+  .legend-buddy h3 { color: var(--buddy-primary); }
+
+  .legend-card p {
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+
+  .product-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin: 40px 0 50px;
+    flex-wrap: wrap;
+  }
+
+  .product-tab {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 40px;
+    border-radius: 50px;
+    font-size: 1.05rem;
+    font-weight: 700;
+    cursor: pointer;
+    border: 3px solid;
+    background: var(--bg-white);
+    transition: all 0.25s;
+  }
+
+  .eva-tab {
+    color: var(--eva-primary);
+    border-color: var(--eva-primary);
+  }
+
+  .eva-tab:hover,
+  .eva-tab.active {
+    background: var(--eva-primary);
+    color: white;
+  }
+
+  .buddy-tab {
+    color: var(--buddy-primary);
+    border-color: var(--buddy-primary);
+  }
+
+  .buddy-tab:hover,
+  .buddy-tab.active {
+    background: var(--buddy-primary);
+    color: white;
+  }
+
+  .tab-icon { font-size: 1.3rem; }
+
+  .product-section {
+    display: none;
+  }
+
+  .product-section.active {
+    display: block;
+  }
+
+  .section-header {
+    text-align: center;
+    margin: 60px 0 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+  }
+
+  .section-header h2 {
+    font-size: 2rem;
+    font-weight: 800;
+    white-space: nowrap;
+  }
+
+  .eva-section h2 { color: var(--eva-primary); }
+  .buddy-section h2 { color: var(--buddy-primary); }
+
+  .divider {
+    flex: 1;
+    height: 2px;
+    border-radius: 1px;
+  }
+
+  .eva-section .divider {
+    background: linear-gradient(90deg, var(--eva-mid), transparent);
+  }
+
+  .buddy-section .divider {
+    background: linear-gradient(90deg, var(--buddy-mid), transparent);
+  }
+
+  .channels-block {
+    background: var(--bg-white);
+    border-radius: 12px;
+    padding: 32px;
+    margin-bottom: 50px;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .channels-block h3 {
+    font-size: 1.2rem;
+    font-weight: 800;
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .eva-block h3 { color: var(--eva-primary); }
+  .buddy-block h3 { color: var(--buddy-primary); }
+
+  .channels-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+  }
+
+  .channel-item {
+    border-radius: 12px;
+    padding: 20px;
+    border: 1px solid;
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+  }
+
+  .eva-channel {
+    background: linear-gradient(135deg, var(--eva-bg), #e8f9ff);
+    border-color: var(--eva-border);
+  }
+
+  .buddy-channel {
+    background: linear-gradient(135deg, var(--buddy-bg), #daeef8);
+    border-color: var(--buddy-border);
+  }
+
+  .channel-icon { font-size: 2rem; flex-shrink: 0; }
+
+  .channel-item h4 {
+    font-size: 1.05rem;
+    font-weight: 800;
+    margin-bottom: 6px;
+  }
+
+  .eva-channel h4 { color: var(--eva-primary); }
+  .buddy-channel h4 { color: var(--buddy-primary); }
+
+  .channel-item p {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+  }
+
+  .variants-wrapper {
+    margin-bottom: 60px;
+  }
+
+  .variants-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    margin-bottom: 40px;
+  }
+
+  .variants-grid.buddy { grid-template-columns: repeat(3, 1fr); }
+
+  .variant-card {
+    background: var(--bg-white);
+    border-radius: 12px;
+    border: 2px solid transparent;
+    box-shadow: var(--shadow-md);
+    overflow: hidden;
+    transition: all 0.2s;
+  }
+
+  .variant-card:hover {
+    transform: translateY(-4px);
+  }
+
+  .eva-card:hover { border-color: var(--eva-mid); }
+  .buddy-card:hover { border-color: var(--buddy-mid); }
+
+  .variant-header {
+    padding: 24px;
+    color: white;
+  }
+
+  .eva-header { background: linear-gradient(135deg, var(--eva-primary), var(--eva-mid)); }
+  .buddy-header { background: linear-gradient(135deg, var(--buddy-primary), var(--buddy-mid)); }
+
+  .variant-badge {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 6px 12px;
+    border-radius: 20px;
+    background: rgba(255,255,255,0.25);
+    margin-bottom: 10px;
+  }
+
+  .variant-title {
+    font-size: 1.4rem;
+    font-weight: 800;
+    margin-bottom: 6px;
+  }
+
+  .variant-value {
+    font-size: 1rem;
+    font-weight: 600;
+    opacity: 0.95;
+    margin-bottom: 4px;
+  }
+
+  .variant-target {
+    font-size: 0.9rem;
+    opacity: 0.85;
+    margin-top: 8px;
+  }
+
+  .variant-content {
+    padding: 20px;
+  }
+
+  .variant-section {
+    margin-bottom: 18px;
+  }
+
+  .section-label {
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text-tertiary);
+    margin-bottom: 8px;
+  }
+
+  .variant-description {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+  }
+
+  .variant-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .variant-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .variant-list li::before {
+    content: '✓';
+    color: var(--accent-green);
+    font-weight: 800;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .variant-list li.inherited {
+    color: var(--text-tertiary);
+    font-style: italic;
+  }
+
+  .variant-list li.inherited::before {
+    content: '↑';
+    color: var(--text-tertiary);
+  }
+
+  .collaborators {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .collaborators li {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.93rem;
+  }
+
+  .collaborators li::before {
+    content: '👤';
+    font-size: 0.85rem;
+  }
+
+  .complexity {
+    margin-top: 12px;
+  }
+
+  .complexity-bar {
+    height: 8px;
+    background: #e0e6f5;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 6px;
+  }
+
+  .complexity-fill-eva {
+    height: 100%;
+    background: linear-gradient(90deg, var(--eva-mid), var(--eva-primary));
+    border-radius: 10px;
+  }
+
+  .complexity-fill-buddy {
+    height: 100%;
+    background: linear-gradient(90deg, var(--buddy-light), var(--buddy-primary));
+    border-radius: 10px;
+  }
+
+  .complexity-label {
+    font-size: 0.9rem;
+    color: var(--text-tertiary);
+  }
+
+  .sara-box {
+    border-radius: 10px;
+    padding: 12px 14px;
+    border: 1.5px solid;
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    margin-top: 14px;
+  }
+
+  .eva-sara {
+    background: linear-gradient(135deg, #eef3ff, #e2f6ff);
+    border-color: var(--eva-mid);
+  }
+
+  .buddy-sara {
+    background: linear-gradient(135deg, #e8f4fb, #d8eef8);
+    border-color: var(--buddy-mid);
+  }
+
+  .sara-icon { font-size: 1.1rem; flex-shrink: 0; }
+
+  .sara-title {
+    font-size: 0.9rem;
+    font-weight: 800;
+    margin-bottom: 3px;
+  }
+
+  .eva-sara .sara-title { color: var(--eva-primary); }
+  .buddy-sara .sara-title { color: var(--buddy-primary); }
+
+  .sara-text {
+    font-size: 0.9rem;
+    color: #333;
+    line-height: 1.4;
+    font-weight: 500;
+  }
+
+  .variant-footer {
+    padding: 0 20px 18px;
+    background: var(--bg-light);
+    border-top: 1px solid var(--border-color);
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .addons-sidebar {
+    background: var(--bg-white);
+    border-radius: 12px;
+    padding: 28px;
+    box-shadow: var(--shadow-md);
+    margin-bottom: 50px;
+  }
+
+  .addons-title {
+    font-size: 1.15rem;
+    font-weight: 800;
+    margin-bottom: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .eva-addon-title { color: var(--eva-primary); }
+  .buddy-addon-title { color: var(--buddy-primary); }
+
+  .addons-subtitle {
+    font-size: 0.9rem;
+    font-weight: 400;
+    color: var(--text-tertiary);
+  }
+
+  .addons-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+  }
+
+  .addon-item {
+    border-radius: 12px;
+    padding: 18px;
+    border: 1px solid;
+  }
+
+  .eva-addon {
+    background: linear-gradient(135deg, var(--eva-bg), #e8f9ff);
+    border-color: var(--eva-border);
+  }
+
+  .buddy-addon {
+    background: linear-gradient(135deg, var(--buddy-bg), #daeef8);
+    border-color: var(--buddy-border);
+  }
+
+  .addon-item h4 {
+    font-size: 1.05rem;
+    font-weight: 800;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .eva-addon h4 { color: var(--eva-primary); }
+  .buddy-addon h4 { color: var(--buddy-primary); }
+
+  .addon-item p {
+    font-size: 0.93rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+  }
+
+  .process-section {
+    background: var(--bg-white);
+    border-radius: 12px;
+    padding: 32px;
+    margin-bottom: 60px;
+    box-shadow: var(--shadow-md);
+  }
+
+  .process-title {
+    font-size: 1.15rem;
+    font-weight: 800;
+    margin-bottom: 28px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .eva-process-title { color: var(--eva-primary); }
+  .buddy-process-title { color: var(--buddy-primary); }
+
+  .process-note {
+    font-size: 0.85rem;
+    color: var(--text-tertiary);
+    font-weight: 500;
+  }
+
+  .process-steps {
+    display: flex;
+    align-items: stretch;
+    gap: 0;
+    margin-top: 20px;
+  }
+
+  .process-step {
+    flex: 1;
+    min-width: 140px;
+    position: relative;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .process-step:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    right: -10px;
+    top: 32px;
+    width: 0;
+    height: 0;
+    z-index: 2;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+  }
+
+  .eva-step:not(:last-child)::after {
+    border-left: 10px solid var(--eva-primary);
+  }
+
+  .buddy-step:not(:last-child)::after {
+    border-left: 10px solid var(--buddy-primary);
+  }
+
+  .step-box {
+    width: 100%;
+    border: 2px solid;
+    border-radius: 12px;
+    padding: 16px 10px 12px;
+    text-align: center;
+    transition: all 0.2s;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: center;
+    margin: 0 6px;
+  }
+
+  .eva-step .step-box {
+    background: var(--eva-bg);
+    border-color: var(--eva-primary);
+  }
+
+  .buddy-step .step-box {
+    background: var(--buddy-bg);
+    border-color: var(--buddy-primary);
+  }
+
+  .eva-step:hover .step-box,
+  .eva-step.active .step-box {
+    background: var(--eva-primary);
+    border-color: var(--eva-primary);
+    transform: translateY(-3px);
+  }
+
+  .buddy-step:hover .step-box,
+  .buddy-step.active .step-box {
+    background: var(--buddy-primary);
+    border-color: var(--buddy-primary);
+    transform: translateY(-3px);
+  }
+
+  .step-number {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    font-size: 0.9rem;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+  }
+
+  .eva-step .step-number { background: var(--eva-primary); }
+  .buddy-step .step-number { background: var(--buddy-primary); }
+
+  .eva-step:hover .step-number,
+  .eva-step.active .step-number,
+  .buddy-step:hover .step-number,
+  .buddy-step.active .step-number {
+    background: white;
+    color: #222;
+  }
+
+  .step-title {
+    font-size: 0.95rem;
+    font-weight: 800;
+    line-height: 1.3;
+    transition: color 0.2s;
+  }
+
+  .eva-step .step-title { color: var(--eva-primary); }
+  .buddy-step .step-title { color: var(--buddy-primary); }
+
+  .eva-step:hover .step-title,
+  .eva-step.active .step-title,
+  .buddy-step:hover .step-title,
+  .buddy-step.active .step-title {
+    color: white;
+  }
+
+  .step-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    justify-content: center;
+  }
+
+  .step-tag {
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 3px 8px;
+    border-radius: 20px;
+    transition: all 0.2s;
+  }
+
+  .eva-tag { background: rgba(0,25,165,0.1); color: var(--eva-primary); }
+  .buddy-tag { background: rgba(0,61,107,0.1); color: var(--buddy-primary); }
+
+  .eva-step:hover .eva-tag,
+  .eva-step.active .eva-tag,
+  .buddy-step:hover .buddy-tag,
+  .buddy-step.active .buddy-tag {
+    background: rgba(255,255,255,0.2);
+    color: white;
+  }
+
+  .step-detail {
+    margin-top: 16px;
+    border: 1.5px solid;
+    border-radius: 12px;
+    padding: 16px 20px;
+    display: none;
+    animation: fadeIn 0.2s;
+  }
+
+  .eva-detail {
+    background: linear-gradient(135deg, var(--eva-bg), #e8f9ff);
+    border-color: var(--eva-mid);
+  }
+
+  .buddy-detail {
+    background: linear-gradient(135deg, var(--buddy-bg), #daeef8);
+    border-color: var(--buddy-mid);
+  }
+
+  .step-detail.active {
+    display: block;
+  }
+
+  .step-detail h4 {
+    font-size: 1.05rem;
+    font-weight: 800;
+    margin-bottom: 12px;
+  }
+
+  .eva-detail h4 { color: var(--eva-primary); }
+  .buddy-detail h4 { color: var(--buddy-primary); }
+
+  .detail-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .detail-tag {
+    background: white;
+    font-size: 0.93rem;
+    font-weight: 700;
+    padding: 6px 14px;
+    border-radius: 20px;
+    border: 1.5px solid;
+  }
+
+  .eva-detail-tag {
+    border-color: var(--eva-mid);
+    color: var(--eva-primary);
+  }
+
+  .buddy-detail-tag {
+    border-color: var(--buddy-mid);
+    color: var(--buddy-primary);
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(5px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  footer {
+    background: var(--bg-white);
+    border-top: 1px solid var(--border-color);
+    padding: 40px 20px;
+    text-align: center;
+    color: var(--text-secondary);
+    margin-top: 80px;
+  }
+
+  @media (max-width: 1100px) {
+    .variants-grid { grid-template-columns: repeat(2, 1fr); }
+    .variants-grid.buddy { grid-template-columns: repeat(2, 1fr); }
+    .process-steps { flex-direction: column; gap: 10px; }
+    .process-step::after { display: none; }
+  }
+
+  @media (max-width: 700px) {
+    .variants-grid,
+    .variants-grid.buddy { grid-template-columns: 1fr; }
+    .legend-cards { grid-template-columns: 1fr; }
+    .page-header h1 { font-size: 2rem; }
+    .channels-grid { grid-template-columns: 1fr; }
+    .process-steps { flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="container">
+    <a href="index.html" class="logo">O2 AI</a>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="eva-buddy.html" class="active">Products</a></li>
+      <li><a href="index.html#solution">Solutions</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+</header>
+
+<div class="container">
+  <div class="page-header">
+    <h1>O2 AI Products</h1>
+    <p>EVA – Customer Service AI | Virtual Buddy – Internal Knowledge Platform</p>
+  </div>
+
+  <div class="legend-cards">
+    <div class="legend-card legend-eva">
+      <div class="legend-icon">🤖</div>
+      <div>
+        <h3>EVA – Customer Service AI</h3>
+        <p>Advanced AI assistant for seamless customer communication. Available 24/7 across chat, voice, and omnichannel platforms.</p>
+      </div>
+    </div>
+    <div class="legend-card legend-buddy">
+      <div class="legend-icon">🧠</div>
+      <div>
+        <h3>Virtual Buddy – Internal Knowledge Base</h3>
+        <p>AI assistant for employees. Instant access to internal documentation, processes, and company knowledge whenever needed.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="product-tabs">
+    <div class="product-tab eva-tab active" onclick="switchProduct('eva', this)">
+      <span class="tab-icon">🤖</span>
+      <span>EVA<br><small style="font-size:0.75rem;font-weight:500;">Customer Service</small></span>
+    </div>
+    <div class="product-tab buddy-tab" onclick="switchProduct('buddy', this)">
+      <span class="tab-icon">🧠</span>
+      <span>Virtual Buddy<br><small style="font-size:0.75rem;font-weight:500;">Internal Knowledge</small></span>
+    </div>
+  </div>
+
+  <!-- EVA SECTION -->
+  <div id="eva-section" class="product-section active">
+    <div class="channels-block eva-block">
+      <h3>📡 Input Channels</h3>
+      <p style="margin-bottom: 20px; color: var(--text-secondary);">Available across all EVA variants</p>
+      <div class="channels-grid">
+        <div class="channel-item eva-channel">
+          <div class="channel-icon">🌐</div>
+          <div>
+            <h4>Web Chat</h4>
+            <p>Chat widget embedded directly on your website, available 24/7</p>
+          </div>
+        </div>
+        <div class="channel-item eva-channel">
+          <div class="channel-icon">📱</div>
+          <div>
+            <h4>Applications</h4>
+            <p>Mobile or web app as a dedicated customer support channel</p>
+          </div>
+        </div>
+        <div class="channel-item eva-channel">
+          <div class="channel-icon">📞</div>
+          <div>
+            <h4>Voice</h4>
+            <p>Voice channel for natural customer conversation</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-header eva-section">
+      <div class="divider"></div>
+      <h2>📦 EVA Service Tiers</h2>
+      <div class="divider"></div>
+    </div>
+
+    <div class="variants-wrapper">
+      <div class="variants-grid eva-grid">
+        <!-- EVA Start -->
+        <div class="variant-card eva-card">
+          <div class="variant-header eva-header">
+            <span class="variant-badge">Tier 1</span>
+            <div class="variant-title">EVA Start</div>
+            <div class="variant-value">⚡ Immediate 24/7 Support</div>
+            <div class="variant-target">For high-volume support teams</div>
+          </div>
+          <div class="variant-content">
+            <div class="variant-section">
+              <div class="section-label">Solves</div>
+              <div class="variant-description">Growing customer support demands</div>
+            </div>
+            <div class="variant-section">
+              <div class="section-label">Includes</div>
+              <ul class="variant-list">
+                <li>AI Chatbot (RAG)</li>
+                <li>FAQ scenarios</li>
+              </ul>
+            </div>
+            <div class="variant-section">
+              <div class="section-label">Your Involvement</div>
+              <ul class="collaborators">
+                <li>Provide FAQ/Knowledge Base</li>
+                <li>Validate AI responses</li>
+                <li>Minimal IT required</li>
+              </ul>
+            </div>
+            <div class="complexity">
+              <div class="complexity-bar">
+                <div class="complexity-fill-eva" style="width: 20%;"></div>
+              </div>
+              <div class="complexity-label">Low complexity</div>
+            </div>
+            <div class="sara-box eva-sara">
+              <div class="sara-icon">🛡️</div>
+              <div>
+                <div class="sara-title">SARA</div>
+                <div class="sara-text">Response quality control – ensures accuracy and brand tone</div>
+              </div>
+            </div>
+          </div>
+          <div class="variant-footer">💡 Perfect first step with minimal IT overhead</div>
+        </div>
+
+        <!-- EVA Scale -->
+        <div class="variant-card eva-card">
+          <div class="variant-header eva-header">
+            <span class="variant-badge">Tier 2</span>
+            <div class="variant-title">EVA Scale</div>
+            <div class="variant-value">🔄 Agent Relief</div>
+            <div class="variant-target">For multi-scenario operations</div>
+          </div>
+          <div class="variant-content">
+            <div class="variant-section">
+              <div class="section-label">Solves</div>
+              <div class="variant-description">Large portion of requests handled manually</div>
+            </div>
+            <div class="variant-section">
+              <div class="section-label">Includes</div>
+              <ul class="variant-list">
+                <li class="inherited">Everything from EVA Start</li>
+                <li>Multiple scenarios</li>
+                <li>Basic integrations</li>
+                <li>AI testing</li>
+              </ul>
+            </div>
+            <div class="variant-section">
+              <div class="section-label">Your Involvement</div>
+              <ul class="collaborators">
+                <li>Define use cases</li>
+                <li>Collaborate on workflows</li>
+                <li>Minimal IT involvement</li>
+              </ul>
+            </div>
+            <div class="complexity">
+              <div class="complexity-bar">
+                <div class="complexity-fill-eva" style="width: 45%;"></div>
+              </div>
+              <div class="complexity-label">Medium complexity</div>
+            </div>
+            <div class="sara-box eva-sara">
+              <div class="sara-icon">🛡️</div>
+              <div>
+                <div class="sara-title">SARA</div>
+                <div class="sara-text">Scenario validation – monitors conversation flows and outcomes</div>
+              </div>
+            </div>
+          </div>
+          <div class="variant-footer">💡 Reduces call center load without complex setup</div>
+        </div>
+
+        <!-- EVA Perform -->
+        <div class="variant-card eva-card">
+          <div class="variant-header eva-header">
+            <span class="variant-badge">Tier 3</span>
+            <div class="variant-title">EVA Perform</div>
+            <div class="variant-value">🚀 Real Automation</div>
+            <div class="variant-target">For large enterprises</div>
+          </div>
+          <div class="variant-content">
+            <div class="variant-section">
+              <div class="section-label">Solves</div>
+              <div class="variant-description">Complex processes suitable for automation</div>
+            </div>
+            <div class="variant-section">
+              <div class="section-label">Includes</div>
+              <ul class="variant-list">
+                <li class="inherited">Everything from EVA Scale</li>
+                <li>Multi-skill AI agents</li>
+                <li>System integrations</li>
+                <li>End-to-end testing</li>
+              </ul>
+            </div>
+            <div class="variant-section">
+              <div class="section-label">Your Involvement</div>
+              <ul class="collaborators">
+                <li>Strong IT involvement</li>
+                <li>API & data connections</li>
+                <li>Business expertise</li>
+              </ul>
+            </div>
+            <div class="complexity">
+              <div class="complexity-bar">
+                <div class="complexity-fill-eva" style="width: 72%;"></div>
+              </div>
+              <div class="complexity-label">High complexity</div>
+            </div>
+            <div class="sara-box eva-sara">
+              <div class="sara-icon">🛡️</div>
+              <div>
+                <div class="sara-title">SARA</div>
+                <div class="sara-text">Decision auditing – monitors AI agent logic and data connections</div>
+              </div>
+            </div>
+          </div>
+          <div class="variant-footer">💡 Connects AI with business systems and data</div>
+        </div>
+
+        <!-- EVA Perform & Operate -->
+        <div class="variant-card eva-card">
+          <div class="variant-header eva-header">
+            <span class="variant-badge">Tier 4</span>
+            <div class="variant-title">EVA Perform&Operate</div>
+            <div class="variant-value">🧠 Results Without Worry</div>
+            <div class="variant-target">For resource-limited teams</div>
+          </div>
+          <div class="variant-content">
+            <div class="variant-section">
+              <div class="section-label">Solves</div>
+              <div class="variant-description">Limited internal AI development capacity</div>
+            </div>
+            <div class="variant-section">
+              <div class="section-label">Includes</div>
+              <ul class="variant-list">
+                <li class="inherited">Everything from EVA Perform</li>
+                <li>Operations & monitoring</li>
+                <li>Continuous AI tuning</li>
+                <li>Testing & reporting</li>
+              </ul>
+            </div>
+            <div class="variant-section">
+              <div class="section-label">Your Involvement</div>
+              <ul class="collaborators">
+                <li>Minimal operations</li>
+                <li>Business feedback</li>
+                <li>Strategic oversight</li>
+              </ul>
+            </div>
+            <div class="complexity">
+              <div class="complexity-bar">
+                <div class="complexity-fill-eva" style="width: 95%;"></div>
+              </div>
+              <div class="complexity-label">Fully O2-managed</div>
+            </div>
+            <div class="sara-box eva-sara">
+              <div class="sara-icon">🛡️</div>
+              <div>
+                <div class="sara-title">SARA</div>
+                <div class="sara-text">Real-time monitoring – continuous quality and compliance oversight</div>
+              </div>
+            </div>
+          </div>
+          <div class="variant-footer">💡 O2 handles everything – you focus on business</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="addons-sidebar">
+      <div class="addons-title eva-addon-title">
+        ➕ Optional Add-ons
+        <span class="addons-subtitle">Available with all EVA tiers</span>
+      </div>
+      <div class="addons-grid">
+        <div class="addon-item eva-addon">
+          <h4>🛡️ SARA</h4>
+          <p>Automatic response quality control. Monitors accuracy, tone, and compliance with company policies.</p>
+        </div>
+        <div class="addon-item eva-addon">
+          <h4>🖥️ Widget</h4>
+          <p>Embedded chat window directly on your website – quick deployment without development.</p>
+        </div>
+        <div class="addon-item eva-addon">
+          <h4>🎙️ AI Voice</h4>
+          <p>Voice technology integration for natural spoken customer interactions.</p>
+        </div>
+        <div class="addon-item eva-addon">
+          <h4>📱 Applications</h4>
+          <p>Mobile or web app as a dedicated customer support channel powered by EVA.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-header eva-section">
+      <div class="divider"></div>
+      <h2>🔄 Delivery Process</h2>
+      <div class="divider"></div>
+    </div>
+
+    <div class="process-section eva-process">
+      <div class="process-title eva-process-title">
+        📋 How We Deliver
+        <span class="process-note">(Click steps for details)</span>
+      </div>
+      <div class="process-steps">
+        <div class="process-step eva-step active" onclick="toggleStep(this, 'eva-step-1')">
+          <div class="step-box">
+            <div class="step-number">1</div>
+            <div class="step-title">Team & Design</div>
+            <div class="step-tags">
+              <span class="step-tag eva-tag">Scope</span>
+              <span class="step-tag eva-tag">Channels</span>
+            </div>
+          </div>
+        </div>
+        <div class="process-step eva-step" onclick="toggleStep(this, 'eva-step-2')">
+          <div class="step-box">
+            <div class="step-number">2</div>
+            <div class="step-title">Needs Assessment</div>
+            <div class="step-tags">
+              <span class="step-tag eva-tag">Use Cases</span>
+              <span class="step-tag eva-tag">Data</span>
+            </div>
+          </div>
+        </div>
+        <div class="process-step eva-step" onclick="toggleStep(this, 'eva-step-3')">
+          <div class="step-box">
+            <div class="step-number">3</div>
+            <div class="step-title">Solution Design</div>
+            <div class="step-tags">
+              <span class="step-tag eva-tag">Fit</span>
+              <span class="step-tag eva-tag">Estimate</span>
+            </div>
+          </div>
+        </div>
+        <div class="process-step eva-step" onclick="toggleStep(this, 'eva-step-4')">
+          <div class="step-box">
+            <div class="step-number">4</div>
+            <div class="step-title">Delivery</div>
+            <div class="step-tags">
+              <span class="step-tag eva-tag">Build</span>
+              <span class="step-tag eva-tag">Test</span>
+            </div>
+          </div>
+        </div>
+        <div class="process-step eva-step" onclick="toggleStep(this, 'eva-step-5')">
+          <div class="step-box">
+            <div class="step-number">5</div>
+            <div class="step-title">Pilot & Scale</div>
+            <div class="step-tags">
+              <span class="step-tag eva-tag">Rollout</span>
+              <span class="step-tag eva-tag">Optimize</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="step-detail eva-detail active" id="eva-step-1">
+        <h4>1️⃣ Team & Design</h4>
+        <div class="detail-tags">
+          <span class="detail-tag eva-detail-tag">📦 EVA Tier Selection</span>
+          <span class="detail-tag eva-detail-tag">🗂️ Scope Definition</span>
+          <span class="detail-tag eva-detail-tag">📡 Channel Choice</span>
+          <span class="detail-tag eva-detail-tag">👥 Team Assembly</span>
+        </div>
+      </div>
+      <div class="step-detail eva-detail" id="eva-step-2">
+        <h4>2️⃣ Needs Assessment</h4>
+        <div class="detail-tags">
+          <span class="detail-tag eva-detail-tag">🎯 Use Case Mapping</span>
+          <span class="detail-tag eva-detail-tag">🗃️ Data Readiness</span>
+          <span class="detail-tag eva-detail-tag">🔗 System Integration</span>
+          <span class="detail-tag eva-detail-tag">🏢 Operating Model</span>
+        </div>
+      </div>
+      <div class="step-detail eva-detail" id="eva-step-3">
+        <h4>3️⃣ Solution Design</h4>
+        <div class="detail-tags">
+          <span class="detail-tag eva-detail-tag">✅ Product Fit</span>
+          <span class="detail-tag eva-detail-tag">📋 Final Scope</span>
+          <span class="detail-tag eva-detail-tag">👤 Collaboration Plan</span>
+          <span class="detail-tag eva-detail-tag">💰 Cost Estimate</span>
+        </div>
+      </div>
+      <div class="step-detail eva-detail" id="eva-step-4">
+        <h4>4️⃣ Delivery</h4>
+        <div class="detail-tags">
+          <span class="detail-tag eva-detail-tag">🏗️ Build Framework</span>
+          <span class="detail-tag eva-detail-tag">🔗 Technical Integration</span>
+          <span class="detail-tag eva-detail-tag">🛡️ SARA Deployment</span>
+          <span class="detail-tag eva-detail-tag">🧪 AI Testing</span>
+        </div>
+      </div>
+      <div class="step-detail eva-detail" id="eva-step-5">
+        <h4>5️⃣ Pilot & Scale</h4>
+        <div class="detail-tags">
+          <span class="detail-tag eva-detail-tag">🚀 Pilot Phase</span>
+          <span class="detail-tag eva-detail-tag">✅ Results Validation</span>
+          <span class="detail-tag eva-detail-tag">🔁 Optimization</span>
+          <span class="detail-tag eva-detail-tag">📈 Full Rollout</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BUDDY SECTION -->
+  <div id="buddy-section" class="product-section">
+    <div class="channels-block buddy-block">
+      <h3>📡 Input Channels</h3>
+      <p style="margin-bottom: 20px; color: var(--text-secondary);">Available across all Virtual Buddy variants</p>
+      <div class="channels-grid">
+        <div class="channel-item buddy-channel">
+          <div class="channel-icon">🌐</div>
+          <div>
+            <h4>Web Chat</h4>
+            <p>Chat interface connected to internal knowledge base</p>
+          </div>
+        </div>
+        <div class="channel-item buddy-channel">
+          <div class="channel-icon">🖥️</div>
+          <div>
+            <h4>Internal UI</h4>
+            <p>Dedicated interface for employees in their work environment</p>
+          </div>
+        </div>
+        <div class="channel-item buddy-channel">
+          <div class="channel-icon">⚙️</div>
+          <div>
+            <h4>API (VB Custom)</h4>
+            <p>Advanced integration available in top tier only</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-header buddy-section">
+      <div class="divider"></div>
+      <h2>🧠 Virtual Buddy Service Tiers</h2>
+      <div class="divider"></div>
+    </div>
+
+    <div class="variants-wrapper">
+      <div class="variants-grid buddy buddy-grid">
+        <!-- VB Start -->
+        <div class="variant-card buddy-card">
+          <div class="variant-header buddy-header">
+            <span class="variant-badge">Tier 1</span>
+            <div class="variant-title">VB Start</div>
+            <div class="variant-value">⚡ Instant Knowledge Access</div>
+            <div class="variant-target">For teams with existing documentation</div>
+          </div>
+          <div class="variant-content">
+            <div class="variant-section">
+              <div class="section-label">Solves</div>
+              <div class="variant-description">Information scattered and hard to find</div>
+            </div>
+            <div class="variant-section">
+              <div class="section-label">Includes</div>
+              <ul class="variant-list">
+                <li>AI chat over internal KB</li>
+                <li>Multi-source connectivity (Confluence, SharePoint, web)</li>
+                <li>Automatic document processing</li>
+              </ul>
+            </div>
+            <div class="variant-section">
+              <div class="section-label">Your Involvement</div>
+              <ul class="collaborators">
+                <li>Provide source materials</li>
+                <li>Grant KB access</li>
+                <li>Validate responses</li>
+              </ul>
+            </div>
+            <div class="complexity">
+              <div class="complexity-bar">
+                <div class="complexity-fill-buddy" style="width: 20%;"></div>
+              </div>
+              <div class="complexity-label">Low complexity</div>
+            </div>
+            <div class="sara-box buddy-sara">
+              <div class="sara-icon">🛡️</div>
+              <div>
+                <div class="sara-title">SARA</div>
+                <div class="sara-text">Basic validation – ensures relevance and accuracy against sources</div>
+              </div>
+            </div>
+          </div>
+          <div class="variant-footer">💡 Quick start – connect existing documentation</div>
+        </div>
+
+        <!-- VB Boost -->
+        <div class="variant-card buddy-card">
+          <div class="variant-header buddy-header">
+            <span class="variant-badge">Tier 2</span>
+            <div class="variant-title">VB Boost</div>
+            <div class="variant-value">🎯 Consistent & Reliable</div>
+            <div class="variant-target">For non-optimized knowledge bases</div>
+          </div>
+          <div class="variant-content">
+            <div class="variant-section">
+              <div class="section-label">Solves</div>
+              <div class="variant-description">Knowledge not efficiently leveraged</div>
+            </div>
+            <div class="variant-section">
+              <div class="section-label">Includes</div>
+              <ul class="variant-list">
+                <li class="inherited">Everything from VB Start</li>
+                <li>KB cleanup & structuring</li>
+                <li>Response tuning</li>
+                <li>AI testing</li>
+              </ul>
+            </div>
+            <div class="variant-section">
+              <div class="section-label">Your Involvement</div>
+              <ul class="collaborators">
+                <li>Active KB collaboration</li>
+                <li>Domain validation</li>
+                <li>Response iteration</li>
+              </ul>
+            </div>
+            <div class="complexity">
+              <div class="complexity-bar">
+                <div class="complexity-fill-buddy" style="width: 55%;"></div>
+              </div>
+              <div class="complexity-label">Medium complexity</div>
+            </div>
+            <div class="sara-box buddy-sara">
+              <div class="sara-icon">🛡️</div>
+              <div>
+                <div class="sara-title">SARA</div>
+                <div class="sara-text">Validation & tuning – continuous optimization for accuracy</div>
+              </div>
+            </div>
+          </div>
+          <div class="variant-footer">💡 Transform knowledge into precise, reliable answers</div>
+        </div>
+
+        <!-- VB Custom -->
+        <div class="variant-card buddy-card">
+          <div class="variant-header buddy-header">
+            <span class="variant-badge">Tier 3</span>
+            <div class="variant-title">VB Custom</div>
+            <div class="variant-value">🌿 Enterprise Knowledge AI</div>
+            <div class="variant-target">For advanced integration needs</div>
+          </div>
+          <div class="variant-content">
+            <div class="variant-section">
+              <div class="section-label">Solves</div>
+              <div class="variant-description">Need process & system integration</div>
+            </div>
+            <div class="variant-section">
+              <div class="section-label">Includes</div>
+              <ul class="variant-list">
+                <li class="inherited">Everything from VB Boost</li>
+                <li>System integrations</li>
+                <li>Custom logic & workflows</li>
+                <li>Monitoring & AI testing</li>
+              </ul>
+            </div>
+            <div class="variant-section">
+              <div class="section-label">Your Involvement</div>
+              <ul class="collaborators">
+                <li>IT team engagement</li>
+                <li>Process definition</li>
+                <li>Continuous tuning</li>
+              </ul>
+            </div>
+            <div class="complexity">
+              <div class="complexity-bar">
+                <div class="complexity-fill-buddy" style="width: 88%;"></div>
+              </div>
+              <div class="complexity-label">High complexity</div>
+            </div>
+            <div class="sara-box buddy-sara">
+              <div class="sara-icon">🛡️</div>
+              <div>
+                <div class="sara-title">SARA</div>
+                <div class="sara-text">Advanced monitoring – complex logic, custom flows, system connectivity</div>
+              </div>
+            </div>
+          </div>
+          <div class="variant-footer">💡 Fully customized for your processes and systems</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="addons-sidebar">
+      <div class="addons-title buddy-addon-title">
+        ➕ Optional Add-ons
+        <span class="addons-subtitle">Available with all Virtual Buddy tiers</span>
+      </div>
+      <div class="addons-grid">
+        <div class="addon-item buddy-addon">
+          <h4>🛡️ SARA</h4>
+          <p>Response quality control for internal KB. Validates accuracy, relevance, and company policy compliance.</p>
+        </div>
+        <div class="addon-item buddy-addon">
+          <h4>🖥️ Widget</h4>
+          <p>Embedded window for KB access directly in employee work tools and applications.</p>
+        </div>
+        <div class="addon-item buddy-addon">
+          <h4>🎙️ AI Voice</h4>
+          <p>Voice interface for natural knowledge access without typing required.</p>
+        </div>
+        <div class="addon-item buddy-addon">
+          <h4>📱 Applications</h4>
+          <p>Dedicated mobile or web app for Virtual Buddy access from anywhere.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-header buddy-section">
+      <div class="divider"></div>
+      <h2>🔄 Implementation Process</h2>
+      <div class="divider"></div>
+    </div>
+
+    <div class="process-section buddy-process">
+      <div class="process-title buddy-process-title">
+        📋 How We Implement
+        <span class="process-note">(Click steps for details)</span>
+      </div>
+      <div class="process-steps">
+        <div class="process-step buddy-step active" onclick="toggleStep(this, 'buddy-step-1')">
+          <div class="step-box">
+            <div class="step-number">1</div>
+            <div class="step-title">Assessment</div>
+            <div class="step-tags">
+              <span class="step-tag buddy-tag">Scope</span>
+              <span class="step-tag buddy-tag">Sources</span>
+            </div>
+          </div>
+        </div>
+        <div class="process-step buddy-step" onclick="toggleStep(this, 'buddy-step-2')">
+          <div class="step-box">
+            <div class="step-number">2</div>
+            <div class="step-title">Setup</div>
+            <div class="step-tags">
+              <span class="step-tag buddy-tag">Sources</span>
+              <span class="step-tag buddy-tag">Training</span>
+            </div>
+          </div>
+        </div>
+        <div class="process-step buddy-step" onclick="toggleStep(this, 'buddy-step-3')">
+          <div class="step-box">
+            <div class="step-number">3</div>
+            <div class="step-title">Optimization</div>
+            <div class="step-tags">
+              <span class="step-tag buddy-tag">Tuning</span>
+              <span class="step-tag buddy-tag">Testing</span>
+            </div>
+          </div>
+        </div>
+        <div class="process-step buddy-step" onclick="toggleStep(this, 'buddy-step-4')">
+          <div class="step-box">
+            <div class="step-number">4</div>
+            <div class="step-title">Launch</div>
+            <div class="step-tags">
+              <span class="step-tag buddy-tag">Deploy</span>
+              <span class="step-tag buddy-tag">Train</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="step-detail buddy-detail active" id="buddy-step-1">
+        <h4>1️⃣ Assessment</h4>
+        <div class="detail-tags">
+          <span class="detail-tag buddy-detail-tag">🗂️ Knowledge Audit</span>
+          <span class="detail-tag buddy-detail-tag">🎯 Use Case Analysis</span>
+          <span class="detail-tag buddy-detail-tag">📊 Scope Definition</span>
+          <span class="detail-tag buddy-detail-tag">💼 Channel Planning</span>
+        </div>
+      </div>
+      <div class="step-detail buddy-detail" id="buddy-step-2">
+        <h4>2️⃣ Setup</h4>
+        <div class="detail-tags">
+          <span class="detail-tag buddy-detail-tag">🔗 Source Connection</span>
+          <span class="detail-tag buddy-detail-tag">📚 KB Preparation</span>
+          <span class="detail-tag buddy-detail-tag">⚙️ System Configuration</span>
+          <span class="detail-tag buddy-detail-tag">🎓 Team Training</span>
+        </div>
+      </div>
+      <div class="step-detail buddy-detail" id="buddy-step-3">
+        <h4>3️⃣ Optimization</h4>
+        <div class="detail-tags">
+          <span class="detail-tag buddy-detail-tag">🔧 Response Tuning</span>
+          <span class="detail-tag buddy-detail-tag">✅ Accuracy Testing</span>
+          <span class="detail-tag buddy-detail-tag">🎯 Use Case Refinement</span>
+          <span class="detail-tag buddy-detail-tag">📈 Performance Monitoring</span>
+        </div>
+      </div>
+      <div class="step-detail buddy-detail" id="buddy-step-4">
+        <h4>4️⃣ Launch</h4>
+        <div class="detail-tags">
+          <span class="detail-tag buddy-detail-tag">🚀 Production Deployment</span>
+          <span class="detail-tag buddy-detail-tag">👥 User Training</span>
+          <span class="detail-tag buddy-detail-tag">📊 Analytics Setup</span>
+          <span class="detail-tag buddy-detail-tag">🔄 Ongoing Support</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p>&copy; 2024 O2 Czech Republic. All rights reserved. | <a href="#" style="color: inherit; text-decoration: none;">Privacy Policy</a> | <a href="#" style="color: inherit; text-decoration: none;">Terms of Service</a></p>
+</footer>
+
+<script>
+  function switchProduct(product, tabEl) {
+    document.querySelectorAll('.product-tab').forEach(t => t.classList.remove('active'));
+    tabEl.classList.add('active');
+    document.querySelectorAll('.product-section').forEach(s => s.classList.remove('active'));
+    document.getElementById(product + '-section').classList.add('active');
+  }
+
+  function toggleStep(stepEl, detailId) {
+    const container = stepEl.closest('.process-section');
+    container.querySelectorAll('.process-step').forEach(s => s.classList.remove('active'));
+    container.querySelectorAll('.step-detail').forEach(d => d.classList.remove('active'));
+    stepEl.classList.add('active');
+    document.getElementById(detailId).classList.add('active');
+  }
+</script>
+
+</body>
+</html>
