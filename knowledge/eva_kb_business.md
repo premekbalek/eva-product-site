@@ -38,6 +38,11 @@ Zjednodušený lifecycle:
 - Discovery (business + architektura): potvrzení hodnoty, datové toky, integrační body, odhady
 - Implementace v PI: vytvoření datových endpointů a napojení EVA na data
 
+Delivery model:
+- Společný produktový stream O2 + klient: O2 dodává platformu, orchestration know-how, implementaci a delivery governance; klient vlastní business výsledky, dostupnost zdrojových systémů, bezpečnostní schválení a operační převzetí.
+- Typické fáze: discovery a framing -> solution design -> build a validace -> pilot, scale a governance.
+- Orientační milníky: Week 0 kick-off; Weeks 1-2 prioritizace use cases a KPI baseline; Weeks 3-4 solution blueprint; Weeks 5-8 MVP flows a integrace pro UAT; Weeks 9-10 UAT, security validation a runbooks; Weeks 11-12 controlled pilot; Weeks 13-14 pilot review a scale decision.
+
 ## 7) Metriky (co typicky měřit)
 - Míra automatického vyřešení (containment / resolution)
 - Přepojení na operátora a důvody

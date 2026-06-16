@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EVA | Architecture & Infrastructure</title>
+    <link rel="alternate" hreflang="en" href="./architecture-infrastructure.html" />
+    <link rel="alternate" hreflang="cs" href="./architecture-infrastructure-cs.html" />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body class="subpage-body">
+    <main class="subpage-shell">
+      <a class="subpage-back" href="./index.html#decision-hub">← Back to decision hub</a>
+
+      <section class="subpage-hero">
+        <p class="section-kicker">Architecture page</p>
+        <h1>Architecture & Infrastructure</h1>
+        <p>
+          Three deployment models for Virtual Buddy and EVA, with clear boundaries for data, code ownership,
+          LLM usage, operations, and customer-cloud responsibilities.
+        </p>
+      </section>
+
+      <section class="subpage-blocks">
+        <article class="subpage-block">
+          <h2>Reference components</h2>
+          <div class="architecture-stack" aria-label="Reference architecture components">
+            <div><strong>User channels</strong><span>Web chat, internal UI, app, voice, API</span></div>
+            <div><strong>Product frontend</strong><span>VB employee FE or EVA customer-facing channel</span></div>
+            <div><strong>Application layer</strong><span>Orchestration, conversation state, tenant rules, admin</span></div>
+            <div><strong>Knowledge/data layer</strong><span>Document storage, query DB, audit DB, vector index, connectors</span></div>
+            <div><strong>LLM gateway</strong><span>Lite LLM with PTU, fallback pay-as-you-go models, routing and metering</span></div>
+            <div><strong>Quality and ops</strong><span>SARA, monitoring, billing, reporting, support, runbooks</span></div>
+          </div>
+        </article>
+
+        <article class="subpage-block">
+          <h2>Shared platform basis for VB and EVA</h2>
+          <p>
+            The meeting confirmed an important product idea: Virtual Buddy and EVA can share the same underlying
+            platform base. The first tier can be almost identical technically; the difference is whether the assistant
+            is pointed inward to employees and knowledge sources, or outward to customers and backend customer journeys.
+          </p>
+          <div class="subpage-grid">
+            <div class="placeholder-fieldset">
+              <strong>Common base</strong>
+              <ul class="subpage-list">
+                <li>Frontend channel, application runtime, knowledge ingestion, RAG, LLM gateway, testing, and monitoring</li>
+                <li>Reusable components can be switched on/off by package, add-on, or customer configuration</li>
+                <li>Start packages should focus on fast pilot value before custom agents and integrations are added</li>
+              </ul>
+            </div>
+            <div class="placeholder-fieldset">
+              <strong>Product split</strong>
+              <ul class="subpage-list">
+                <li>Virtual Buddy points the platform at internal knowledge, employees, policies, and process documentation</li>
+                <li>EVA points the platform at customer journeys, external channels, backend context, and action execution</li>
+                <li>Advanced tiers can converge again through agents, custom workflows, integrations, SARA, and AI testing</li>
+              </ul>
+            </div>
+          </div>
+        </article>
+
+        <article class="subpage-block">
+          <h2>Data preparation vs. runtime flow</h2>
+          <p>
+            The transcript separates two different technical phases. First, data must be prepared and indexed.
+            Only after that does the runtime chat/RAG flow answer user questions from the prepared knowledge layer.
+          </p>
+          <div class="subpage-grid delivery-model-grid">
+            <div class="placeholder-fieldset">
+              <strong>Preparation path A: File upload</strong>
+              <ul class="subpage-list">
+                <li>Customer uploads files, HTML export, ZIP package, or documentation bundle into controlled storage</li>
+                <li>Pipeline parses, chunks, versions, and stores metadata for each document version</li>
+                <li>Embedding model creates vectors and writes chunks into vector search / AI Search</li>
+              </ul>
+            </div>
+            <div class="placeholder-fieldset">
+              <strong>Preparation path B: Source connector</strong>
+              <ul class="subpage-list">
+                <li>Customer authorizes Confluence, SharePoint, web, file storage, or another source through a token/connector setup</li>
+                <li>Connector runs scheduled refresh and indexes changed content, for example once per day</li>
+                <li>Future product need: admin UI for connector setup, parsing rules, refresh cadence, and source scope</li>
+              </ul>
+            </div>
+            <div class="placeholder-fieldset">
+              <strong>Runtime query flow</strong>
+              <ul class="subpage-list">
+                <li>User asks a question through chat or another frontend; conversation history is stored in query/audit DB</li>
+                <li>Question is embedded and nearest chunks are retrieved from vector search</li>
+                <li>Retrieved chunks are added to the prompt and passed through backend to the LLM gateway</li>
+              </ul>
+            </div>
+            <div class="placeholder-fieldset">
+              <strong>Answer and control</strong>
+              <ul class="subpage-list">
+                <li>LLM returns an answer with references/citations when supported by the source content</li>
+                <li>SARA/testing layer validates answer quality, policy compliance, and regression behavior</li>
+                <li>Storage is mainly preparation-time infrastructure; runtime primarily uses query DB, vector DB, backend, and LLM gateway</li>
+              </ul>
+            </div>
+          </div>
+        </article>
+
+        <article class="subpage-block">
+          <h2>Three deployment models</h2>
+          <div class="subpage-grid delivery-model-grid">
+            <div class="placeholder-fieldset">
+              <strong>1. O2-hosted SaaS</strong>
+              <ul class="subpage-list">
+                <li>VB/EVA application, storage, LLM gateway, SARA, and monitoring run in O2 environment</li>
+                <li>Customer data is accessed through secure connectors, APIs, VPN, Private Link, or controlled import</li>
+                <li>Best for fast start, repeatable delivery, and strongest O2 control over updates and usage billing</li>
+              </ul>
+            </div>
+            <div class="placeholder-fieldset">
+              <strong>2. Customer-cloud managed instance</strong>
+              <ul class="subpage-list">
+                <li>Runtime runs in customer cloud as a managed O2 product, typically via containers and controlled release process</li>
+                <li>Customer does not receive source code, build pipeline, or rights to modify the solution</li>
+                <li>Best for regulated clients that require data and runtime close to their cloud boundary</li>
+              </ul>
+            </div>
+            <div class="placeholder-fieldset">
+              <strong>3. Hybrid control plane + customer data/action plane</strong>
+              <ul class="subpage-list">
+                <li>O2 keeps product control plane: orchestration, LLM gateway, SARA, metering, updates, and monitoring</li>
+                <li>Customer hosts data/action plane: connectors, indexer, vector store, API proxy, or action adapters</li>
+                <li>Best target model for enterprise customers that require data control without losing O2 product governance</li>
+              </ul>
+            </div>
+            <div class="placeholder-fieldset">
+              <strong>Architecture decision</strong>
+              <ul class="subpage-list">
+                <li>Default for speed: O2-hosted SaaS</li>
+                <li>Default for enterprise: Hybrid control plane + customer data/action plane</li>
+                <li>Exception model: Customer-cloud managed instance for strict compliance cases</li>
+              </ul>
+            </div>
+          </div>
+        </article>
+
+        <article class="subpage-block">
+          <h2>Virtual Buddy specifics</h2>
+          <p>
+            Virtual Buddy is primarily a knowledge-access product. The main architecture question is where documents,
+            embeddings, query history, and source connectors live, and how O2 keeps LLM usage and updates under control.
+          </p>
+          <div class="subpage-grid">
+            <div class="placeholder-fieldset">
+              <strong>Core infrastructure</strong>
+              <ul class="subpage-list">
+                <li>User FE for employee queries</li>
+                <li>Document storage and source connectors</li>
+                <li>Query/audit database and vector index</li>
+                <li>VB application cloud runtime</li>
+                <li>Lite LLM PTU model with pay-as-you-go fallback models</li>
+                <li>User policy layer controlling who can access which buddy and which knowledge scope</li>
+              </ul>
+            </div>
+            <div class="placeholder-fieldset">
+              <strong>Main workshop decisions</strong>
+              <ul class="subpage-list">
+                <li>Are documents copied, synchronized, indexed in place, or queried on demand?</li>
+                <li>Who owns embeddings, query logs, retention, and deletion?</li>
+                <li>Does the customer use O2 LLM gateway or their own model subscription?</li>
+                <li>How is usage metered for subscription, token resale, and managed operations?</li>
+                <li>Which add-ons are standard: connectors, testing, SARA, admin UI, policy management?</li>
+              </ul>
+            </div>
+          </div>
+        </article>
+
+        <article class="subpage-block">
+          <h2>EVA specifics</h2>
+          <p>
+            EVA uses the same deployment models, but is more sensitive because it can serve external customers,
+            verify identity, call backend systems, and execute actions. The key question is not only where EVA runs,
+            but where customer actions are authorized and executed.
+          </p>
+          <div class="subpage-grid">
+            <div class="placeholder-fieldset">
+              <strong>Additional EVA layers</strong>
+              <ul class="subpage-list">
+                <li>Identity verification and authorization/entitlement engine</li>
+                <li>Customer context resolver and journey state management</li>
+                <li>Action execution layer for backend systems</li>
+                <li>Human handoff, audit log, error handling, and compensation logic</li>
+                <li>SLA and incident process for customer-facing impact</li>
+              </ul>
+            </div>
+            <div class="placeholder-fieldset">
+              <strong>Use-case risk classes</strong>
+              <ul class="subpage-list">
+                <li><strong>Informational:</strong> order status, billing info, ticket status</li>
+                <li><strong>Guided workflow:</strong> data collection, ticket creation, change request preparation</li>
+                <li><strong>Transactional/action:</strong> service changes, orders, provisioning, customer-impacting actions</li>
+              </ul>
+            </div>
+          </div>
+        </article>
+
+        <article class="subpage-block">
+          <h2>Commercial and IP control rules</h2>
+          <ul class="subpage-list">
+            <li>Frontend and backend should never call models directly; all model calls should go through O2 LLM Gateway.</li>
+            <li>O2 should preserve source-code ownership, build pipeline, release management, and product roadmap control.</li>
+            <li>Even in customer-cloud deployment, O2 should keep license checks, usage metering, managed updates, and support telemetry.</li>
+            <li>Token usage should be billed through a clear model: platform subscription, LLM/token usage, connectors, operations, and change requests.</li>
+            <li>Customer-cloud does not mean software handover; it should be positioned as a managed private instance.</li>
+            <li>O2-owned LLM/API keys should remain in backend or gateway configuration, not visible to the customer frontend or tenant users.</li>
+            <li>If customers use their own model subscription, the commercial model must explicitly separate platform fee from customer-paid model consumption.</li>
+          </ul>
+        </article>
+      </section>
+    </main>
+  </body>
+</html>

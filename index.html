@@ -4,6 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>EVA | AI Customer Service Platform</title>
+    <link rel="alternate" hreflang="en" href="./index.html" />
+    <link rel="alternate" hreflang="cs" href="./index-cs.html" />
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
@@ -22,9 +24,15 @@
         <a href="#why-eva">Why EVA</a>
         <a href="#knowledge">Knowledge base</a>
         <a href="#solution">Technical solution</a>
+        <a href="./architecture-infrastructure.html">Architecture</a>
+        <a href="./delivery-plan.html">Delivery roadmap</a>
         <a href="#chat">Product chat</a>
       </nav>
       <a class="header-action" href="#decision-hub">Start evaluation</a>
+      <div class="language-switch" aria-label="Language switch">
+        <a class="active" href="./index.html" lang="en">EN</a>
+        <a href="./index-cs.html" lang="cs">CZ</a>
+      </div>
     </header>
 
     <main id="top">
@@ -100,13 +108,26 @@
           </article>
 
           <article class="decision-card">
+            <p class="decision-tag">Architecture</p>
+            <h3>Infrastructure Options</h3>
+            <p>Compare O2-hosted, customer-cloud, and hybrid deployment models for EVA and Virtual Buddy.</p>
+            <ul>
+              <li>Cloud, private managed, and hybrid control-plane models</li>
+              <li>LLM PTU, fallback, token metering, and billing boundary</li>
+              <li>Specific differences between VB knowledge access and EVA action execution</li>
+            </ul>
+            <a class="decision-link" href="./architecture-infrastructure.html">Open Architecture page</a>
+          </article>
+
+          <article class="decision-card">
             <p class="decision-tag">Execution</p>
             <h3>Delivery Plan</h3>
-            <p>Define realistic timeline and ownership for pilot, rollout, and operations.</p>
+            <p>Define B2B market launch, delivery model, operating model, and scale governance.</p>
             <ul>
+              <li>B2B go-to-market and scaling model</li>
+              <li>Joint delivery model</li>
+              <li>Operating model for run and growth</li>
               <li>30-60-90 day structure</li>
-              <li>Roles for O2 and client teams</li>
-              <li>Dependencies and go-live gates</li>
             </ul>
             <a class="decision-link" href="./delivery-plan.html">Open Delivery Plan page</a>
           </article>
@@ -364,6 +385,11 @@
             </div>
 
             <div class="product-block">
+              <h4>Platform basis</h4>
+              <p class="product-note">EVA can use the same core platform base as Virtual Buddy, but points it outward to customer journeys, backend context, and controlled action execution.</p>
+            </div>
+
+            <div class="product-block">
               <h4>Service tiers</h4>
               <div class="tier-grid tier-grid-eva">
                 <article class="tier-card">
@@ -414,6 +440,15 @@
                 <li><strong>Application:</strong> Dedicated mobile or web support channel</li>
               </ul>
             </div>
+
+            <div class="product-block">
+              <h4>Infrastructure specifics</h4>
+              <ul class="addon-list">
+                <li><strong>Data/action plane:</strong> Customer context, entitlement checks, and backend action endpoints must be controlled and auditable.</li>
+                <li><strong>Runtime risk:</strong> EVA can execute customer-facing actions, so identity, authorization, rollback, and human handoff are mandatory design topics.</li>
+                <li><strong>Preferred enterprise model:</strong> Hybrid control plane with customer data/action plane for sensitive or transactional use cases.</li>
+              </ul>
+            </div>
           </article>
 
           <article class="product-panel product-panel-buddy">
@@ -430,6 +465,11 @@
                 <span>Internal UI</span>
                 <span>API (Custom tier)</span>
               </div>
+            </div>
+
+            <div class="product-block">
+              <h4>Platform basis</h4>
+              <p class="product-note">Virtual Buddy is the internal knowledge version of the shared platform: documents, connectors, RAG, testing, policy management, and LLM governance.</p>
             </div>
 
             <div class="product-block">
@@ -472,6 +512,15 @@
                 <li><strong>Widget:</strong> Embedded assistant in employee tools</li>
                 <li><strong>AI Voice:</strong> Hands-free access to knowledge</li>
                 <li><strong>Application:</strong> Mobile or web app for internal teams</li>
+              </ul>
+            </div>
+
+            <div class="product-block">
+              <h4>Infrastructure specifics</h4>
+              <ul class="addon-list">
+                <li><strong>Knowledge plane:</strong> FE, document storage, query/audit database, vector index, and source connectors are the core components.</li>
+                <li><strong>LLM layer:</strong> Lite LLM with PTU subscription should be routed through an O2 gateway, with pay-as-you-go fallback models for overflow.</li>
+                <li><strong>Preferred start model:</strong> O2-hosted SaaS for speed, hybrid private connect for enterprise data-control requirements.</li>
               </ul>
             </div>
           </article>

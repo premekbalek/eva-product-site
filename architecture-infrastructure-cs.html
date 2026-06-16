@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="cs">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EVA | Architektura a infrastruktura</title>
+    <link rel="alternate" hreflang="en" href="./architecture-infrastructure.html" />
+    <link rel="alternate" hreflang="cs" href="./architecture-infrastructure-cs.html" />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body class="subpage-body">
+    <main class="subpage-shell">
+      <a class="subpage-back" href="./index-cs.html#decision-hub">← Zpět do rozhodovacího hubu</a>
+
+      <section class="subpage-hero">
+        <p class="section-kicker">Architektura</p>
+        <h1>Architektura a infrastruktura</h1>
+        <p>
+          Tři deployment modely pro Virtual Buddy a EVA s jasnými hranicemi pro data, vlastnictví kódu,
+          LLM spotřebu, provoz a odpovědnosti v cloudu zákazníka.
+        </p>
+      </section>
+
+      <section class="subpage-blocks">
+        <article class="subpage-block">
+          <h2>Referenční komponenty</h2>
+          <div class="architecture-stack" aria-label="Referenční architektonické komponenty">
+            <div><strong>Uživatelské kanály</strong><span>Web chat, interní UI, aplikace, voice, API</span></div>
+            <div><strong>Produktový frontend</strong><span>VB zaměstnanecké FE nebo EVA zákaznický kanál</span></div>
+            <div><strong>Aplikační vrstva</strong><span>Orchestrace, stav konverzace, tenant pravidla, admin</span></div>
+            <div><strong>Znalostní/datová vrstva</strong><span>Document storage, query DB, audit DB, vector index, konektory</span></div>
+            <div><strong>LLM gateway</strong><span>Lite LLM s PTU, pay-as-you-go fallback modely, routing a metering</span></div>
+            <div><strong>Kvalita a provoz</strong><span>SARA, monitoring, billing, reporting, support, runbooky</span></div>
+          </div>
+        </article>
+
+        <article class="subpage-block">
+          <h2>Společný platformní základ pro VB a EVA</h2>
+          <p>
+            Ze schůzky vyplývá důležitá produktová myšlenka: Virtual Buddy a EVA mohou sdílet stejný podvozek.
+            První varianta může být technicky velmi podobná; rozdíl je hlavně v tom, jestli se asistent namíří dovnitř
+            na zaměstnance a znalostní zdroje, nebo ven na zákazníky a zákaznické backendové cesty.
+          </p>
+          <div class="subpage-grid">
+            <div class="placeholder-fieldset">
+              <strong>Společný základ</strong>
+              <ul class="subpage-list">
+                <li>Frontend kanál, aplikační runtime, ingestion znalostí, RAG, LLM gateway, testing a monitoring</li>
+                <li>Znovupoužitelné komponenty se zapínají/vypínají podle balíčku, add-onu nebo zákaznické konfigurace</li>
+                <li>Start balíčky mají cílit na rychlou hodnotu pilotu před custom agenty a integracemi</li>
+              </ul>
+            </div>
+            <div class="placeholder-fieldset">
+              <strong>Rozdělení produktů</strong>
+              <ul class="subpage-list">
+                <li>Virtual Buddy míří na interní znalosti, zaměstnance, politiky a procesní dokumentaci</li>
+                <li>EVA míří na zákaznické journeys, externí kanály, backendový kontext a vykonávání akcí</li>
+                <li>Vyšší varianty se mohou znovu sbíhat přes agenty, custom workflows, integrace, SARA a AI testing</li>
+              </ul>
+            </div>
+          </div>
+        </article>
+
+        <article class="subpage-block">
+          <h2>Příprava dat vs. provozní flow</h2>
+          <p>
+            Přepis odděluje dvě technické fáze. Nejdřív se data připraví a zaindexují.
+            Teprve potom runtime chat/RAG flow odpovídá na dotazy z připravené znalostní vrstvy.
+          </p>
+          <div class="subpage-grid delivery-model-grid">
+            <div class="placeholder-fieldset">
+              <strong>Příprava A: Upload souborů</strong>
+              <ul class="subpage-list">
+                <li>Zákazník nahraje soubory, HTML export, ZIP balík nebo dokumentační bundle do řízeného storage</li>
+                <li>Pipeline dokumenty parsuje, chunkuje, verzuje a ukládá metadata ke každé verzi dokumentu</li>
+                <li>Embedding model vytvoří vektory a zapíše chunky do vector search / AI Search</li>
+              </ul>
+            </div>
+            <div class="placeholder-fieldset">
+              <strong>Příprava B: Zdrojový konektor</strong>
+              <ul class="subpage-list">
+                <li>Zákazník autorizuje Confluence, SharePoint, web, file storage nebo jiný zdroj přes token/konektor</li>
+                <li>Konektor běží v naplánovaném refreshi a indexuje změněný obsah, například jednou denně</li>
+                <li>Budoucí produktová potřeba: admin UI pro setup konektorů, parsing rules, refresh cadence a scope zdrojů</li>
+              </ul>
+            </div>
+            <div class="placeholder-fieldset">
+              <strong>Runtime query flow</strong>
+              <ul class="subpage-list">
+                <li>Uživatel položí dotaz přes chat nebo jiný frontend; historie konverzace se ukládá do query/audit DB</li>
+                <li>Dotaz se převede na embedding a z vector search se vytáhnou nejbližší chunky</li>
+                <li>Vybrané chunky se přimíchají do promptu a přes backend jdou do LLM gateway</li>
+              </ul>
+            </div>
+            <div class="placeholder-fieldset">
+              <strong>Odpověď a kontrola</strong>
+              <ul class="subpage-list">
+                <li>LLM vrátí odpověď s referencemi/citacemi, pokud je podporuje zdrojový obsah</li>
+                <li>SARA/testing vrstva validuje kvalitu odpovědi, policy compliance a regresní chování</li>
+                <li>Storage je hlavně přípravná infrastruktura; runtime používá primárně query DB, vector DB, backend a LLM gateway</li>
+              </ul>
+            </div>
+          </div>
+        </article>
+
+        <article class="subpage-block">
+          <h2>Tři deployment modely</h2>
+          <div class="subpage-grid delivery-model-grid">
+            <div class="placeholder-fieldset">
+              <strong>1. O2-hosted SaaS</strong>
+              <ul class="subpage-list">
+                <li>VB/EVA aplikace, storage, LLM gateway, SARA a monitoring běží v prostředí O2</li>
+                <li>Zákaznická data se připojují přes secure konektory, API, VPN, Private Link nebo řízený import</li>
+                <li>Nejlepší pro rychlý start, opakovatelnou delivery a nejsilnější kontrolu O2 nad updaty a billingem</li>
+              </ul>
+            </div>
+            <div class="placeholder-fieldset">
+              <strong>2. Customer-cloud managed instance</strong>
+              <ul class="subpage-list">
+                <li>Runtime běží v cloudu zákazníka jako managed O2 produkt, typicky přes kontejnery a řízený release proces</li>
+                <li>Zákazník nedostává zdrojový kód, build pipeline ani právo řešení upravovat</li>
+                <li>Vhodné pro regulované klienty, kteří vyžadují data a runtime blízko své cloudové hranice</li>
+              </ul>
+            </div>
+            <div class="placeholder-fieldset">
+              <strong>3. Hybrid control plane + customer data/action plane</strong>
+              <ul class="subpage-list">
+                <li>O2 drží product control plane: orchestraci, LLM gateway, SARA, metering, updaty a monitoring</li>
+                <li>Zákazník hostuje data/action plane: konektory, indexer, vector store, API proxy nebo action adaptery</li>
+                <li>Cílový model pro enterprise zákazníky, kteří chtějí kontrolu dat bez ztráty O2 product governance</li>
+              </ul>
+            </div>
+            <div class="placeholder-fieldset">
+              <strong>Architektonické rozhodnutí</strong>
+              <ul class="subpage-list">
+                <li>Default pro rychlost: O2-hosted SaaS</li>
+                <li>Default pro enterprise: Hybrid control plane + customer data/action plane</li>
+                <li>Výjimkový model: Customer-cloud managed instance pro přísné compliance případy</li>
+              </ul>
+            </div>
+          </div>
+        </article>
+
+        <article class="subpage-block">
+          <h2>Specifika Virtual Buddy</h2>
+          <p>
+            Virtual Buddy je primárně produkt pro přístup ke znalostem. Hlavní architektonická otázka je,
+            kde žijí dokumenty, embeddings, historie dotazů a zdrojové konektory, a jak O2 udrží pod kontrolou
+            LLM spotřebu a aktualizace.
+          </p>
+          <div class="subpage-grid">
+            <div class="placeholder-fieldset">
+              <strong>Core infrastruktura</strong>
+              <ul class="subpage-list">
+                <li>Uživatelské FE pro zaměstnanecké dotazy</li>
+                <li>Document storage a zdrojové konektory</li>
+                <li>Query/audit databáze a vector index</li>
+                <li>VB aplikační cloud runtime</li>
+                <li>Lite LLM PTU model s pay-as-you-go fallback modely</li>
+                <li>User policy vrstva určující, kdo má přístup ke kterému buddymu a znalostnímu scope</li>
+              </ul>
+            </div>
+            <div class="placeholder-fieldset">
+              <strong>Hlavní workshop rozhodnutí</strong>
+              <ul class="subpage-list">
+                <li>Budou dokumenty kopírované, synchronizované, indexované u zdroje nebo dotazované on demand?</li>
+                <li>Kdo vlastní embeddings, query logy, retention a mazání?</li>
+                <li>Používá zákazník O2 LLM gateway nebo vlastní model subscription?</li>
+                <li>Jak se měří usage pro subscription, resale tokenů a managed operations?</li>
+                <li>Které add-ony budou standard: konektory, testing, SARA, admin UI, policy management?</li>
+              </ul>
+            </div>
+          </div>
+        </article>
+
+        <article class="subpage-block">
+          <h2>Specifika EVA</h2>
+          <p>
+            EVA používá stejné deployment modely, ale je citlivější, protože obsluhuje externí zákazníky,
+            ověřuje identitu, volá backendové systémy a může provádět akce. Hlavní otázka tedy není jen kde EVA běží,
+            ale kde se autorizují a vykonávají zákaznické akce.
+          </p>
+          <div class="subpage-grid">
+            <div class="placeholder-fieldset">
+              <strong>Další EVA vrstvy</strong>
+              <ul class="subpage-list">
+                <li>Identity verification a authorization/entitlement engine</li>
+                <li>Customer context resolver a journey state management</li>
+                <li>Action execution layer pro backend systémy</li>
+                <li>Human handoff, audit log, error handling a compensation logic</li>
+                <li>SLA a incident process pro zákaznický dopad</li>
+              </ul>
+            </div>
+            <div class="placeholder-fieldset">
+              <strong>Rizikové třídy use casů</strong>
+              <ul class="subpage-list">
+                <li><strong>Informational:</strong> stav objednávky, faktura, ticket status</li>
+                <li><strong>Guided workflow:</strong> sběr dat, založení ticketu, příprava změnového požadavku</li>
+                <li><strong>Transactional/action:</strong> změna služby, objednávky, provisioning, zákaznicky dopadové akce</li>
+              </ul>
+            </div>
+          </div>
+        </article>
+
+        <article class="subpage-block">
+          <h2>Komerční a IP kontrolní pravidla</h2>
+          <ul class="subpage-list">
+            <li>Frontend ani backend by neměl volat modely přímo; všechna modelová volání mají jít přes O2 LLM Gateway.</li>
+            <li>O2 má držet vlastnictví zdrojového kódu, build pipeline, release management a kontrolu produktové roadmapy.</li>
+            <li>I u customer-cloud deploymentu má O2 držet licenční kontrolu, usage metering, managed updaty a support telemetrii.</li>
+            <li>Token usage má být účtovaný přes jasný model: platform subscription, LLM/token usage, konektory, operations a change requesty.</li>
+            <li>Customer-cloud neznamená předání softwaru; má být pozicovaný jako managed private instance.</li>
+            <li>O2 LLM/API klíče mají zůstat v backendu nebo gateway konfiguraci, ne viditelné zákaznickému frontendu nebo tenant uživatelům.</li>
+            <li>Pokud zákazník používá vlastní model subscription, komerční model musí oddělit platform fee od zákazníkem placené modelové spotřeby.</li>
+          </ul>
+        </article>
+      </section>
+    </main>
+  </body>
+</html>

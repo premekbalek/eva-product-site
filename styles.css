@@ -120,6 +120,33 @@ input {
   color: var(--white);
 }
 
+.language-switch {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--white);
+  padding: 4px;
+}
+
+.language-switch a {
+  display: inline-grid;
+  min-width: 36px;
+  min-height: 32px;
+  place-items: center;
+  border-radius: 999px;
+  color: var(--slate);
+  font-size: 12px;
+  font-weight: 950;
+}
+
+.language-switch a.active,
+.language-switch a:hover {
+  background: var(--ink);
+  color: var(--white);
+}
+
 .hero {
   position: relative;
   min-height: 730px;
@@ -411,6 +438,18 @@ input {
   color: var(--ink-2);
 }
 
+.product-note {
+  margin: 0;
+  border-left: 3px solid var(--teal);
+  border-radius: 12px;
+  background: var(--teal-soft);
+  color: var(--ink-2);
+  line-height: 1.6;
+  padding: 12px 14px;
+  font-size: 14px;
+  font-weight: 750;
+}
+
 .channel-pills {
   display: flex;
   flex-wrap: wrap;
@@ -661,6 +700,81 @@ input {
   display: block;
   margin-bottom: 6px;
   color: var(--ink-2);
+}
+
+.delivery-model-grid .placeholder-fieldset {
+  border-style: solid;
+  background: linear-gradient(180deg, #ffffff 0%, #f7fcfb 100%);
+}
+
+.architecture-stack {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.architecture-stack div {
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+  padding: 16px;
+}
+
+.architecture-stack strong,
+.architecture-stack span {
+  display: block;
+}
+
+.architecture-stack strong {
+  color: var(--ink-2);
+  font-size: 16px;
+}
+
+.architecture-stack span {
+  margin-top: 8px;
+  color: var(--slate);
+  line-height: 1.55;
+  font-size: 14px;
+}
+
+.milestone-timeline {
+  display: grid;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.milestone-item {
+  display: grid;
+  grid-template-columns: 120px minmax(180px, 0.52fr) minmax(0, 1fr);
+  gap: 16px;
+  align-items: start;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+  padding: 16px;
+}
+
+.milestone-item span {
+  display: inline-flex;
+  width: fit-content;
+  border-radius: 999px;
+  background: var(--teal-soft);
+  color: var(--teal-dark);
+  padding: 7px 10px;
+  font-size: 12px;
+  font-weight: 950;
+}
+
+.milestone-item strong {
+  color: var(--ink-2);
+  line-height: 1.3;
+}
+
+.milestone-item p {
+  margin: 0;
+  color: var(--slate);
+  line-height: 1.55;
 }
 
 .knowledge-shell {
@@ -1115,6 +1229,7 @@ input {
   .sales-outcome-strip,
   .decision-grid,
   .subpage-grid,
+  .architecture-stack,
   .knowledge-shell,
   .capability-grid,
   .tier-grid-eva,
@@ -1129,6 +1244,11 @@ input {
 
   .flow-step {
     grid-template-columns: 42px 1fr;
+  }
+
+  .milestone-item {
+    grid-template-columns: 1fr;
+    gap: 8px;
   }
 
   .flow-step p {
