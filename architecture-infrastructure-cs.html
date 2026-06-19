@@ -3,62 +3,143 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>EVA | Architektura a infrastruktura</title>
-    <link rel="alternate" hreflang="en" href="./architecture-infrastructure.html" />
-    <link rel="alternate" hreflang="cs" href="./architecture-infrastructure-cs.html" />
+    <title>O2 AI | Architektura a infrastruktura</title>
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body class="subpage-body">
-    <main class="subpage-shell">
-      <a class="subpage-back" href="./index-cs.html#decision-hub">← Zpět do rozhodovacího hubu</a>
+    <header class="site-header">
+      <a class="brand" href="./index-cs.html" aria-label="O2 AI domů">
+        <span class="brand-mark">O2</span>
+        <span>
+          <strong>O2 AI</strong>
+          <small>EVA &amp; Virtual Buddy</small>
+        </span>
+      </a>
+      <nav class="top-nav" aria-label="Hlavní záložky">
+        <a href="./index-cs.html">EVA &amp; Virtual Buddy</a>
+        <a href="./customer-cooperation-cs.html">Součinnost zákazníka</a>
+        <a class="active" href="./architecture-infrastructure-cs.html">Architektura &amp; infrastruktura</a>
+        <a href="./delivery-plan-cs.html">Delivery roadmapa</a>
+        <a class="internal-tab" href="./product-preparation-cs.html">Příprava produktu</a>
+        <a class="internal-tab" href="./o2-internal-cs.html">Ekonomika</a>
+      </nav>
+    </header>
 
-      <section class="subpage-hero">
+    <main class="subpage-shell with-tabs">
+      <section class="subpage-hero architecture-hero">
         <p class="section-kicker">Architektura</p>
         <h1>Architektura a infrastruktura</h1>
         <p>
-          Tři deployment modely pro Virtual Buddy a EVA s jasnými hranicemi pro data, vlastnictví kódu,
-          LLM spotřebu, provoz a odpovědnosti v cloudu zákazníka.
+          Architektura odděluje produktovou kontrolu O2, zákaznická data, LLM spotřebu, provozní odpovědnosti
+          a hranice mezi znalostní vrstvou, integračními službami a uživatelskými kanály.
         </p>
       </section>
 
       <section class="subpage-blocks">
         <article class="subpage-block">
           <h2>Referenční komponenty</h2>
-          <div class="architecture-stack" aria-label="Referenční architektonické komponenty">
-            <div><strong>Uživatelské kanály</strong><span>Web chat, interní UI, aplikace, voice, API</span></div>
-            <div><strong>Produktový frontend</strong><span>VB zaměstnanecké FE nebo EVA zákaznický kanál</span></div>
-            <div><strong>Aplikační vrstva</strong><span>Orchestrace, stav konverzace, tenant pravidla, admin</span></div>
-            <div><strong>Znalostní/datová vrstva</strong><span>Document storage, query DB, audit DB, vector index, konektory</span></div>
-            <div><strong>LLM gateway</strong><span>Lite LLM s PTU, pay-as-you-go fallback modely, routing a metering</span></div>
-            <div><strong>Kvalita a provoz</strong><span>SARA, monitoring, billing, reporting, support, runbooky</span></div>
-          </div>
-        </article>
-
-        <article class="subpage-block">
-          <h2>Společný platformní základ pro VB a EVA</h2>
           <p>
-            Ze schůzky vyplývá důležitá produktová myšlenka: Virtual Buddy a EVA mohou sdílet stejný podvozek.
-            První varianta může být technicky velmi podobná; rozdíl je hlavně v tom, jestli se asistent namíří dovnitř
-            na zaměstnance a znalostní zdroje, nebo ven na zákazníky a zákaznické backendové cesty.
+            Referenční architektura odděluje uživatelský kanál, runtime orchestrace, znalostní vrstvu,
+            modelovou spotřebu a provozní kontrolu.
           </p>
-          <div class="subpage-grid">
-            <div class="placeholder-fieldset">
-              <strong>Společný základ</strong>
-              <ul class="subpage-list">
-                <li>Frontend kanál, aplikační runtime, ingestion znalostí, RAG, LLM gateway, testing a monitoring</li>
-                <li>Znovupoužitelné komponenty se zapínají/vypínají podle balíčku, add-onu nebo zákaznické konfigurace</li>
-                <li>Start balíčky mají cílit na rychlou hodnotu pilotu před custom agenty a integracemi</li>
-              </ul>
+          <div class="architecture-flow" aria-label="Referenční architektonický tok">
+            <div class="flow-row flow-entry">
+              <div class="flow-node flow-node-wide owner-shared">
+                <span class="flow-label">Uživatelské kanály</span>
+                <span class="flow-owner owner-shared">Sdílené</span>
+                <strong>Frontend pro EVA a Virtual Buddy</strong>
+                <p>Web chat, interní UI, aplikace, voice nebo API. Kanál sbírá dotaz, identitu uživatele a kontext.</p>
+              </div>
             </div>
-            <div class="placeholder-fieldset">
-              <strong>Rozdělení produktů</strong>
-              <ul class="subpage-list">
-                <li>Virtual Buddy míří na interní znalosti, zaměstnance, politiky a procesní dokumentaci</li>
-                <li>EVA míří na zákaznické journeys, externí kanály, backendový kontext a vykonávání akcí</li>
-                <li>Vyšší varianty se mohou znovu sbíhat přes agenty, custom workflows, integrace, SARA a AI testing</li>
-              </ul>
+
+            <div class="flow-arrow" aria-hidden="true"></div>
+
+            <div class="flow-row flow-split">
+              <div class="flow-node owner-o2">
+                <span class="flow-label">Konverzace</span>
+                <span class="flow-owner owner-o2">O2</span>
+                <strong>Query DB a audit</strong>
+                <p>Historie dotazů, session state, auditní stopa, feedback a reporting.</p>
+              </div>
+              <div class="flow-node owner-customer">
+                <span class="flow-label">Znalosti</span>
+                <span class="flow-owner owner-customer">Zákazník</span>
+                <strong>Storage a zdrojové konektory</strong>
+                <p>Dokumenty, FAQ, SharePoint, Confluence, weby, metadata a pravidla přístupu.</p>
+              </div>
+              <div class="flow-node owner-customer">
+                <span class="flow-label">Index</span>
+                <span class="flow-owner owner-customer">Zákazník</span>
+                <strong>Azure AI Search</strong>
+                <p>Chunking, embeddings, vector index, filtrování podle oprávnění a retrieval.</p>
+              </div>
+            </div>
+
+            <div class="flow-row">
+              <div class="flow-node flow-node-wide flow-tools owner-shared">
+                <span class="flow-label">Tools</span>
+                <span class="flow-owner flow-owner-eva">Primárně EVA</span>
+                <strong>Dostupné tools a akční integrace</strong>
+                <p>Samostatná vrstva pro volání backendových funkcí a systémových akcí. Nejde o znalostní zdroje, ale o řízené operace, které runtime může podle pravidel použít.</p>
+                <ul class="flow-tools-list">
+                  <li>CRM / customer lookup</li>
+                  <li>Stav objednávky nebo služby</li>
+                  <li>Založení ticketu nebo změnového požadavku</li>
+                  <li>Objednávkové a billing API</li>
+                  <li>Interní workflow a schvalovací akce</li>
+                  <li>MCP tools nebo jiné řízené tool registry</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="flow-arrow" aria-hidden="true"></div>
+
+            <div class="flow-row">
+              <div class="flow-node flow-node-wide flow-core owner-o2">
+                <span class="flow-label">Runtime</span>
+                <span class="flow-owner owner-o2">O2</span>
+                <strong>Backend a RAG pipeline</strong>
+                <p>Orchestrace dotazu, interpretace intentu, výběr mezi retrieval a tools, tenant pravidla, prompt assembly, fallback a odkazy na zdroje.</p>
+              </div>
+            </div>
+
+            <div class="flow-arrow" aria-hidden="true"></div>
+
+            <div class="flow-row">
+              <div class="flow-node flow-node-wide owner-o2">
+                <span class="flow-label">Control plane O2</span>
+                <span class="flow-owner owner-o2">O2</span>
+                <strong>AI/LLM Gateway</strong>
+                <p>Routing na modely, rate limiting, metering spotřeby, policy pravidla, logování a oddělení zákaznických tenantů.</p>
+              </div>
+            </div>
+
+            <div class="flow-boundary"><span>hranice modelové spotřeby a governance</span></div>
+
+            <div class="flow-row flow-split flow-models">
+              <div class="flow-node owner-o2">
+                <span class="flow-label">Modely</span>
+                <span class="flow-owner owner-o2">O2</span>
+                <strong>LLM providers</strong>
+                <p>PTU nebo pay-as-you-go modely podle výkonu, ceny, dostupnosti a datové politiky zákazníka.</p>
+              </div>
+              <div class="flow-node owner-o2">
+                <span class="flow-label">Kvalita</span>
+                <span class="flow-owner owner-o2">O2</span>
+                <strong>SARA a AI testing</strong>
+                <p>Kontrola odpovědí, regresní testy, policy compliance, citace a eskalační pravidla.</p>
+              </div>
+              <div class="flow-node owner-o2">
+                <span class="flow-label">Provoz</span>
+                <span class="flow-owner owner-o2">O2</span>
+                <strong>Monitoring a support</strong>
+                <p>Observabilita, billing, reporting, alerting, runbooky a průběžné ladění.</p>
+              </div>
             </div>
           </div>
+          <p class="flow-ownership-note">
+            Pozn.: Pokud vyjdeme z preferovaného modelu u VB tak data budou O2 Cloudu
+          </p>
         </article>
 
         <article class="subpage-block">
@@ -133,88 +214,191 @@
             <div class="placeholder-fieldset">
               <strong>Architektonické rozhodnutí</strong>
               <ul class="subpage-list">
-                <li>Default pro rychlost: O2-hosted SaaS</li>
+                <li>Default pro rychlost: O2-hosted SaaS v případě VB</li>
                 <li>Default pro enterprise: Hybrid control plane + customer data/action plane</li>
-                <li>Výjimkový model: Customer-cloud managed instance pro přísné compliance případy</li>
+                <li>V případě EVA půjde o customizované řešení</li>
               </ul>
             </div>
           </div>
         </article>
 
-        <article class="subpage-block">
-          <h2>Specifika Virtual Buddy</h2>
-          <p>
-            Virtual Buddy je primárně produkt pro přístup ke znalostem. Hlavní architektonická otázka je,
-            kde žijí dokumenty, embeddings, historie dotazů a zdrojové konektory, a jak O2 udrží pod kontrolou
-            LLM spotřebu a aktualizace.
-          </p>
-          <div class="subpage-grid">
-            <div class="placeholder-fieldset">
-              <strong>Core infrastruktura</strong>
-              <ul class="subpage-list">
-                <li>Uživatelské FE pro zaměstnanecké dotazy</li>
-                <li>Document storage a zdrojové konektory</li>
-                <li>Query/audit databáze a vector index</li>
-                <li>VB aplikační cloud runtime</li>
-                <li>Lite LLM PTU model s pay-as-you-go fallback modely</li>
-                <li>User policy vrstva určující, kdo má přístup ke kterému buddymu a znalostnímu scope</li>
-              </ul>
-            </div>
-            <div class="placeholder-fieldset">
-              <strong>Hlavní workshop rozhodnutí</strong>
-              <ul class="subpage-list">
-                <li>Budou dokumenty kopírované, synchronizované, indexované u zdroje nebo dotazované on demand?</li>
-                <li>Kdo vlastní embeddings, query logy, retention a mazání?</li>
-                <li>Používá zákazník O2 LLM gateway nebo vlastní model subscription?</li>
-                <li>Jak se měří usage pro subscription, resale tokenů a managed operations?</li>
-                <li>Které add-ony budou standard: konektory, testing, SARA, admin UI, policy management?</li>
-              </ul>
-            </div>
-          </div>
-        </article>
+      </section>
 
-        <article class="subpage-block">
-          <h2>Specifika EVA</h2>
-          <p>
-            EVA používá stejné deployment modely, ale je citlivější, protože obsluhuje externí zákazníky,
-            ověřuje identitu, volá backendové systémy a může provádět akce. Hlavní otázka tedy není jen kde EVA běží,
-            ale kde se autorizují a vykonávají zákaznické akce.
-          </p>
-          <div class="subpage-grid">
-            <div class="placeholder-fieldset">
-              <strong>Další EVA vrstvy</strong>
-              <ul class="subpage-list">
-                <li>Identity verification a authorization/entitlement engine</li>
-                <li>Customer context resolver a journey state management</li>
-                <li>Action execution layer pro backend systémy</li>
-                <li>Human handoff, audit log, error handling a compensation logic</li>
-                <li>SLA a incident process pro zákaznický dopad</li>
-              </ul>
-            </div>
-            <div class="placeholder-fieldset">
-              <strong>Rizikové třídy use casů</strong>
-              <ul class="subpage-list">
-                <li><strong>Informational:</strong> stav objednávky, faktura, ticket status</li>
-                <li><strong>Guided workflow:</strong> sběr dat, založení ticketu, příprava změnového požadavku</li>
-                <li><strong>Transactional/action:</strong> změna služby, objednávky, provisioning, zákaznicky dopadové akce</li>
-              </ul>
-            </div>
-          </div>
-        </article>
-
-        <article class="subpage-block">
-          <h2>Komerční a IP kontrolní pravidla</h2>
-          <ul class="subpage-list">
-            <li>Frontend ani backend by neměl volat modely přímo; všechna modelová volání mají jít přes O2 LLM Gateway.</li>
-            <li>O2 má držet vlastnictví zdrojového kódu, build pipeline, release management a kontrolu produktové roadmapy.</li>
-            <li>I u customer-cloud deploymentu má O2 držet licenční kontrolu, usage metering, managed updaty a support telemetrii.</li>
-            <li>Token usage má být účtovaný přes jasný model: platform subscription, LLM/token usage, konektory, operations a change requesty.</li>
-            <li>Customer-cloud neznamená předání softwaru; má být pozicovaný jako managed private instance.</li>
-            <li>O2 LLM/API klíče mají zůstat v backendu nebo gateway konfiguraci, ne viditelné zákaznickému frontendu nebo tenant uživatelům.</li>
-            <li>Pokud zákazník používá vlastní model subscription, komerční model musí oddělit platform fee od zákazníkem placené modelové spotřeby.</li>
-          </ul>
-        </article>
+      <section class="section inline-editor-tools" aria-label="Uložení úprav stránky">
+        <div class="inline-editor-actions">
+          <button type="button" class="inline-editor-button" id="saveInlineEditsButton">Uložit změny</button>
+          <p class="inline-editor-hint" id="inlineEditorStatus">Po úpravě textu klikni na Uložit změny pro přímý zápis do aktuální stránky.</p>
+        </div>
       </section>
     </main>
-  </body>
-</html>
+
+    <script>
+      const INLINE_EDIT_SELECTORS = [
+        'main .section-kicker',
+        'main h1',
+        'main h2',
+        'main h3',
+        'main h4',
+        'main p',
+        'main li',
+        'main strong',
+        'main span',
+        'main .flow-label',
+        'main .flow-owner'
+      ];
+
+      function initializeInlineEditing() {
+        const editableNodes = document.querySelectorAll(INLINE_EDIT_SELECTORS.join(','));
+
+        editableNodes.forEach((node, index) => {
+          node.setAttribute('contenteditable', 'true');
+          node.setAttribute('spellcheck', 'false');
+          node.classList.add('inline-editable-text');
+          node.setAttribute('title', 'Klikni a uprav text');
+          node.dataset.inlineEditKey = String(index);
+        });
+      }
+
+      function initializeInlineEditPersistence() {
+        const saveButton = document.getElementById('saveInlineEditsButton');
+        const statusNode = document.getElementById('inlineEditorStatus');
+        const defaultStatusText = 'Po úpravě textu klikni na Uložit změny pro přímý zápis do aktuální stránky.';
+        let expectedMtimeMs = null;
+
+        if (!saveButton || !statusNode) {
+          return;
+        }
+
+        statusNode.textContent = defaultStatusText;
+        statusNode.classList.remove('error');
+
+        function setStatus(message, isError) {
+          statusNode.textContent = message;
+          statusNode.classList.toggle('error', !!isError);
+        }
+
+        function getEditorApiBaseUrl() {
+          if (window.EVA_EDITOR_API_URL) {
+            return String(window.EVA_EDITOR_API_URL).replace(/\/$/, '');
+          }
+
+          if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+            return 'http://localhost:8787';
+          }
+
+          return '';
+        }
+
+        async function refreshExpectedMtime(baseUrl) {
+          try {
+            const response = await fetch(`${baseUrl}/api/page-meta?filePath=${encodeURIComponent(window.location.pathname)}`);
+            const result = await response.json().catch(() => ({}));
+            if (response.ok && result.ok && typeof result.mtimeMs === 'number') {
+              expectedMtimeMs = result.mtimeMs;
+            }
+          } catch {
+            expectedMtimeMs = null;
+          }
+        }
+
+        async function checkForExternalFileChange(baseUrl) {
+          try {
+            const response = await fetch(`${baseUrl}/api/page-meta?filePath=${encodeURIComponent(window.location.pathname)}`);
+            const result = await response.json().catch(() => ({}));
+            if (!response.ok || !result.ok || typeof result.mtimeMs !== 'number') {
+              return;
+            }
+
+            if (expectedMtimeMs !== null && Math.floor(result.mtimeMs) !== Math.floor(expectedMtimeMs)) {
+              setStatus('Soubor byl zmenen ve VS Code, nacitam aktualni verzi...', false);
+              window.location.reload();
+              return;
+            }
+
+            expectedMtimeMs = result.mtimeMs;
+          } catch {
+            // Ignore temporary polling errors.
+          }
+        }
+
+        function buildPersistedHtml() {
+          const cloneRoot = document.documentElement.cloneNode(true);
+          cloneRoot.querySelectorAll('.inline-editable-text').forEach((node) => {
+            node.removeAttribute('contenteditable');
+            node.removeAttribute('spellcheck');
+            node.removeAttribute('title');
+            node.removeAttribute('data-inline-edit-key');
+            node.classList.remove('inline-editable-text');
+          });
+
+          cloneRoot.querySelectorAll('[class=""]').forEach((node) => {
+            node.removeAttribute('class');
+          });
+
+          const cloneStatus = cloneRoot.querySelector('#inlineEditorStatus');
+          if (cloneStatus) {
+            cloneStatus.textContent = defaultStatusText;
+            cloneStatus.classList.remove('error');
+          }
+
+          return '<!doctype html>\n' + cloneRoot.outerHTML;
+        }
+
+        async function saveInlineEditsToFile() {
+          setStatus(`Ukladam ${window.location.pathname}...`, false);
+
+          try {
+            const baseUrl = getEditorApiBaseUrl();
+            if (!baseUrl) {
+              throw new Error('Neni nastavena URL pro save API.');
+            }
+
+            const response = await fetch(`${baseUrl}/api/save-page`, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                filePath: window.location.pathname,
+                expectedMtimeMs,
+                html: buildPersistedHtml()
+              })
+            });
+
+            const result = await response.json().catch(() => ({}));
+            if (!response.ok || !result.ok) {
+              throw new Error(result.answer || 'Ulozeni selhalo.');
+            }
+
+            if (typeof result.savedMtimeMs === 'number') {
+              expectedMtimeMs = result.savedMtimeMs;
+            }
+
+            setStatus(`Ulozeno do ${result.savedPath}.`, false);
+            alert(`Ulozeno do souboru: ${result.savedPath}`);
+          } catch (error) {
+            const reason = error && error.message ? error.message : 'Ulozeni selhalo.';
+            setStatus(`Chyba: ${reason} Spust node server/chat-server.js.`, true);
+            alert(`Neulozeno: ${reason}`);
+          }
+        }
+
+        saveButton.addEventListener('click', saveInlineEditsToFile);
+        const baseUrl = getEditorApiBaseUrl();
+        if (baseUrl) {
+          refreshExpectedMtime(baseUrl);
+          window.setInterval(() => {
+            checkForExternalFileChange(baseUrl);
+          }, 3000);
+          document.addEventListener('visibilitychange', () => {
+            if (!document.hidden) {
+              checkForExternalFileChange(baseUrl);
+            }
+          });
+        }
+      }
+
+      initializeInlineEditing();
+      initializeInlineEditPersistence();
+    </script>
+  
+
+</body></html>

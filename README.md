@@ -1,39 +1,79 @@
 # EVA Product Site
 
-Standalone product presentation for EVA, an AI Banking Service Hub.
+Produktová prezentace EVA a Virtual Buddy — AI platforma pro zákaznickou péči a interní znalostní management.
 
-This is intentionally independent from PremekWiki. It is a static frontend with:
+Obsahuje:
 
-- corporate landing page
-- customer-facing knowledge base
-- technical solution section
-- product chat backed by a lightweight `/api/chat` service and local EVA knowledge base
+- produktové landing pages (CS + EN)
+- zákaznickou znalostní bázi
+- technické sekce a delivery roadmapu
+- chat backend (`/api/chat`) s lokální EVA knowledge base
+- inline page editor s přímým zápisem do HTML souborů (`/api/save-page`)
 
-## Run locally
+---
+
+## Docker (doporučeno)
+
+Jeden kontejner obsluhuje frontend i backend API na stejném portu.
+
+```bash
+docker build -t evaproduct .
+docker run -p 8787:8787 evaproduct
+```
+
+Otevři: <http://localhost:8787>
+
+### Docker s LLM (OpenAI)
+
+```bash
+docker run -p 8787:8787 \
+  -e LLM_PROVIDER=openai \
+  -e LLM_MODEL=gpt-4o-mini \
+  -e LLM_API_KEY=sk-... \
+  evaproduct
+```
+
+### Docker s Azure OpenAI
+
+```bash
+docker run -p 8787:8787 \
+  -e LLM_PROVIDER=azure \
+  -e LLM_MODEL=<deployment-name> \
+  -e LLM_API_KEY=... \
+  -e LLM_ENDPOINT=https://<resource>.openai.azure.com \
+  -e LLM_API_VERSION=2024-10-21 \
+  evaproduct
+```
+
+---
+
+## Run locally (bez Dockeru)
+
+### Frontend (statický server)
 
 ```bash
 python3 -m http.server 5180
 ```
 
-Then open:
+Otevři: <http://localhost:5180>
 
-```text
-http://localhost:5180/
-```
+### Backend (chat API + save API)
 
-## How to run chat backend
-
-The static site calls `/api/chat`. During local development from `localhost:5180`, `script.js` automatically points chat requests to:
-
-```text
-http://localhost:8787/api/chat
-```
-
-Start the backend in a second terminal:
+V druhém terminálu:
 
 ```bash
 node server/chat-server.js
 ```
+
+`script.js` automaticky přesměruje API volání na `http://localhost:8787` pokud frontend běží na portu `5180`.
+
+The same backend now also provides direct page persistence for inline editor mode:
+
+```text
+POST /api/save-page
+```
+
+This endpoint is used by the "Ulozit do HTML" button on `index-cs.html` to write changes directly into the current HTML file in your local workspace.
 
 Health check:
 

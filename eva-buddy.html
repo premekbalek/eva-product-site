@@ -820,6 +820,58 @@
     margin-top: 80px;
   }
 
+  .inline-editor-tools {
+    margin: 20px 0 10px;
+  }
+
+  .inline-editor-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    background: var(--bg-white);
+    padding: 12px;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .inline-editor-button {
+    border: 1px solid var(--primary);
+    border-radius: 999px;
+    background: var(--primary);
+    color: #fff;
+    font-size: 0.85rem;
+    font-weight: 700;
+    padding: 9px 14px;
+    cursor: pointer;
+  }
+
+  .inline-editor-hint {
+    margin: 0;
+    color: var(--text-secondary);
+    font-size: 0.86rem;
+  }
+
+  .inline-editor-hint.error {
+    color: #9f2d2d;
+  }
+
+  .inline-editable-text {
+    border-radius: 6px;
+    transition: background 0.15s ease, box-shadow 0.15s ease;
+  }
+
+  .inline-editable-text:hover {
+    background: rgba(0, 25, 165, 0.07);
+  }
+
+  .inline-editable-text:focus {
+    outline: none;
+    background: rgba(0, 25, 165, 0.09);
+    box-shadow: 0 0 0 2px rgba(0, 25, 165, 0.23);
+  }
+
   @media (max-width: 1100px) {
     .variants-grid { grid-template-columns: repeat(2, 1fr); }
     .variants-grid.buddy { grid-template-columns: repeat(2, 1fr); }
@@ -834,6 +886,7 @@
     .page-header h1 { font-size: 2rem; }
     .channels-grid { grid-template-columns: 1fr; }
     .process-steps { flex-direction: column; }
+    .inline-editor-actions { flex-direction: column; align-items: stretch; }
   }
 </style>
 </head>
@@ -1545,6 +1598,13 @@
   </div>
 </div>
 
+<section class="inline-editor-tools container" aria-label="Save inline edits">
+  <div class="inline-editor-actions">
+    <button type="button" class="inline-editor-button" id="saveInlineEditsButton">Save changes</button>
+    <p class="inline-editor-hint" id="inlineEditorStatus">After editing text, click Save changes to write updates directly to this HTML file.</p>
+  </div>
+</section>
+
 <footer>
   <p>&copy; 2024 O2 Czech Republic. All rights reserved. | <a href="#" style="color: inherit; text-decoration: none;">Privacy Policy</a> | <a href="#" style="color: inherit; text-decoration: none;">Terms of Service</a></p>
 </footer>
@@ -1564,6 +1624,180 @@
     stepEl.classList.add('active');
     document.getElementById(detailId).classList.add('active');
   }
+
+  const INLINE_EDIT_SELECTORS = [
+    '.container .page-header h1',
+    '.container .page-header p',
+    '.container h2',
+    '.container h3',
+    '.container h4',
+    '.container p',
+    '.container li',
+    '.container .variant-title',
+    '.container .variant-value',
+    '.container .variant-target',
+    '.container .section-label',
+    '.container .complexity-label',
+    '.container .sara-title',
+    '.container .sara-text',
+    '.container .variant-footer',
+    '.container .addons-title',
+    '.container .addons-subtitle',
+    '.container .step-title',
+    '.container .detail-tag'
+  ];
+
+  function initializeInlineEditing() {
+    const editableNodes = document.querySelectorAll(INLINE_EDIT_SELECTORS.join(','));
+
+    editableNodes.forEach((node, index) => {
+      node.setAttribute('contenteditable', 'true');
+      node.setAttribute('spellcheck', 'false');
+      node.classList.add('inline-editable-text');
+      node.setAttribute('title', 'Click and edit text');
+      node.dataset.inlineEditKey = String(index);
+    });
+  }
+
+  function initializeInlineEditPersistence() {
+    const saveButton = document.getElementById('saveInlineEditsButton');
+    const statusNode = document.getElementById('inlineEditorStatus');
+    const defaultStatusText = 'After editing text, click Save changes to write updates directly to this HTML file.';
+    let expectedMtimeMs = null;
+
+    if (!saveButton || !statusNode) {
+      return;
+    }
+
+    statusNode.textContent = defaultStatusText;
+    statusNode.classList.remove('error');
+
+    function setStatus(message, isError) {
+      statusNode.textContent = message;
+      statusNode.classList.toggle('error', !!isError);
+    }
+
+    function getEditorApiBaseUrl() {
+      if (window.EVA_EDITOR_API_URL) {
+        return String(window.EVA_EDITOR_API_URL).replace(/\/$/, '');
+      }
+
+      if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+        return 'http://localhost:8787';
+      }
+
+      return '';
+    }
+
+    async function refreshExpectedMtime(baseUrl) {
+      try {
+        const response = await fetch(`${baseUrl}/api/page-meta?filePath=${encodeURIComponent(window.location.pathname)}`);
+        const result = await response.json().catch(() => ({}));
+        if (response.ok && result.ok && typeof result.mtimeMs === 'number') {
+          expectedMtimeMs = result.mtimeMs;
+        }
+      } catch {
+        expectedMtimeMs = null;
+      }
+    }
+
+    async function checkForExternalFileChange(baseUrl) {
+      try {
+        const response = await fetch(`${baseUrl}/api/page-meta?filePath=${encodeURIComponent(window.location.pathname)}`);
+        const result = await response.json().catch(() => ({}));
+        if (!response.ok || !result.ok || typeof result.mtimeMs !== 'number') {
+          return;
+        }
+
+        if (expectedMtimeMs !== null && Math.floor(result.mtimeMs) !== Math.floor(expectedMtimeMs)) {
+          setStatus('File changed in VS Code. Reloading current version...', false);
+          window.location.reload();
+          return;
+        }
+
+        expectedMtimeMs = result.mtimeMs;
+      } catch {
+        // Ignore temporary polling errors.
+      }
+    }
+
+    function buildPersistedHtml() {
+      const cloneRoot = document.documentElement.cloneNode(true);
+      cloneRoot.querySelectorAll('.inline-editable-text').forEach((node) => {
+        node.removeAttribute('contenteditable');
+        node.removeAttribute('spellcheck');
+        node.removeAttribute('title');
+        node.removeAttribute('data-inline-edit-key');
+        node.classList.remove('inline-editable-text');
+      });
+
+      cloneRoot.querySelectorAll('[class=""]').forEach((node) => {
+        node.removeAttribute('class');
+      });
+
+      const cloneStatus = cloneRoot.querySelector('#inlineEditorStatus');
+      if (cloneStatus) {
+        cloneStatus.textContent = defaultStatusText;
+        cloneStatus.classList.remove('error');
+      }
+
+      return '<!doctype html>\n' + cloneRoot.outerHTML;
+    }
+
+    async function saveInlineEditsToFile() {
+      setStatus(`Saving ${window.location.pathname}...`, false);
+
+      try {
+        const baseUrl = getEditorApiBaseUrl();
+        if (!baseUrl) {
+          throw new Error('Save API URL is not configured.');
+        }
+
+        const response = await fetch(`${baseUrl}/api/save-page`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            filePath: window.location.pathname,
+            expectedMtimeMs,
+            html: buildPersistedHtml()
+          })
+        });
+
+        const result = await response.json().catch(() => ({}));
+        if (!response.ok || !result.ok) {
+          throw new Error(result.answer || 'Save failed.');
+        }
+
+        if (typeof result.savedMtimeMs === 'number') {
+          expectedMtimeMs = result.savedMtimeMs;
+        }
+
+        setStatus(`Saved to ${result.savedPath}.`, false);
+        alert(`Saved to file: ${result.savedPath}`);
+      } catch (error) {
+        const reason = error && error.message ? error.message : 'Save failed.';
+        setStatus(`Error: ${reason} Start node server/chat-server.js.`, true);
+        alert(`Not saved: ${reason}`);
+      }
+    }
+
+    saveButton.addEventListener('click', saveInlineEditsToFile);
+    const baseUrl = getEditorApiBaseUrl();
+    if (baseUrl) {
+      refreshExpectedMtime(baseUrl);
+      window.setInterval(() => {
+        checkForExternalFileChange(baseUrl);
+      }, 3000);
+      document.addEventListener('visibilitychange', () => {
+        if (!document.hidden) {
+          checkForExternalFileChange(baseUrl);
+        }
+      });
+    }
+  }
+
+  initializeInlineEditing();
+  initializeInlineEditPersistence();
 </script>
 
 </body>

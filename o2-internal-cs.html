@@ -1,0 +1,679 @@
+<!doctype html>
+<html lang="cs"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>O2 AI | O2 interní ekonomika</title>
+    <link rel="stylesheet" href="./styles.css">
+  </head>
+  <body class="subpage-body">
+    <header class="site-header">
+      <a class="brand" href="./index-cs.html" aria-label="O2 AI domů">
+        <span class="brand-mark">O2</span>
+        <span>
+          <strong>O2 AI</strong>
+          <small>EVA &amp; Virtual Buddy</small>
+        </span>
+      </a>
+      <nav class="top-nav" aria-label="Hlavní záložky">
+        <a href="./index-cs.html">EVA &amp; Virtual Buddy</a>
+        <a href="./customer-cooperation-cs.html">Součinnost zákazníka</a>
+        <a href="./architecture-infrastructure-cs.html">Architektura &amp; infrastruktura</a>
+        <a href="./delivery-plan-cs.html">Delivery roadmapa</a>
+        <a class="active internal-tab" href="./o2-internal-cs.html">O2 interní</a>
+        <a class="internal-tab" href="./product-preparation-cs.html">Příprava produktu</a>
+      </nav>
+    </header>
+
+    <main class="subpage-shell with-tabs">
+      <section class="subpage-hero internal-hero">
+        <p class="section-kicker">Interní O2</p>
+        <h1>Ekonomika produktu: náklady, výnosy a marže</h1>
+        <p><br></p>
+        <p class="internal-note">Co fakturovat jednorázově, co měsíčně a co účtovat podle spotřeby.</p>
+      </section>
+
+      <section class="subpage-blocks">
+        <article class="subpage-block">
+          <h2>Nákladová struktura O2</h2>
+          <p>
+            Nákladový model je složen ve čtyřech vrstvách: jednorázová implementace,
+            pravidelný provoz, variabilní spotřeba a interní governance.&nbsp;</p>
+          <div class="finance-grid">
+            <div class="finance-card finance-cost">
+              <h3>Jednorázová implementace</h3>
+              <ul>
+                <li>Solution design, architektura, bezpečnostní návrh</li>
+                <li>Konfigurace runtime logiky, prompt patterns, guardrails</li>
+                <li>Integrace na API, tool adaptery, SSO/IAM</li>
+                <li>Ingestion pipeline a příprava knowledge zdrojů</li>
+                <li>UAT, hardening, go-live readiness</li>
+              </ul>
+            </div>
+            <div class="finance-card finance-cost">
+              <h3>Provozní service (měsíčně)</h3>
+              <ul>
+                <li>Monitoring, incident management, L2 podpora</li>
+                <li>Patchování backendu a pravidelná aktualizace komponent</li>
+                <li>Prompt tuning a průběžná optimalizace odpovědí</li>
+                <li>Regresní testy a quality governance</li>
+                <li>Reporting SLA, kvality a hodnoty</li>
+              </ul>
+            </div>
+            <div class="finance-card finance-cost">
+              <h3>Variabilní spotřeba</h3>
+              <ul>
+                <li>LLM tokeny (input/output), embeddings, reranking</li>
+                <li>AI Search / vector DB dotazy a indexace</li>
+                <li>Storage, compute, síťový přenos, API volání</li>
+                <li>Model fallbacky a špičky zatížení</li>
+                <li>Volání externích nástrojů třetích stran</li>
+              </ul>
+            </div>
+            <div class="finance-card finance-cost">
+              <h3>Interní governance</h3>
+              <ul>
+                <li>Pre-sales podpora, solutioning, architektonické review</li>
+                <li>Právní a compliance šablony, revize smluv</li>
+                <li>Produktový management, roadmapa, release management</li>
+                <li>Enablement delivery týmu a provozních rolí</li>
+              </ul>
+            </div>
+          </div>
+        </article>
+
+        <article class="subpage-block">
+          <h2>Na čem O2 vydělává&nbsp;</h2>
+          <p>Stabilní model kombinuje setup,
+            měsíční managed službu, variabilní spotřebu a změnové práce.
+          </p>
+          <div class="finance-grid">
+            <div class="finance-card finance-revenue">
+              <h3>1) Setup fee (jednorázově)</h3>
+              <ul>
+                <li>Přeúčtování implementace podle rozsahu a složitosti</li>
+                <li>Oddělit core setup od volitelných custom integrací</li>
+                <li>Změnové požadavky po scope locku účtovat zvlášť</li>
+              </ul>
+            </div>
+            <div class="finance-card finance-revenue">
+              <h3>2) Managed service fee (měsíčně) + doplnit subscriptions</h3>
+              <ul>
+                <li>Provoz, monitoring, podpora, pravidelný tuning</li>
+                <li>SLA tiering: Basic / Business / Enterprise</li>
+                <li>Základní cena musí pokrýt fixní O2 tým</li>
+              </ul>
+            </div>
+            <div class="finance-card finance-revenue">
+              <h3>3) Přeprodej cloud services</h3>
+              <ul>
+                <li>Transparentní pass-through cloudových nákladů</li>
+                <li><br></li>
+                <li><br></li>
+              </ul>
+            </div>
+            <div class="finance-card finance-revenue">
+              <h3>4) Upgrades a change requests</h3>
+              <ul>
+                <li>Nové funkcionality, nové use cases, nové integrace</li>
+                <li>Upgrade backendu, konektorů, runtime logiky, testů</li>
+                <li>Balíčky změn jako opakovatelná nabídka</li>
+              </ul>
+            </div>
+            <div class="finance-card finance-revenue">
+              <h3>5) Add-ons - customizovaný vývoj</h3>
+              <ul>
+                <li>SARA/testing rozšíření, advanced audit a compliance</li>
+                <li>Voice, widget a analytické dashboardy&nbsp;</li>
+                <li>Admin tool</li>
+              </ul>
+            </div>
+            <div class="finance-card finance-revenue">
+              <h3>6) Advisory a konzultace</h3>
+              <ul>
+                <li>Conversation design, governance setup, operating model</li>
+                <li>Produktová strategie, roadmapa a kvartální review</li>
+                <li>Školení business a provozních týmů zákazníka</li>
+              </ul>
+            </div>
+          </div>
+        </article>
+
+        <article class="subpage-block">
+          <h2>Ekonomika VB: HR Buddy</h2>
+          <p>
+            Orientacni baseline pro HR Buddy vychazi z produktivizovaneho interniho asistenta nad dokumenty a Knowledge Bace.</p>
+
+          <div class="finance-table-wrap" aria-label="HR Buddy prehled nakladu">
+            <table class="finance-table">
+              <thead>
+                <tr>
+                  <th>Polozka</th>
+                  <th>Typ</th>
+                  <th>Vypocet</th>
+                  <th>Cena</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Implementace</td>
+                  <td>Jednorazove</td>
+                  <td>~13 MD x 15 000 Kc</td>
+                  <td>~195 000 Kc</td>
+                </tr>
+                <tr>
+                  <td>Mesicni servis</td>
+                  <td>Mesicne</td>
+                  <td>~3 MD x 15 000 Kc</td>
+                  <td>~45 000 Kc / m</td>
+                </tr>
+                <tr>
+                  <td>Azure infrastruktura</td>
+                  <td>Mesicne</td>
+                  <td>MS Azure v prostredi O2</td>
+                  <td>~10 000 Kc / m</td>
+                </tr>
+                <tr>
+                  <td>Tokenova spotreba</td>
+                  <td>Mesicne</td>
+                  <td>1 200 dotazu / cca 2 Kc za dotaz</td>
+                  <td>~2 400 Kc / m</td>
+                </tr>
+                <tr class="finance-table-total">
+                  <td>Celkem mesicne</td>
+                  <td>Baseline provoz</td>
+                  <td>Servis + Azure + tokeny</td>
+                  <td>~57 400 Kc / m</td>
+                </tr>
+                <tr>
+                  <td>Admin portal</td>
+                  <td>Mimo baseline</td>
+                  <td>~30 MD x 15 000 Kc</td>
+                  <td>~450 000 Kc</td>
+                </tr>
+                <tr>
+                  <td>Priprava dat zakaznika</td>
+                  <td>Mimo baseline</td>
+                  <td>~3 az 10 MD podle stavu podkladu</td>
+                  <td>~45 000 az 150 000 Kc</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p>
+            Zakladni HR Buddy baseline tedy pocita s jednorazovou implementaci cca 195 000 Kc a s beznym
+            provozem cca 57 400 Kc za mesic bez admin portalu a bez pripravy dat zakaznika.
+          </p>
+
+          <div class="finance-grid">
+            <div class="finance-card finance-cost">
+              <h3>Zakladni rozsah reseni</h3>
+              <ul>
+                <li>Frontend chat jako webovy chat pro zamestnance</li>
+                <li>DB pro konverzace a storage pro dokumenty</li>
+                <li>Azure AI Search: index, indexer a skillset</li>
+                <li>Backend RAG pipeline pro retrieval z KB a odpovedi s odkazem na zdroj</li>
+                <li>AI/LLM gateway pro routing dotazu, logovani spotreby a rate limiting</li>
+              </ul>
+            </div>
+            <div class="finance-card finance-revenue">
+              <h3>Co je v mesicnim servisu</h3>
+              <ul>
+                <li>Monitoring a provoz: dohled, alerting, incident response a sprava zaloh</li>
+                <li>Aktualizace: upgrade BE a FE, AI/LLM gateway a bezpecnostni zaplaty</li>
+                <li>L2 podpora: technicka podpora, konzultace a provozni bug fixing</li>
+                <li>Prompting a prubezna aktualizace knowledge podle provoznich potreb</li>
+                <li>Spotreba infra a tokenu se drzi oddelene jako usage polozka</li>
+              </ul>
+            </div>
+            <div class="finance-card finance-risk">
+              <h3>Kriticke predpoklady a otevrene body</h3>
+              <ul>
+                <li>MS Azure je provozovano v prostredi O2</li>
+                <li>Je potreba mit pravni sablony: DPA, SLA a smluvni vzory</li>
+                <li>Investice do produktizace musi probehnout pred prvnim prodejem</li>
+                <li>Do pricingu je potreba dodelat licencni model, SLA garance a GDPR role</li>
+                <li>Je potreba rozhodnout, zda je O2 Cloud soucasti standardni nabidky</li>
+              </ul>
+            </div>
+            <div class="finance-card finance-cost">
+              <h3>Co neni v baseline a navysuje cenu</h3>
+              <ul>
+                <li>Admin portal pro spravu promptu a upload dokumentu do KB</li>
+                <li>Dopracovani admin portalu cca 30 MD</li>
+                <li>Priprava dat zakaznika orientacne 3 az 10 MD podle stavu podkladu</li>
+                <li>Kvalita dat primo ovlivnuje kvalitu odpovedi a rychlost implementace</li>
+                <li>Bez admin portalu je produkt obchodne velmi obtizne prodejny</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="subpage-grid delivery-model-grid">
+            <div class="placeholder-fieldset">
+              <strong>Nad ramec baseline umime</strong>
+              <ul class="subpage-list">
+                <li>Major upgrade platformy a vyvoj custom integraci</li>
+                <li>Vetsi restrukturalizaci knowledge base</li>
+                <li>Skoleni novych uzivatelu a administratoru</li>
+                <li>Teams nebo Slack integraci podle ciloveho prostredi</li>
+                <li>Rizeni prav k informacim</li>
+                <li>Automaticke revize dokumentace</li>
+                <li>Dotazeni automatizace testovani (kontrola odpovedi modelem vyssiho radu)</li>
+              </ul>
+            </div>
+            <div class="placeholder-fieldset">
+              <strong>Co ma byt v nabidce oddelene</strong>
+              <ul class="subpage-list">
+                <li>Implementace, mesicni servis, Azure infrastruktura a tokenova spotreba</li>
+                <li>Admin portal jako samostatny add-on</li>
+                <li>Priprava a cisteni zakaznickych dat jako samostatna pracnost</li>
+                <li>Repurposing do dalsich domen jako samostatny rozsah</li>
+              </ul>
+            </div>
+          </div>
+        </article>
+
+        <article class="subpage-block">
+          <h2>Doporučený komerční model pro O2</h2>
+          <div class="subpage-grid delivery-model-grid">
+            <div class="placeholder-fieldset">
+              <strong>Model účtování</strong>
+              <ul class="subpage-list">
+                <li>Setup fee: fixní + scope-based část</li>
+                <li>Měsíční managed fee podle SLA tieru</li>
+                <li>Spotřeba cloudu jako pass-through + markup</li>
+                <li>CR a nové funkce jako samostatný backlog</li>
+              </ul>
+            </div>
+            <div class="placeholder-fieldset">
+              <strong>Smluvní guardraily</strong>
+              <ul class="subpage-list">
+                <li>Výslovný scope lock a change management proces</li>
+                <li>Token budget cap + mechanismus schválení navýšení</li>
+                <li>SLA matice a jasná hranice odpovědností</li>
+                <li>Definice, co je bug fix vs. co je placená změna</li>
+              </ul>
+            </div>
+            <div class="placeholder-fieldset">
+              <strong>Interní řízení profitability</strong>
+              <ul class="subpage-list">
+                <li>Každý deal mít contribution margin dashboard</li>
+                <li>Měsíčně porovnávat plán vs. skutečnost (MD, tokeny, incidenty)</li>
+                <li>Včas eskalovat dealy pod cílovou marží</li>
+                <li>U enterprise zákazníků řídit kvartální repricing</li>
+              </ul>
+            </div>
+            <div class="placeholder-fieldset">
+              <strong>Kdy dává smysl add-on upsell</strong>
+              <ul class="subpage-list">
+                <li>Zákazník požaduje interní správu promptů a knowledge</li>
+                <li>Potřebuje vyšší audit, testování nebo compliance dohled</li>
+                <li>Rozšiřuje se počet use cases nebo kanálů</li>
+                <li>Je potřeba napojení na nové backendové akce</li>
+              </ul>
+            </div>
+          </div>
+        </article>
+
+        <article class="subpage-block">
+          <h2>Konsolidace EVA: build u O2 vs. build u zákazníka</h2>
+          <p>Eva je komplexnejší systém, který není v tuto chvíli připraven pro SaaS delivery. Bude potřeba domluvit individuální potřeby zákazníka a zvážit ekonomický smysl dodávky.</p>
+
+          <div class="finance-table-wrap" aria-label="Naklady EVA podle podkladu">
+            <table class="finance-table">
+              <thead>
+                <tr>
+                  <th>Polozka</th>
+                  <th>Hodnota z podkladu</th>
+                  <th>Objem</th>
+                  <th>Interni sazba</th>
+                  <th>Cenikova sazba</th>
+                  <th>Poznamka</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Jednorazove naklady / zakaznik</td>
+                  <td>300 000 Kc</td>
+                  <td>200</td>
+                  <td>-8 000</td>
+                  <td>15 000</td>
+                  <td>Rozchodim agenta</td>
+                </tr>
+                <tr>
+                  <td>Admin portal / zakaznik</td>
+                  <td>750 000 Kc</td>
+                  <td>500</td>
+                  <td>-8 000</td>
+                  <td>15 000</td>
+                  <td>Zakaznik vidi data na jednom miste</td>
+                </tr>
+                <tr>
+                  <td>Priprava skill pro agenta</td>
+                  <td>0 Kc</td>
+                  <td>0</td>
+                  <td>-8 000</td>
+                  <td>15 000</td>
+                  <td>IT interni zakaznika</td>
+                </tr>
+                <tr>
+                  <td>Provoz / zakaznik / rok</td>
+                  <td>1 250 000 Kc</td>
+                  <td>1 000</td>
+                  <td>-8 000</td>
+                  <td>15 000</td>
+                  <td>Reseni naseho rozsahu</td>
+                </tr>
+                <tr class="finance-table-total">
+                  <td>Infrastruktura / zakaznik / rok</td>
+                  <td>-3 000 000 Kc</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>Hodnota ponechana dle podkladu</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="finance-table-wrap" aria-label="Varianty EVA podle podkladu">
+            <table class="finance-table">
+              <thead>
+                <tr>
+                  <th>Varianta</th>
+                  <th>Vynos</th>
+                  <th>Cilovy segment</th>
+                  <th>Odh. pocet IC</th>
+                  <th>Pausal / rok</th>
+                  <th>Implementacni naklad</th>
+                  <th>Cena per zakaznik</th>
+                  <th>Usage / zak / rok</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Standard</td>
+                  <td>80000 az 150000</td>
+                  <td>Mensi hraci a tradicni vyrobci</td>
+                  <td>0</td>
+                  <td>50 000 Kc</td>
+                  <td>10 500 000 Kc</td>
+                  <td>-</td>
+                  <td>Licence CC portal</td>
+                </tr>
+                <tr>
+                  <td>Mid</td>
+                  <td>150000 az 250000</td>
+                  <td>Velci hraci, multi use-case</td>
+                  <td>0</td>
+                  <td>50 000 Kc</td>
+                  <td>10 500 000 Kc</td>
+                  <td>-</td>
+                  <td>-</td>
+                </tr>
+                <tr>
+                  <td>Enterprise</td>
+                  <td>300000 az 600000</td>
+                  <td>CORP TC, CC 100+ agentu</td>
+                  <td>400</td>
+                  <td>50 000 Kc</td>
+                  <td>10 500 000 Kc</td>
+                  <td>341 667 Kc</td>
+                  <td>AI tym</td>
+                </tr>
+                <tr class="finance-table-total">
+                  <td>Celkovy potencial</td>
+                  <td>-</td>
+                  <td>-</td>
+                  <td>400</td>
+                  <td>600 000 Kc</td>
+                  <td>10 500 000 Kc</td>
+                  <td>291 667 Kc</td>
+                  <td>Cena za 36 mesicu</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p>
+            Referencni dealy z podkladu: Veolia 300 000 Kc mesicne, EG.D/E.ON 333 333 Kc mesicne,
+            Zasilkovna 150 000 Kc mesicne.
+          </p>
+
+          <p>
+            Tabulka vys je zamerne vedena podle podkladu. Pokud budeme chtit z EVA udelat stejne cisty model jako u VB,
+            dalsi krok je rozdelit tyto polozky na jednorazove, mesicni a rocni naklady v jednotnem pricing formatu.
+          </p>
+
+          <p><br></p>
+          <div class="finance-table-wrap" aria-label="Rozpad MD podle komponent">
+            <table class="finance-table">
+              <thead>
+                <tr>
+                  <th>Komponenta</th>
+                  <th>MD v O2 prostředí</th>
+                  <th>MD v prostředí zákazníka</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>Administrace/indexace dokumentu</td><td>2</td><td>6</td></tr>
+                <tr><td>Backend a runtime</td><td>5</td><td>15</td></tr>
+                <tr><td>Frontend</td><td>3</td><td>6</td></tr>
+                <tr><td>AKS prostredi</td><td>5</td><td>15</td></tr>
+                <tr><td>AI Search (vector store)</td><td>1</td><td>3</td></tr>
+                <tr><td>Database</td><td>1</td><td>3</td></tr>
+                <tr><td>Redis</td><td>1</td><td>3</td></tr>
+                <tr><td>Automated testing module</td><td>2</td><td>6</td></tr>
+                <tr><td>Validation module</td><td>2</td><td>6</td></tr>
+                <tr><td>LLM endpoint / governance vrstva</td><td>1</td><td>3</td></tr>
+                <tr><td>Langfuse (logging/prompt library)</td><td>1</td><td>3</td></tr>
+                <tr class="finance-table-total"><td>Součet implementace (bez admin portálu)</td><td>24 MD</td><td>69 MD</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="subpage-grid delivery-model-grid">
+          </div>
+        </article>
+
+        <article class="subpage-block">
+          <h2>Interní checklist před obchodní nabídkou</h2>
+          <div class="finance-checklist">
+            <div class="finance-checklist-item">
+              <strong>1. Je oddělená implementace, service a spotřeba?</strong>
+              <p>Bez tohoto oddělení nelze spolehlivě řídit marži ani srovnávat dealy mezi sebou.</p>
+            </div>
+            <div class="finance-checklist-item">
+              <strong>2. Máme token budget cap a alerting?</strong>
+              <p>Spotřeba modelů musí mít limit a mechanismus schválení navýšení na straně zákazníka.</p>
+            </div>
+            <div class="finance-checklist-item">
+              <strong>3. Je jasná hranice bug fix vs. change request?</strong>
+              <p>Nejasná hranice vytváří neplacenou práci a rychle snižuje ziskovost provozu.</p>
+            </div>
+            <div class="finance-checklist-item">
+              <strong>4. Je v nabídce prostor pro upgrades a roadmapu?</strong>
+              <p>Bez plánovaných upgradů se produkt mění na jednorázový projekt bez opakovatelného výnosu.</p>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <section class="section inline-editor-tools" aria-label="Uložení úprav stránky">
+        <div class="inline-editor-actions">
+          <button type="button" class="inline-editor-button" id="saveInlineEditsButton">Uložit změny</button>
+          <p class="inline-editor-hint" id="inlineEditorStatus">Po úpravě textu klikni na Uložit změny pro přímý zápis do aktuální stránky.</p>
+        </div>
+      </section>
+    </main>
+
+    <script>
+      const INLINE_EDIT_SELECTORS = [
+        'main .section-kicker',
+        'main h1',
+        'main h2',
+        'main h3',
+        'main h4',
+        'main p',
+        'main li',
+        'main strong',
+        'main span',
+        'main th',
+        'main td'
+      ];
+
+      function initializeInlineEditing() {
+        const editableNodes = document.querySelectorAll(INLINE_EDIT_SELECTORS.join(','));
+
+        editableNodes.forEach((node, index) => {
+          node.setAttribute('contenteditable', 'true');
+          node.setAttribute('spellcheck', 'false');
+          node.classList.add('inline-editable-text');
+          node.setAttribute('title', 'Klikni a uprav text');
+          node.dataset.inlineEditKey = String(index);
+        });
+      }
+
+      function initializeInlineEditPersistence() {
+        const saveButton = document.getElementById('saveInlineEditsButton');
+        const statusNode = document.getElementById('inlineEditorStatus');
+        const defaultStatusText = 'Po úpravě textu klikni na Uložit změny pro přímý zápis do aktuální stránky.';
+        let expectedMtimeMs = null;
+
+        if (!saveButton || !statusNode) {
+          return;
+        }
+
+        statusNode.textContent = defaultStatusText;
+        statusNode.classList.remove('error');
+
+        function setStatus(message, isError) {
+          statusNode.textContent = message;
+          statusNode.classList.toggle('error', !!isError);
+        }
+
+        function getEditorApiBaseUrl() {
+          if (window.EVA_EDITOR_API_URL) {
+            return String(window.EVA_EDITOR_API_URL).replace(/\/$/, '');
+          }
+
+          if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+            return 'http://localhost:8787';
+          }
+
+          return '';
+        }
+
+        async function refreshExpectedMtime(baseUrl) {
+          try {
+            const response = await fetch(`${baseUrl}/api/page-meta?filePath=${encodeURIComponent(window.location.pathname)}`);
+            const result = await response.json().catch(() => ({}));
+            if (response.ok && result.ok && typeof result.mtimeMs === 'number') {
+              expectedMtimeMs = result.mtimeMs;
+            }
+          } catch {
+            expectedMtimeMs = null;
+          }
+        }
+
+        async function checkForExternalFileChange(baseUrl) {
+          try {
+            const response = await fetch(`${baseUrl}/api/page-meta?filePath=${encodeURIComponent(window.location.pathname)}`);
+            const result = await response.json().catch(() => ({}));
+            if (!response.ok || !result.ok || typeof result.mtimeMs !== 'number') {
+              return;
+            }
+
+            if (expectedMtimeMs !== null && Math.floor(result.mtimeMs) !== Math.floor(expectedMtimeMs)) {
+              setStatus('Soubor byl zmenen ve VS Code, nacitam aktualni verzi...', false);
+              window.location.reload();
+              return;
+            }
+
+            expectedMtimeMs = result.mtimeMs;
+          } catch {
+            // Ignore temporary polling errors.
+          }
+        }
+
+        function buildPersistedHtml() {
+          const cloneRoot = document.documentElement.cloneNode(true);
+          cloneRoot.querySelectorAll('.inline-editable-text').forEach((node) => {
+            node.removeAttribute('contenteditable');
+            node.removeAttribute('spellcheck');
+            node.removeAttribute('title');
+            node.removeAttribute('data-inline-edit-key');
+            node.classList.remove('inline-editable-text');
+          });
+
+          cloneRoot.querySelectorAll('[class=""]').forEach((node) => {
+            node.removeAttribute('class');
+          });
+
+          const cloneStatus = cloneRoot.querySelector('#inlineEditorStatus');
+          if (cloneStatus) {
+            cloneStatus.textContent = defaultStatusText;
+            cloneStatus.classList.remove('error');
+          }
+
+          return '<!doctype html>\n' + cloneRoot.outerHTML;
+        }
+
+        async function saveInlineEditsToFile() {
+          setStatus(`Ukladam ${window.location.pathname}...`, false);
+
+          try {
+            const baseUrl = getEditorApiBaseUrl();
+            if (!baseUrl) {
+              throw new Error('Neni nastavena URL pro save API.');
+            }
+
+            const response = await fetch(`${baseUrl}/api/save-page`, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                filePath: window.location.pathname,
+                expectedMtimeMs,
+                html: buildPersistedHtml()
+              })
+            });
+
+            const result = await response.json().catch(() => ({}));
+            if (!response.ok || !result.ok) {
+              throw new Error(result.answer || 'Ulozeni selhalo.');
+            }
+
+            if (typeof result.savedMtimeMs === 'number') {
+              expectedMtimeMs = result.savedMtimeMs;
+            }
+
+            setStatus(`Ulozeno do ${result.savedPath}.`, false);
+            alert(`Ulozeno do souboru: ${result.savedPath}`);
+          } catch (error) {
+            const reason = error && error.message ? error.message : 'Ulozeni selhalo.';
+            setStatus(`Chyba: ${reason} Spust node server/chat-server.js.`, true);
+            alert(`Neulozeno: ${reason}`);
+          }
+        }
+
+        saveButton.addEventListener('click', saveInlineEditsToFile);
+        const baseUrl = getEditorApiBaseUrl();
+        if (baseUrl) {
+          refreshExpectedMtime(baseUrl);
+          window.setInterval(() => {
+            checkForExternalFileChange(baseUrl);
+          }, 3000);
+          document.addEventListener('visibilitychange', () => {
+            if (!document.hidden) {
+              checkForExternalFileChange(baseUrl);
+            }
+          });
+        }
+      }
+
+      initializeInlineEditing();
+      initializeInlineEditPersistence();
+    </script>
+  
+
+</body></html>

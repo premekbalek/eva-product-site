@@ -1,561 +1,365 @@
 <!doctype html>
-<html lang="cs">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>EVA | AI platforma pro zákaznickou péči</title>
-    <link rel="alternate" hreflang="en" href="./index.html" />
-    <link rel="alternate" hreflang="cs" href="./index-cs.html" />
-    <link rel="stylesheet" href="./styles.css" />
+<html lang="cs"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>O2 AI | EVA &amp; Virtual Buddy</title>
+    <link rel="stylesheet" href="./styles.css">
   </head>
   <body>
     <header class="site-header">
-      <a class="brand" href="#top" aria-label="EVA domů">
-        <span class="brand-mark">E</span>
+      <a class="brand" href="./index-cs.html" aria-label="O2 AI domů">
+        <span class="brand-mark">O2</span>
         <span>
-          <strong>EVA</strong>
-          <small>AI platforma pro zákaznickou péči</small>
+          <strong>O2 AI</strong>
+          <small>EVA &amp; Virtual Buddy</small>
         </span>
       </a>
-      <nav class="top-nav" aria-label="Hlavní navigace">
-        <a href="#decision-hub">Rozhodovací hub</a>
-        <a href="#products">EVA & Virtual Buddy</a>
-        <a href="#platform">Platform</a>
-        <a href="#why-eva">Proč EVA</a>
-        <a href="#knowledge">Znalostní báze</a>
-        <a href="#solution">Technické řešení</a>
-        <a href="./architecture-infrastructure-cs.html">Architektura</a>
+      <nav class="top-nav" aria-label="Hlavní záložky">
+        <a class="active" href="./index-cs.html">EVA &amp; Virtual Buddy</a>
+        <a href="./customer-cooperation-cs.html">Součinnost zákazníka</a>
+        <a href="./architecture-infrastructure-cs.html">Architektura &amp; infrastruktura</a>
         <a href="./delivery-plan-cs.html">Delivery roadmapa</a>
-        <a href="#chat">Produktový chat</a>
+        <a class="internal-tab" href="./product-preparation-cs.html">Příprava produktu</a>
+        <a class="internal-tab" href="./o2-internal-cs.html">Ekonomika</a>
       </nav>
-      <a class="header-action" href="#decision-hub">Začít hodnocení</a>
-      <div class="language-switch" aria-label="Přepnutí jazyka">
-        <a href="./index.html" lang="en">EN</a>
-        <a class="active" href="./index-cs.html" lang="cs">CZ</a>
-      </div>
     </header>
 
     <main id="top">
-      <section class="hero">
-        <img class="hero-image" src="./assets/eva-banking-hub-hero.png" alt="" />
+      <section class="hero product-hero">
+        <img class="hero-image" src="./assets/eva-banking-hub-hero.png" alt="">
         <div class="hero-overlay"></div>
         <div class="hero-content">
-          <div class="eyebrow">Od IVR k AI samoobsluze</div>
-          <h1>EVA řeší požadavky zákazníků dřív, než vznikne fronta.</h1>
-          <p>
-            AI-first platforma pro enterprise zákaznickou péči: jeden řízený agent napříč hlasem,
-            chatem, mobilem a webem, který rozumí záměru, ověří identitu, volá backendové systémy
-            a dokončí zákaznickou cestu.
-          </p>
-          <div class="hero-actions">
-            <a class="primary-action" href="#solution">Zobrazit technický flow</a>
-            <a class="secondary-action" href="#products">Prozkoumat EVA & Virtual Buddy</a>
-          </div>
-          <div class="metric-strip" aria-label="Obchodní dopad">
-            <div><strong>30-60%</strong><span>méně kontaktů na operátory</span></div>
-            <div><strong>0 čekání</strong><span>u opakovaných požadavků</span></div>
-            <div><strong>+NPS</strong><span>rychlejší úplné vyřešení</span></div>
-            <div><strong>nový výnos</strong><span>včasný cross-sell</span></div>
-          </div>
+          <div class="eyebrow">Produktové portfolio</div>
+          <h1>EVA řeší zákaznickou péči. Virtual Buddy zpřístupňuje interní znalosti.</h1>
+          <p class="hero-lede">EVA řeší externí
+            zákaznickou péči, Virtual Buddy interní přístup ke znalostem.&nbsp;</p>
         </div>
       </section>
 
-      <section class="section decision-hub" id="decision-hub">
-        <div class="section-heading">
-          <p class="section-kicker">Rozhodovací hub</p>
-          <h2>Vše, co CFO/CTO potřebuje pro rozhodnutí: koupit od O2, stavět interně, nebo kombinovat obě cesty.</h2>
-          <p class="section-intro">
-            Tyto stránky pomáhají vyhodnotit ekonomiku, rizika, připravenost delivery a provozní model.
-            Každá stránka je praktický checklist, aby tým rychle našel chybějící vstupy.
-          </p>
-        </div>
+      <section class="section product-portfolio" id="produkty">
+        <div class="portfolio-showcase">
+          <section class="portfolio-product-block">
+            <div class="section-title buddy-title"><h2>Produktové varianty Buddy</h2><div class="line"></div></div>
+            <p class="kpi-note">KPI</p>
 
-        <div class="decision-grid" aria-label="Hodnoticí oblasti">
-          <article class="decision-card">
-            <p class="decision-tag">Strategie</p>
-            <h3>Build vs Buy</h3>
-            <p>Porovnejte time-to-value, nároky na tým, rizikový profil a dlouhodobou kontrolu.</p>
-            <ul>
-              <li>Scoring matice pro obě varianty</li>
-              <li>Typické skryté náklady a zpoždění</li>
-              <li>Doporučená rozhodovací logika</li>
-            </ul>
-            <a class="decision-link" href="./build-vs-buy-cs.html">Otevřít stránku Build vs Buy</a>
-          </article>
-
-          <article class="decision-card">
-            <p class="decision-tag">Finance</p>
-            <h3>Business Case</h3>
-            <p>Připravte ROI a TCO vstupy na jednom místě před schválením vedením.</p>
-            <ul>
-              <li>Struktura ROI modelu</li>
-              <li>Nákladové kategorie k validaci</li>
-              <li>Rámec pro scénáře návratnosti</li>
-            </ul>
-            <a class="decision-link" href="./business-case-cs.html">Otevřít stránku Business Case</a>
-          </article>
-
-          <article class="decision-card">
-            <p class="decision-tag">Riziko</p>
-            <h3>Security & Trust</h3>
-            <p>Prověřte governance, datové politiky, řízení přístupu, auditovatelnost a compliance očekávání.</p>
-            <ul>
-              <li>Mapa sdílené odpovědnosti</li>
-              <li>Šablona bezpečnostního dotazníku</li>
-              <li>Checklist připravenosti ke schválení</li>
-            </ul>
-            <a class="decision-link" href="./security-trust-cs.html">Otevřít stránku Security & Trust</a>
-          </article>
-
-          <article class="decision-card">
-            <p class="decision-tag">Architektura</p>
-            <h3>Infrastructure Options</h3>
-            <p>Porovnejte O2-hosted, customer-cloud a hybridní deployment model pro EVA a Virtual Buddy.</p>
-            <ul>
-              <li>Cloud, private managed a hybrid control-plane modely</li>
-              <li>LLM PTU, fallback, token metering a billing boundary</li>
-              <li>Rozdíly mezi VB znalostním přístupem a EVA vykonáváním akcí</li>
-            </ul>
-            <a class="decision-link" href="./architecture-infrastructure-cs.html">Otevřít Architecture stránku</a>
-          </article>
-
-          <article class="decision-card">
-            <p class="decision-tag">Realizace</p>
-            <h3>Delivery Plan</h3>
-            <p>Definujte uvedení na B2B trh, delivery model, operating model a governance škálování.</p>
-            <ul>
-              <li>B2B go-to-market a škálovací model</li>
-              <li>Společný delivery model</li>
-              <li>Operating model pro provoz a růst</li>
-              <li>Struktura 30-60-90 dní</li>
-            </ul>
-            <a class="decision-link" href="./delivery-plan-cs.html">Otevřít stránku Delivery Plan</a>
-          </article>
-        </div>
-
-        <div class="decision-footer">
-          <div>
-            <strong>Doporučený postup:</strong>
-            <span>1) Build vs Buy → 2) Business Case → 3) Security & Trust → 4) Delivery Plan.</span>
-          </div>
-          <a class="secondary-action" href="#products">Pokračovat na produktové varianty</a>
-        </div>
-      </section>
-
-      <section class="section split" id="platform">
-        <div>
-          <p class="section-kicker">Platformová nabídka</p>
-          <h2>Jedna servisní logika tam, kde dnes firmy mají IVR, chatboty, skripty a oddělená pravidla.</h2>
-        </div>
-        <div class="capability-grid">
-          <article>
-            <span>01</span>
-            <h3>Skutečné vyřešení</h3>
-            <p>Záměr, identita, API volání, rozhodnutí a potvrzení v jednom řízeném servisním flow.</p>
-          </article>
-          <article>
-            <span>02</span>
-            <h3>Enterprise kontext</h3>
-            <p>Kontext zákazníka, produktu, objednávky, rizika, kanálu a interakce bez opakování informací.</p>
-          </article>
-          <article>
-            <span>03</span>
-            <h3>Integrace na vyžádání</h3>
-            <p>Core systémy se volají jen ve chvíli, kdy jsou potřeba, což zrychluje službu a snižuje zátěž.</p>
-          </article>
-          <article>
-            <span>04</span>
-            <h3>Proaktivní AI</h3>
-            <p>Fraud alerty, připomínky, navedení v aplikaci a compliant next-best nabídky.</p>
-          </article>
-        </div>
-      </section>
-
-      <section class="section why-eva" id="why-eva">
-        <div class="why-eva-header">
-          <p class="section-kicker">Proč EVA</p>
-          <h2>EVA není jen AI. Je to orchestrační vrstva, díky které zákaznická péče skutečně funguje.</h2>
-          <p class="section-intro">
-            Firmy už mají data, API a systémy. Často jim ale chybí způsob, jak je proměnit ve funkční a škálovatelný systém zákaznické interakce.<br><br>
-            <strong>Data a API sama o sobě zákaznickou péči nevytvoří. Tu vytváří orchestrace.</strong>
-          </p>
-        </div>
-        
-        <div class="why-eva-content">
-          <article class="why-eva-block">
-            <h3>Co si reálně kupujete</h3>
-            <div class="contrast-box">
-              <div class="not-buying">
-                <p><strong>Nekupujete:</strong></p>
-                <ul>
-                  <li>chatbota</li>
-                  <li>LLM model</li>
-                  <li>integrační vrstvu</li>
-                </ul>
-              </div>
-              <div class="buying">
-                <p><strong>Kupujete:</strong></p>
-                <p>Schopnost řešit zákaznické požadavky end-to-end bez operátora.</p>
-              </div>
-            </div>
-          </article>
-
-          <article class="why-eva-block">
-            <h3>Multi-agent orchestrace</h3>
-            <p>EVA je koordinovaný agentní systém:</p>
-            <div class="agent-structure">
-              <div class="agent-item">
-                <strong>Master agent</strong>
-                <ul>
-                  <li>rozumí záměru</li>
-                  <li>řídí celé flow</li>
-                  <li>rozhoduje o dalším kroku</li>
-                </ul>
-              </div>
-              <div class="agent-item">
-                <strong>Specializovaní agenti</strong>
-                <ul>
-                  <li>řeší konkrétní use cases (fakturace, objednávky, support)</li>
-                  <li>vykonávají business logiku</li>
-                </ul>
-              </div>
-              <div class="agent-item">
-                <strong>Backendové systémy</strong>
-                <ul>
-                  <li>poskytují data</li>
-                  <li>neřídí samotné flow</li>
-                </ul>
-              </div>
-            </div>
-            <p><strong>Logika žije v agentní vrstvě, ne v backendových systémech.</strong></p>
-          </article>
-
-          <article class="why-eva-block">
-            <h3>Data jako rozhodovací vrstva</h3>
-            <div class="data-comparison">
-              <div class="traditional">
-                <p><strong>Tradiční systémy:</strong><br>→ vrací data</p>
-              </div>
-              <div class="eva-way">
-                <p><strong>EVA:</strong><br>→ používá data pro rozhodování</p>
-                <ul>
-                  <li>určí, kdy volat API</li>
-                  <li>kombinuje více datových zdrojů</li>
-                  <li>pracuje i s neúplnými daty</li>
-                </ul>
-              </div>
-            </div>
-            <p><strong>Nevracíme jen data. Jednáme na jejich základě.</strong></p>
-          </article>
-
-          <article class="why-eva-block">
-            <h3>Integrace na vyžádání</h3>
-            <ul>
-              <li>Bez těžké integrace na začátku</li>
-              <li>Data se volají jen tehdy, když jsou potřeba</li>
-            </ul>
-            <p><strong>Dopad:</strong></p>
-            <ul>
-              <li>rychlejší nasazení</li>
-              <li>nižší latence</li>
-              <li>nižší náklady</li>
-            </ul>
-          </article>
-
-          <article class="why-eva-block">
-            <h3>Proč je těžké postavit to interně</h3>
-            <div class="internal-challenge">
-              <div class="can-build">
-                <p><strong>Organizace umí postavit:</strong></p>
-                <ul>
-                  <li>APIs</li>
-                  <li>chatbots</li>
-                  <li>AI modely</li>
-                </ul>
-              </div>
-              <div class="cannot-build">
-                <p><strong>Ale naráží u:</strong></p>
-                <ul>
-                  <li>koordinace agentů</li>
-                  <li>návrhu interakčních flow</li>
-                  <li>práce s neúplnými daty</li>
-                  <li>řízení nákladů na LLM</li>
-                  <li>opakovaného použití logiky napříč use cases</li>
-                </ul>
-              </div>
-            </div>
-            <p><strong>Problém není AI. Problém je orchestrace.</strong></p>
-          </article>
-
-          <article class="why-eva-block">
-            <h3>Co EVA přináší</h3>
-            <ul>
-              <li>Ověřený multi-agent orchestrační model</li>
-              <li>Reálné produkční zkušenosti</li>
-              <li>Znovupoužitelné interakční patterny</li>
-              <li>Optimalizovaný nákladový model (LLM + pravidla + API)</li>
-              <li>Oddělení logiky od backendových systémů</li>
-            </ul>
-          </article>
-
-          <article class="why-eva-block why-eva-closing">
-            <p>EVA mění systémy a data ve funkční zákaznickou péči.</p>
-            <p><strong>Bez orchestrace zůstává AI demem. EVA ji posouvá do produkce.</strong></p>
-          </article>
-        </div>
-      </section>
-
-      <section class="section knowledge" id="knowledge">
-        <div class="section-heading">
-          <p class="section-kicker">Zákaznická znalostní báze</p>
-          <h2>Dejte firemním zákazníkům prostor produkt prověřit, ne jen přečíst obchodní text.</h2>
-        </div>
-        <div class="knowledge-shell">
-          <aside class="kb-nav" aria-label="Témata znalostní báze">
-            <button class="kb-button active" data-topic="overview">Manažerský přehled</button>
-            <button class="kb-button" data-topic="usecases">Use cases</button>
-            <button class="kb-button" data-topic="security">Bezpečnost a compliance</button>
-            <button class="kb-button" data-topic="mvp">Rozsah MVP</button>
-          </aside>
-          <article class="kb-panel" id="kb-panel" aria-live="polite"></article>
-        </div>
-      </section>
-
-      <section class="section solution" id="solution">
-        <div>
-          <p class="section-kicker">Technické řešení</p>
-          <h2>Resolver architektura pro firmy, které potřebují governance, auditovatelnost a skutečné backendové akce.</h2>
-          <p class="solution-copy">
-            EVA funguje jako orchestrační vrstva mezi kanály, identitou, business API,
-            rozhodovacími pravidly a eskalací na člověka. Stejná logika obslouží voice, chat, mobile i web.
-          </p>
-        </div>
-        <div class="flow-board">
-          <div class="flow-step"><strong>1</strong><span>Záměr</span><p>Rozpoznání cíle zákazníka a urgence.</p></div>
-          <div class="flow-step"><strong>2</strong><span>Identita</span><p>Ověření zákazníka a úrovně oprávnění.</p></div>
-          <div class="flow-step"><strong>3</strong><span>Kontext</span><p>Načtení zákazníka, produktu, objednávky, kanálu a rizikových signálů.</p></div>
-          <div class="flow-step"><strong>4</strong><span>API</span><p>Volání zákaznických, objednávkových, produktových nebo systémových záznamů.</p></div>
-          <div class="flow-step"><strong>5</strong><span>Vyřešení</span><p>Dokončení úkolu, potvrzení, logování a návrh dalšího kroku.</p></div>
-        </div>
-      </section>
-
-      <section class="section product-portfolio" id="products">
-        <div class="section-heading">
-          <p class="section-kicker">Produktové portfolio</p>
-          <h2>Vyberte správnou produktovou linii podle jasně definovaných business cílů.</h2>
-          <p class="section-intro">
-            Začněte očekávanými výsledky a potom zvolte EVA nebo Virtual Buddy variantu podle rozsahu,
-            komplexity a provozního modelu.
-          </p>
-        </div>
-
-        <div class="sales-outcome-strip" aria-label="Obchodní výsledky">
-          <article>
-            <strong>+NPS</strong>
-            <p>Rychlejší a konzistentnější kvalita zákaznického vyřešení.</p>
-          </article>
-          <article>
-            <strong>0 opuštění</strong>
-            <p>24/7 servisní pokrytí pro časté a urgentní požadavky.</p>
-          </article>
-          <article>
-            <strong>30-60% containment</strong>
-            <p>Nižší zátěž operátorů díky automatizaci opakovatelných flow.</p>
-          </article>
-          <article>
-            <strong>Rychlejší návratnost</strong>
-            <p>Postupný rollout od MVP po enterprise scale bez změny platformy.</p>
-          </article>
-        </div>
-
-        <div class="product-suite">
-          <article class="product-panel product-panel-eva">
-            <div class="product-panel-head">
-              <p class="product-label">EVA</p>
-            <h3>AI pro zákaznickou péči</h3>
-              <p>Pro externí zákaznickou komunikaci napříč chatem, hlasem a aplikací.</p>
+            <div class="outcome-metrics buddy-metrics" aria-label="Hlavní metriky Buddy">
+              <div class="metric-card"><strong>méně hledání</strong><span>rychlejší přístup ke znalostem</span></div>
+              <div class="metric-card"><strong>rychlejší onboarding</strong><span>noví lidé se zorientují dříve</span></div>
+              <div class="metric-card"><strong>konzistentní odpovědi</strong><span>jedna pravda napříč týmy</span></div>
+              <div class="metric-card"><strong>řízený přístup</strong><span>znalosti podle rolí a oprávnění</span></div>
             </div>
 
-            <div class="product-block">
-              <h4>Vstupní kanály</h4>
-              <div class="channel-pills">
-                <span>Web Chat</span>
-                <span>Aplikace</span>
-                <span>Voice</span>
+            <div class="shared-block buddy-block">
+              <h3>Vstupní kanály<span style="background-color: rgba(31, 79, 131, 0.06); color: rgb(96, 112, 134); font-size: 13px; font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;"><br></span></h3>
+              <div class="channels-grid">
+                <div class="channel-item buddy-channel"><div class="channel-icon">🌐</div><div><h4>Web chat</h4><p>Chatovací rozhraní napojené na interní znalostní bázi.</p></div></div>
+                <div class="channel-item buddy-channel"><div class="channel-icon">🖥️</div><div><h4>Interní UI</h4><p>Dedikované rozhraní pro zaměstnance přímo v pracovním prostředí.</p></div></div>
               </div>
             </div>
 
-            <div class="product-block">
-              <h4>Platformní základ</h4>
-              <p class="product-note">EVA může využívat stejný platformní základ jako Virtual Buddy, ale míří ven na zákaznické journeys, backendový kontext a řízené vykonávání akcí.</p>
-            </div>
-
-            <div class="product-block">
-              <h4>Servisní varianty</h4>
-              <div class="tier-grid tier-grid-eva">
-                <article class="tier-card">
-                  <h5>EVA Start</h5>
-                  <p class="tier-subtitle">Okamžitá 24/7 podpora</p>
-                  <ul>
-                    <li>AI chatbot s RAG</li>
-                    <li>FAQ scénáře</li>
-                    <li>Nízká komplexita nasazení</li>
-                  </ul>
+            <div class="main-layout">
+              <div class="cards-aligned buddy-grid" id="buddy-cards">
+                <article class="card-col buddy-card-col tier-vb-start">
+                  <div class="col-header"><div class="badge">Úroveň 1</div><h2>VB MVP</h2><div class="value-tag">Okamžitý přístup ke znalostem</div><div class="target">Firmy s existující dokumentací</div></div>
+                  <div class="col-section"><div class="section-label">Co řeší</div><p>Snadné vyhledání odpovědi z Knowledge Base (KB)</p></div>
+                  <div class="col-section"><div class="section-label">Co dostanete</div><ul class="scope-list"><li>AI chat nad interní KB</li><li>Napojení na zdroje znalostí</li><li>Automatická práce s dokumenty</li></ul></div>
+                  <div class="col-section"><div class="section-label">Součinnost zákazníka</div><ul class="collab-list"><li>Příprava KB&nbsp;</li><li>Přístupy do KB (Confluence, PDF, Web...)</li><li>Lehké ověření odpovědí</li></ul></div>
+                  <div class="col-section"><div class="section-label">Komplexita nasazení</div><div class="complexity-bar"><div class="complexity-fill-buddy" style="width:20%"></div></div><div class="complexity-label">Nízká</div></div>
+                  <div class="col-footer">Rychlý start - napojíte stávající dokumentaci</div>
                 </article>
-                <article class="tier-card">
-                  <h5>EVA Scale</h5>
-                  <p class="tier-subtitle">Odlehčení operátorům ve větším měřítku</p>
-                  <ul>
-                    <li>Vše z EVA Start</li>
-                    <li>Multi-scenario workflows</li>
-                    <li>Základní integrace a AI testování</li>
-                  </ul>
+
+                <article class="card-col buddy-card-col tier-vb-boost">
+                  <div class="col-header"><div class="badge">Úroveň 2</div><h2>VB Standard</h2><div class="value-tag">Konzistentní a spolehlivé odpovědi</div><div class="target">Firmy, kde KB není optimalizovaná pro AI</div></div>
+                  <div class="col-section"><div class="section-label">Co řeší</div><p>Znalosti nejsou efektivně využívány.</p></div>
+                  <div class="col-section"><div class="section-label">Co dostanete</div><ul class="scope-list"><li class="inherited">Vše z VB MVP</li><li>Čištění a strukturování KB</li><li>Nastavení odpovědí</li><li>AI testing - manuální ověření znalostí</li></ul></div>
+                  <div class="col-section"><div class="section-label">Součinnost zákazníka</div><ul class="collab-list"><li>Aktivní spolupráce na KB</li><li>Domain validace</li><li>Iterace odpovědí</li></ul></div>
+                  <div class="col-section"><div class="section-label">Komplexita nasazení</div><div class="complexity-bar"><div class="complexity-fill-buddy" style="width:55%"></div></div><div class="complexity-label">Střední</div></div>
+                  <div class="col-footer">Znalosti se promění v přesné a důvěryhodné odpovědi</div>
                 </article>
-                <article class="tier-card">
-                  <h5>EVA Perform</h5>
-                  <p class="tier-subtitle">Enterprise automatizace</p>
-                  <ul>
-                    <li>Multi-skill AI agenti</li>
-                    <li>Integrace interních systémů</li>
-                    <li>End-to-end testování</li>
-                  </ul>
-                </article>
-                <article class="tier-card">
-                  <h5>EVA Perform&Operate</h5>
-                  <p class="tier-subtitle">Plně spravováno O2</p>
-                  <ul>
-                    <li>Provoz a monitoring</li>
-                    <li>Průběžné ladění</li>
-                    <li>Minimální provozní zátěž zákazníka</li>
-                  </ul>
+
+                <article class="card-col buddy-card-col tier-vb-custom">
+                  <div class="col-header"><div class="badge">Úroveň 3</div><h2>VB Enterprise</h2><div class="value-tag">Enterprise knowledge AI</div><div class="target">Firmy se specifickými požadavky</div></div>
+                  <div class="col-section"><div class="section-label">Co řeší</div><p>Potřeba propojení s procesy a systémy.</p></div>
+                  <div class="col-section"><div class="section-label">Co dostanete</div><ul class="scope-list"><li class="inherited">Vše z VB Standard</li><li>Integrace na systémy</li><li>Custom logika</li><li>AI testing + monitoring</li></ul></div>
+                  <div class="col-section"><div class="section-label">Součinnost zákazníka</div><ul class="collab-list"><li>Zapojení IT</li><li>Definice procesů</li><li>Průběžný tuning</li></ul></div>
+                  <div class="col-section"><div class="section-label">Komplexita nasazení</div><div class="complexity-bar"><div class="complexity-fill-buddy" style="width:88%"></div></div><div class="complexity-label">Vysoká</div></div>
+                  <div class="col-footer">Plně přizpůsobené firemním procesům a systémům</div>
                 </article>
               </div>
+
+              <aside class="addon-sidebar">
+                <div class="addon-sidebar-title buddy-sidebar-title">Volitelné Add-ony<span class="subtitle">dostupné ke všem variantám</span></div>
+                <div class="addon-item-v buddy-addon-v"><h4>Admin portál</h4><p>GUI pro správu promptů, popisů tools, znalostních zdrojů, verzování změn a publikaci do produkce.</p></div>
+                <div class="addon-item-v buddy-addon-v"><h4>Řízení práv k informacím</h4><p>Nastavení oprávnění, rolí a znalostních scope podle skupin uživatelů.</p></div>
+                <div class="addon-item-v buddy-addon-v"><h4>Automatizace testování</h4><p>Pravidelné regresní testy odpovědí, zdrojů a klíčových znalostních scénářů.</p></div>
+                <div class="addon-item-v buddy-addon-v"><h4>Widget</h4><p>Embedded okno pro přístup ke znalostní bázi přímo v pracovních nástrojích.</p></div>
+                <div class="addon-item-v buddy-addon-v"><h4>SARA</h4><p>Kontrola správnosti, relevance a souladu odpovědí s firemní politikou.</p></div>
+              </aside>
+            </div>
+          </section>
+
+          <section class="portfolio-product-block">
+            <div class="section-title eva-title"><h2>Produktové varianty EVA</h2><div class="line"></div></div>
+            <p class="kpi-note">KPI - odhad při plné implementaci</p>
+
+            <div class="outcome-metrics eva-metrics" aria-label="Hlavní metriky EVA">
+              <div class="metric-card"><strong>30-60%</strong><span>méně kontaktů na operátory</span></div>
+              <div class="metric-card"><strong>0 čekání</strong><span>pro velkoobjemové požadavky</span></div>
+              <div class="metric-card"><strong>+NPS</strong><span>rychlejší úplné vyřešení</span></div>
+              <div class="metric-card"><strong>nové výnosy</strong><span>včasný cross-sell</span></div>
             </div>
 
-            <div class="product-block">
-              <h4>Volitelné doplňky</h4>
-              <ul class="addon-list">
-                <li><strong>SARA:</strong> Kontrola kvality odpovědí a souladu s pravidly</li>
-                <li><strong>Widget:</strong> Vložený web chat s rychlým nasazením</li>
-                <li><strong>AI Voice:</strong> Přirozené hlasové interakce</li>
-                <li><strong>Aplikace:</strong> Dedikovaný mobilní nebo webový support kanál</li>
-              </ul>
-            </div>
-
-            <div class="product-block">
-              <h4>Infrastrukturní specifika</h4>
-              <ul class="addon-list">
-                <li><strong>Data/action plane:</strong> Zákaznický kontext, oprávnění a backend action endpointy musí být řízené a auditovatelné.</li>
-                <li><strong>Runtime riziko:</strong> EVA může provádět zákaznické akce, takže identita, autorizace, rollback a handoff na operátora jsou povinná témata návrhu.</li>
-                <li><strong>Preferovaný enterprise model:</strong> Hybridní control plane s customer data/action plane pro citlivé nebo transakční use cases.</li>
-              </ul>
-            </div>
-          </article>
-
-          <article class="product-panel product-panel-buddy">
-            <div class="product-panel-head">
-              <p class="product-label">Virtual Buddy</p>
-            <h3>Interní znalostní AI</h3>
-              <p>Pro zaměstnance, kteří potřebují rychlý a přesný přístup k firemním znalostem a procesní logice.</p>
-            </div>
-
-            <div class="product-block">
-              <h4>Vstupní kanály</h4>
-              <div class="channel-pills">
-                <span>Web Chat</span>
-                <span>Internal UI</span>
-                <span>API (Custom varianta)</span>
+            <div class="shared-block eva-block">
+              <h3>Vstupní kanály</h3>
+              <div class="channels-grid">
+                <div class="channel-item eva-channel"><div class="channel-icon">🌐</div><div><h4>Web chat</h4><p>Chatovací okno přímo na webu, dostupné 24/7.</p></div></div>
+                <div class="channel-item eva-channel"><div class="channel-icon">📱</div><div><h4>Aplikace</h4><p>Mobilní nebo webová aplikace jako samostatný kanál obsluhy.</p></div></div>
+                <div class="channel-item eva-channel"><div class="channel-icon">📞</div><div><h4>Voice - součást addons</h4><p>Hlasový kanál pro přirozenou komunikaci se zákazníkem.</p></div></div>
               </div>
             </div>
 
-            <div class="product-block">
-              <h4>Platformní základ</h4>
-              <p class="product-note">Virtual Buddy je interní znalostní varianta společné platformy: dokumenty, konektory, RAG, testing, policy management a LLM governance.</p>
-            </div>
+            <div class="main-layout">
+              <div class="cards-aligned" id="eva-cards">
+                <article class="card-col eva-card-col tier-start">
+                  <div class="col-header"><div class="badge">Úroveň 1</div><h2>EVA MVP</h2><div class="value-tag">Okamžitá obsluha 24/7</div><div class="target">Firmy s vysokým objemem dotazů</div></div>
+                  <div class="col-section"><div class="section-label">Co řeší</div><p>Rostoucí nároky na zákaznickou obsluhu.</p></div>
+                  <div class="col-section"><div class="section-label">Co dostanete</div><ul class="scope-list"><li>AI chatbot (RAG)</li><li>FAQ scénáře</li></ul></div>
+                  <div class="col-section"><div class="section-label">Součinnost zákazníka</div><ul class="collab-list"><li>Dodání FAQ / KB</li><li>Validace odpovědí</li><li>Minimální IT</li></ul></div>
+                  <div class="col-section"><div class="section-label">Komplexita nasazení</div><div class="complexity-bar"><div class="complexity-fill-eva" style="width:20%"></div></div><div class="complexity-label">Nízká</div></div>
+                  <div class="col-section sara-section"><div class="sara-box eva-sara"><div class="sara-icon">🛡️</div><div><div class="sara-box-title">SARA</div><div class="sara-box-text">Kontrola kvality odpovědí - hlídá správnost a tón každé reakce.</div></div></div></div>
+                  <div class="col-footer">Ideální start bez velké IT zátěže</div>
+                </article>
 
-            <div class="product-block">
-              <h4>Servisní varianty</h4>
-              <div class="tier-grid tier-grid-buddy">
-                <article class="tier-card">
-                  <h5>VB Start</h5>
-                  <p class="tier-subtitle">Okamžitý přístup ke znalostem</p>
-                  <ul>
-                    <li>AI chat nad interní znalostní bází</li>
-                    <li>Podpora zdrojů Confluence a SharePoint</li>
-                    <li>Nízká komplexita nasazení</li>
-                  </ul>
+                <article class="card-col eva-card-col tier-scale">
+                  <div class="col-header"><div class="badge">Úroveň 2</div><h2>EVA Standard</h2><div class="value-tag">Úleva operátorům</div><div class="target">Firmy s více scénáři</div></div>
+                  <div class="col-section"><div class="section-label">Co řeší</div><p>Velká část požadavků řešena manuálně.</p></div>
+                  <div class="col-section"><div class="section-label">Co dostanete</div><ul class="scope-list"><li class="inherited">Vše z EVA MVP</li><li>Více scénářů</li><li>Základní integrace</li><li>AI testing</li></ul></div>
+                  <div class="col-section"><div class="section-label">Součinnost zákazníka</div><ul class="collab-list"><li>Definice use-case</li><li>Spolupráce na flows</li><li>Lehké IT zapojení</li></ul></div>
+                  <div class="col-section"><div class="section-label">Komplexita nasazení</div><div class="complexity-bar"><div class="complexity-fill-eva" style="width:45%"></div></div><div class="complexity-label">Střední</div></div>
+                  <div class="col-section sara-section"><div class="sara-box eva-sara"><div class="sara-icon">🛡️</div><div><div class="sara-box-title">SARA</div><div class="sara-box-text">Kontrola scénářů - ověřuje průběh a výsledky konverzačních toků.</div></div></div></div>
+                  <div class="col-footer">Snižuje zátěž call centra bez složité integrace</div>
                 </article>
-                <article class="tier-card">
-                  <h5>VB Boost</h5>
-                  <p class="tier-subtitle">Spolehlivé a konzistentní odpovědi</p>
-                  <ul>
-                    <li>Vše z VB Start</li>
-                    <li>Čištění a strukturování znalostí</li>
-                    <li>Ladění odpovědí a AI testování</li>
-                  </ul>
+
+                <article class="card-col eva-card-col tier-perform">
+                  <div class="col-header"><div class="badge">Úroveň 3</div><h2>EVA Mid</h2><div class="value-tag">Reálná automatizace</div><div class="target">Velké firmy</div></div>
+                  <div class="col-section"><div class="section-label">Co řeší</div><p>Procesy vhodné pro automatizaci.</p></div>
+                  <div class="col-section"><div class="section-label">Co dostanete</div><ul class="scope-list"><li class="inherited">Vše z EVA Standard</li><li>AI agenti (multi-skill)</li><li>Napojení na interní systémy</li><li>E2E testing</li></ul></div>
+                  <div class="col-section"><div class="section-label">Součinnost zákazníka</div><ul class="collab-list"><li>Silné IT zapojení</li><li>API / data připojení</li><li>Business + domain expertíza</li></ul></div>
+                  <div class="col-section"><div class="section-label">Komplexita nasazení</div><div class="complexity-bar"><div class="complexity-fill-eva" style="width:72%"></div></div><div class="complexity-label">Vysoká</div></div>
+                  <div class="col-section sara-section"><div class="sara-box eva-sara"><div class="sara-icon">🛡️</div><div><div class="sara-box-title">SARA</div><div class="sara-box-text">Kontrola rozhodování - audituje logiku AI agentů a napojení na firemní data.</div></div></div></div>
+                  <div class="col-footer">Propojuje AI s firemními daty a systémy</div>
                 </article>
-                <article class="tier-card">
-                  <h5>VB Custom</h5>
-                  <p class="tier-subtitle">Enterprise správa znalostí</p>
-                  <ul>
-                    <li>Vlastní logika a workflow automatizace</li>
-                    <li>Systémové integrace</li>
-                    <li>Pokročilý monitoring a governance</li>
-                  </ul>
+
+                <article class="card-col eva-card-col tier-operate">
+                  <div class="col-header"><div class="badge">Úroveň 4</div><h2>EVA Enterprise</h2><div class="value-tag">Výsledek bez starostí</div><div class="target">Firmy bez AI kapacity</div></div>
+                  <div class="col-section"><div class="section-label">Co řeší</div><p>Omezené interní zdroje pro AI rozvoj.</p></div>
+                  <div class="col-section"><div class="section-label">Co dostanete</div><ul class="scope-list"><li class="inherited">Vše z EVA Mid</li><li>Provoz + monitoring</li><li>Continuous tuning</li><li>AI testing + reporting</li></ul></div>
+                  <div class="col-section"><div class="section-label">Součinnost zákazníka</div><ul class="collab-list"><li>Minimální operativa</li><li>Business feedback</li><li>Strategické řízení</li></ul></div>
+                  <div class="col-section"><div class="section-label">Komplexita nasazení</div><div class="complexity-bar"><div class="complexity-fill-eva" style="width:95%"></div></div><div class="complexity-label">Vysoká</div></div>
+                  <div class="col-section sara-section"><div class="sara-box eva-sara"><div class="sara-icon">🛡️</div><div><div class="sara-box-title">SARA</div><div class="sara-box-text">Real-time kontrola - průběžný dohled nad kvalitou a shodou s firemní politikou.</div></div></div></div>
+                  <div class="col-footer">O2 zajišťuje vše - vy se staráte o byznys</div>
                 </article>
               </div>
-            </div>
 
-            <div class="product-block">
-              <h4>Volitelné doplňky</h4>
-              <ul class="addon-list">
-                <li><strong>SARA:</strong> Validace kvality a relevance interních odpovědí</li>
-                <li><strong>Widget:</strong> Vložený asistent v zaměstnaneckých nástrojích</li>
-                <li><strong>AI Voice:</strong> Hands-free přístup ke znalostem</li>
-                <li><strong>Aplikace:</strong> Mobilní nebo webová aplikace pro interní týmy</li>
-              </ul>
+              <aside class="addon-sidebar">
+                <div class="addon-sidebar-title eva-sidebar-title">Volitelné Add-ony<span class="subtitle">dostupné ke všem variantám</span></div>
+                <div class="addon-item-v eva-addon-v"><h4>SARA</h4><p>Automatická kontrola kvality odpovědí AI. Hlídá správnost, tón i soulad s firemní politikou.</p></div>
+                <div class="addon-item-v eva-addon-v"><h4>Widget</h4><p>Embedded chatovací okno přímo na webu - rychlé nasazení bez vývoje.</p></div>
+                <div class="addon-item-v eva-addon-v"><h4>Admin portál</h4><p>GUI pro správu promptů, popisů tools, znalostních zdrojů, verzování změn a publikaci do produkce.</p></div>
+                <div class="addon-item-v eva-addon-v"><h4>AI Voice</h4><p>Propojení technologií pro přirozené hlasové AI reakce.</p></div>
+                <div class="addon-item-v eva-addon-v"><h4>Aplikace</h4><p>Mobilní nebo webová aplikace jako samostatný kanál pro obsluhu zákazníků přes EVA.</p></div>
+              </aside>
             </div>
-
-            <div class="product-block">
-              <h4>Infrastrukturní specifika</h4>
-              <ul class="addon-list">
-                <li><strong>Knowledge plane:</strong> FE, document storage, query/audit databáze, vector index a zdrojové konektory tvoří jádro řešení.</li>
-                <li><strong>LLM vrstva:</strong> Lite LLM s PTU předplatným by měl jít přes O2 gateway, s pay-as-you-go fallback modely pro špičky.</li>
-                <li><strong>Preferovaný start model:</strong> O2-hosted SaaS pro rychlý start, hybrid private connect pro enterprise požadavky na kontrolu dat.</li>
-              </ul>
-            </div>
-          </article>
+          </section>
         </div>
       </section>
 
-      <section class="section chat-section" id="chat">
-        <div class="chat-intro">
-          <p class="section-kicker">Produktový chat</p>
-          <h2>Umožněte zákazníkovi zeptat se na EVA přímo tam, kde hodnotí řešení.</h2>
-          <p>
-            Demo chat je naplněný produktovými znalostmi EVA. Odpovídá na typické otázky kupujících
-            k hodnotě, rozsahu, architektuře, bezpečnosti a MVP use cases.
-          </p>
-        </div>
-        <div class="chat-card">
-          <div class="chat-header">
-            <span class="status-dot"></span>
-            <div><strong>EVA produktový asistent</strong><small>Demo znalostní režim</small></div>
-          </div>
-          <div class="chat-messages" id="chat-messages" aria-live="polite"></div>
-          <form class="chat-form" id="chat-form">
-            <input id="chat-input" autocomplete="off" placeholder="Zeptejte se na architekturu, MVP, ROI nebo bezpečnost..." />
-            <button type="submit">Odeslat</button>
-          </form>
-          <div class="quick-prompts">
-            <button data-question="Čím se EVA liší od chatbota?">Proč ne chatbot?</button>
-            <button data-question="Jaký je rozsah MVP?">Rozsah MVP</button>
-            <button data-question="Jak se EVA integruje s enterprise systémy?">Integrace</button>
-          </div>
+      <section class="section inline-editor-tools" aria-label="Uložení a načtení úprav">
+        <div class="inline-editor-actions">
+          <button type="button" class="inline-editor-button" id="saveInlineEditsButton">Uložit změny</button>
+          <p class="inline-editor-hint" id="inlineEditorStatus">Po úpravě textu klikni na Uložit změny pro přímý zápis do aktuální stránky.</p>
         </div>
       </section>
+
     </main>
 
-    <script src="./script.js"></script>
-  </body>
-</html>
+    <script>
+      const INLINE_EDIT_SELECTORS = [
+        'main .section-kicker',
+        'main h1',
+        'main h2',
+        'main h3',
+        'main h4',
+        'main p',
+        'main li',
+        'main strong',
+        'main .badge',
+        'main .value-tag',
+        'main .target',
+        'main .section-label',
+        'main .complexity-label',
+        'main .sara-box-title',
+        'main .sara-box-text',
+        'main .col-footer',
+        'main .addon-sidebar-title',
+        'main .metric-card span',
+        'main .metric-card strong',
+        'main .shared-block .subtitle'
+      ];
+
+      function initializeInlineEditing() {
+        const editableNodes = document.querySelectorAll(INLINE_EDIT_SELECTORS.join(','));
+
+        editableNodes.forEach((node, index) => {
+          node.setAttribute('contenteditable', 'true');
+          node.setAttribute('spellcheck', 'false');
+          node.classList.add('inline-editable-text');
+          node.setAttribute('title', 'Klikni a uprav text');
+          node.dataset.inlineEditKey = String(index);
+        });
+      }
+
+      function initializeInlineEditPersistence() {
+        const saveButton = document.getElementById('saveInlineEditsButton');
+        const statusNode = document.getElementById('inlineEditorStatus');
+        const defaultStatusText = 'Po úpravě textu klikni na Uložit změny pro přímý zápis do aktuální stránky.';
+        let expectedMtimeMs = null;
+
+        if (!saveButton || !statusNode) {
+          return;
+        }
+
+        statusNode.textContent = defaultStatusText;
+        statusNode.classList.remove('error');
+
+        function setStatus(message, isError) {
+          statusNode.textContent = message;
+          statusNode.classList.toggle('error', !!isError);
+        }
+
+        function getEditorApiBaseUrl() {
+          if (window.EVA_EDITOR_API_URL) {
+            return String(window.EVA_EDITOR_API_URL).replace(/\/$/, '');
+          }
+
+          if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+            return 'http://localhost:8787';
+          }
+
+          return '';
+        }
+
+        async function refreshExpectedMtime(baseUrl) {
+          try {
+            const response = await fetch(`${baseUrl}/api/page-meta?filePath=${encodeURIComponent(window.location.pathname)}`);
+            const result = await response.json().catch(() => ({}));
+            if (response.ok && result.ok && typeof result.mtimeMs === 'number') {
+              expectedMtimeMs = result.mtimeMs;
+            }
+          } catch {
+            expectedMtimeMs = null;
+          }
+        }
+
+        async function checkForExternalFileChange(baseUrl) {
+          try {
+            const response = await fetch(`${baseUrl}/api/page-meta?filePath=${encodeURIComponent(window.location.pathname)}`);
+            const result = await response.json().catch(() => ({}));
+            if (!response.ok || !result.ok || typeof result.mtimeMs !== 'number') {
+              return;
+            }
+
+            if (expectedMtimeMs !== null && Math.floor(result.mtimeMs) !== Math.floor(expectedMtimeMs)) {
+              setStatus('Soubor byl zmenen ve VS Code, nacitam aktualni verzi...', false);
+              window.location.reload();
+              return;
+            }
+
+            expectedMtimeMs = result.mtimeMs;
+          } catch {
+            // Ignore temporary polling errors.
+          }
+        }
+
+        function buildPersistedHtml() {
+          const cloneRoot = document.documentElement.cloneNode(true);
+          cloneRoot.querySelectorAll('.inline-editable-text').forEach((node) => {
+            node.removeAttribute('contenteditable');
+            node.removeAttribute('spellcheck');
+            node.removeAttribute('title');
+            node.removeAttribute('data-inline-edit-key');
+            node.classList.remove('inline-editable-text');
+          });
+
+          cloneRoot.querySelectorAll('[class=""]').forEach((node) => {
+            node.removeAttribute('class');
+          });
+
+          const cloneStatus = cloneRoot.querySelector('#inlineEditorStatus');
+          if (cloneStatus) {
+            cloneStatus.textContent = defaultStatusText;
+            cloneStatus.classList.remove('error');
+          }
+
+          return '<!doctype html>\n' + cloneRoot.outerHTML;
+        }
+
+        async function saveInlineEditsToFile() {
+          setStatus(`Ukladam ${window.location.pathname}...`, false);
+
+          try {
+            const baseUrl = getEditorApiBaseUrl();
+            if (!baseUrl) {
+              throw new Error('Neni nastavena URL pro save API.');
+            }
+
+            const response = await fetch(`${baseUrl}/api/save-page`, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({
+                filePath: window.location.pathname,
+                expectedMtimeMs,
+                html: buildPersistedHtml()
+              })
+            });
+
+            const result = await response.json().catch(() => ({}));
+            if (!response.ok || !result.ok) {
+              throw new Error(result.answer || 'Ulozeni selhalo.');
+            }
+
+            if (typeof result.savedMtimeMs === 'number') {
+              expectedMtimeMs = result.savedMtimeMs;
+            }
+
+            setStatus(`Ulozeno do ${result.savedPath}.`, false);
+            alert(`Ulozeno do souboru: ${result.savedPath}`);
+          } catch (error) {
+            const reason = error && error.message ? error.message : 'Ulozeni selhalo.';
+            setStatus(`Chyba: ${reason} Spust node server/chat-server.js.`, true);
+            alert(`Neulozeno: ${reason}`);
+          }
+        }
+
+        saveButton.addEventListener('click', saveInlineEditsToFile);
+        const baseUrl = getEditorApiBaseUrl();
+        if (baseUrl) {
+          refreshExpectedMtime(baseUrl);
+          window.setInterval(() => {
+            checkForExternalFileChange(baseUrl);
+          }, 3000);
+          document.addEventListener('visibilitychange', () => {
+            if (!document.hidden) {
+              checkForExternalFileChange(baseUrl);
+            }
+          });
+        }
+      }
+
+      initializeInlineEditing();
+      initializeInlineEditPersistence();
+    </script>
+  
+</body></html>

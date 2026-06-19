@@ -324,6 +324,129 @@ async function handleChat(request, response) {
   }
 }
 
+function resolveSavePath(inputPath) {
+  const rawPath = String(inputPath || "").trim();
+  const normalized = rawPath === "/" ? "/index.html" : rawPath;
+  const cleaned = normalized.replace(/\\/g, "/");
+
+  if (!cleaned.startsWith("/") || !cleaned.endsWith(".html")) {
+    throw new Error("filePath must be an absolute .html path like /index-cs.html");
+  }
+
+  const resolved = path.resolve(ROOT_DIR, `.${cleaned}`);
+  if (!resolved.startsWith(ROOT_DIR + path.sep) && resolved !== ROOT_DIR) {
+    throw new Error("Invalid filePath");
+  }
+
+  return resolved;
+}
+
+async function handleSavePage(request, response) {
+  const body = await readJson(request);
+  const html = typeof body.html === "string" ? body.html : "";
+  if (!html.trim()) {
+    sendJson(response, 400, { ok: false, answer: "Missing html content." });
+    return;
+  }
+
+  let targetPath;
+  try {
+    targetPath = resolveSavePath(body.filePath);
+  } catch (error) {
+    sendJson(response, 400, { ok: false, answer: error.message || "Invalid filePath." });
+    return;
+  }
+
+  if (!fs.existsSync(targetPath)) {
+    sendJson(response, 404, { ok: false, answer: "Target file does not exist." });
+    return;
+  }
+
+  const currentStat = fs.statSync(targetPath);
+  if (typeof body.expectedMtimeMs === "number") {
+    const expected = Math.floor(body.expectedMtimeMs);
+    const actual = Math.floor(currentStat.mtimeMs);
+    if (expected !== actual) {
+      sendJson(response, 409, {
+        ok: false,
+        answer: "Soubor byl mezitim zmenen ve VS Code nebo v jinem tabu. Obnov stranku a zkus ulozit znovu.",
+        currentMtimeMs: currentStat.mtimeMs,
+      });
+      return;
+    }
+  }
+
+  fs.writeFileSync(targetPath, html, "utf8");
+  const savedStat = fs.statSync(targetPath);
+  sendJson(response, 200, {
+    ok: true,
+    savedPath: path.relative(ROOT_DIR, targetPath),
+    savedMtimeMs: savedStat.mtimeMs,
+  });
+}
+
+const STATIC_MIME = {
+  ".html": "text/html; charset=utf-8",
+  ".css": "text/css; charset=utf-8",
+  ".js": "application/javascript; charset=utf-8",
+  ".png": "image/png",
+  ".jpg": "image/jpeg",
+  ".jpeg": "image/jpeg",
+  ".webp": "image/webp",
+  ".svg": "image/svg+xml",
+  ".ico": "image/x-icon",
+  ".md": "text/plain; charset=utf-8",
+};
+
+function serveStaticFile(request, response, urlPath) {
+  const safePath = urlPath === "/" ? "/index.html" : urlPath;
+  const filePath = path.join(ROOT_DIR, safePath);
+  const resolved = path.resolve(filePath);
+  if (!resolved.startsWith(ROOT_DIR + path.sep) && resolved !== ROOT_DIR) {
+    response.writeHead(403, { "Content-Type": "text/plain" });
+    response.end("Forbidden");
+    return;
+  }
+  const ext = path.extname(filePath).toLowerCase();
+  const contentType = STATIC_MIME[ext] || "application/octet-stream";
+  fs.readFile(filePath, (err, data) => {
+    if (err) {
+      if (err.code === "ENOENT") {
+        response.writeHead(404, { "Content-Type": "text/plain" });
+        response.end("Not found");
+      } else {
+        response.writeHead(500, { "Content-Type": "text/plain" });
+        response.end("Server error");
+      }
+      return;
+    }
+    response.writeHead(200, { "Content-Type": contentType });
+    response.end(data);
+  });
+}
+
+function handlePageMeta(request, response, url) {
+  let targetPath;
+  try {
+    targetPath = resolveSavePath(url.searchParams.get("filePath"));
+  } catch (error) {
+    sendJson(response, 400, { ok: false, answer: error.message || "Invalid filePath." });
+    return;
+  }
+
+  if (!fs.existsSync(targetPath)) {
+    sendJson(response, 404, { ok: false, answer: "Target file does not exist." });
+    return;
+  }
+
+  const stat = fs.statSync(targetPath);
+  sendJson(response, 200, {
+    ok: true,
+    filePath: path.relative(ROOT_DIR, targetPath),
+    mtimeMs: stat.mtimeMs,
+  });
+}
+
 const server = http.createServer((request, response) => {
   const url = new URL(request.url, `http://${request.headers.host || "localhost"}`);
 
@@ -344,9 +467,29 @@ const server = http.createServer((request, response) => {
     return;
   }
 
+  if (request.method === "GET" && url.pathname === "/api/page-meta") {
+    handlePageMeta(request, response, url);
+    return;
+  }
+
+  if (request.method === "POST" && url.pathname === "/api/save-page") {
+    handleSavePage(request, response).catch((error) => {
+      sendJson(response, 500, { ok: false, answer: error.message || "Save failed." });
+    });
+    return;
+  }
+
+  // Static file fallback — serves the frontend when running in Docker
+  if (request.method === "GET") {
+    serveStaticFile(request, response, url.pathname);
+    return;
+  }
+
   sendJson(response, 404, { answer: "Not found.", citations: [] });
 });
 
 server.listen(PORT, () => {
   console.log(`EVA chat backend listening on http://localhost:${PORT}`);
+  console.log(`Static site:  http://localhost:${PORT}/`);
+  console.log(`Chat API:     http://localhost:${PORT}/api/chat`);
 });

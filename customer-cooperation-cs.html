@@ -2,7 +2,7 @@
 <html lang="cs"><head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>O2 AI | Delivery roadmapa</title>
+    <title>O2 AI | Součinnost zákazníka</title>
     <link rel="stylesheet" href="./styles.css">
   </head>
   <body class="subpage-body">
@@ -16,162 +16,160 @@
       </a>
       <nav class="top-nav" aria-label="Hlavní záložky">
         <a href="./index-cs.html">EVA &amp; Virtual Buddy</a>
-        <a href="./customer-cooperation-cs.html">Součinnost zákazníka</a>
+        <a class="active" href="./customer-cooperation-cs.html">Součinnost zákazníka</a>
         <a href="./architecture-infrastructure-cs.html">Architektura &amp; infrastruktura</a>
-        <a class="active" href="./delivery-plan-cs.html">Delivery roadmapa</a>
+        <a href="./delivery-plan-cs.html">Delivery roadmapa</a>
+        <a class="internal-tab" href="./o2-internal-cs.html">O2 interní</a>
         <a class="internal-tab" href="./product-preparation-cs.html">Příprava produktu</a>
-        <a class="internal-tab" href="./o2-internal-cs.html">Ekonomika</a>
       </nav>
     </header>
 
     <main class="subpage-shell with-tabs">
-
-      <section class="subpage-hero delivery-hero">
-        <p class="section-kicker">Realizace</p>
-        <h1>Delivery Roadmapa</h1>
+      <section class="subpage-hero customer-hero">
+        <p class="section-kicker">Součinnost zákazníka</p>
+        <h1>Co potřebujeme od zákazníka</h1>
         <p>
-          Vzhledem ke komplexnímu řešení EVA je MVP roadmapa primárně definovaná pro VB. EVA může být vystavena pro zákazníky, pokud bude využívat pouze znalostní bázi. Pro zapojení agentského řešení a tools je potřeba customizace na základě prostředí zákazníka</p>
-      </section>
-
-      <section class="topic-summary" aria-label="Principy delivery">
-        <div>
-          <p class="section-kicker">Principy delivery</p>
-          <h2>Roadmapa vede od prvního scope přes pilot až po škálování a řízený provoz.</h2>
-        </div>
-        <p>
-          Každá fáze má jasný výstup, rozhodovací gate a vlastníka. O2 drží opakovatelný delivery postup,
-          kvalitu řešení a provozní governance; zákazník potvrzuje scope, business hodnotu, akceptaci
-          a připravenost na rozšíření.</p>
+          Úspěšné nasazení EVA nebo Virtual Buddy stojí na jasném rozdělení odpovědností. O2 dodává produkt,
+          delivery know-how a provozní governance; zákazník dodává business cíle, obsah, systémové přístupy,
+          bezpečnostní vstupy a validaci výsledků.
+        </p>
       </section>
 
       <section class="subpage-blocks">
         <article class="subpage-block">
-          <h2>Implementační roadmapa řešení (MVP)</h2>
-          <p>Nejdřív se definuje business scope a zdroje, potom se připraví znalostní a datová vrstva, následně kanál, runtime,
-            integrace, testování a teprve potom kontrolovaný pilot.
-          </p>
+          <h2>Součinnost podle oblasti</h2>
           <div class="subpage-grid delivery-model-grid">
             <div class="placeholder-fieldset">
-              <strong>1. Scope a cílové scénáře</strong>
+              <strong>Business owner</strong>
               <ul class="subpage-list">
-                <li>Vybrat 3-5 prioritních use cases pro pilot</li>
-                <li>Rozlišit EVA zákaznické journeys a Buddy interní knowledge scénáře</li>
-                <li>Definovat KPI, akceptační kritéria, fallback a hranice pilotu</li>
+                <li>Definuje očekávaný business výsledek a prioritní use cases</li>
+                <li>Schvaluje cílové zákaznické nebo zaměstnanecké scénáře</li>
+                <li>Potvrzuje KPI, akceptační kritéria a pilotní rozsah</li>
               </ul>
             </div>
             <div class="placeholder-fieldset">
-              <strong>2. Zdroje, data a oprávnění</strong>
+              <strong>Obsah a znalosti</strong>
               <ul class="subpage-list">
-                <li>Identifikovat FAQ, dokumenty, znalostní báze, procesy, API a datové entity</li>
-                <li>U Buddyho připravit zdroje znalostí, metadata a přístupová práva</li>
-                <li>U EVA připravit API, testovací data, autorizaci a pravidla zákaznických akcí</li>
+                <li>Dodává FAQ, znalostní bázi, procesní dokumentaci a zdrojové systémy</li>
+                <li>Pomáhá určit, které zdroje jsou autoritativní</li>
+                <li>Validuje odpovědi, tón komunikace a věcnou správnost</li>
               </ul>
             </div>
             <div class="placeholder-fieldset">
-              <strong>3. Kanál a konverzační vrstva</strong>
+              <strong>IT a integrace</strong>
               <ul class="subpage-list">
-                <li>Nasadit web chat, interní UI</li>
-                <li>Nastavit identity, session state, eskalace, tón komunikace a handover</li>
-                <li>Připravit základní scénáře, prompt pravidla a odpovědní šablony</li>
+                <li>Popisuje API, datové entity, dostupná prostředí a technická omezení</li>
+                <li>Zajišťuje přístupy, testovací data a integrační kontakty</li>
+                <li>Spolupracuje na architektuře, monitoringu a provozních rozhraních</li>
               </ul>
             </div>
             <div class="placeholder-fieldset">
-              <strong>4. Runtime, integrace a pilot</strong>
+              <strong>Security, právní a compliance</strong>
               <ul class="subpage-list">
-                <li>Zapojit RAG pipeline, LLM gateway, monitoring, logging a SARA/testing</li>
-                <li>Validovat integrace, bezpečnost, kvalitu odpovědí a provozní runbooky</li>
-                <li>Spustit pilot na omezeném trafficu nebo vybrané skupině zaměstnanců</li>
+                <li>Definuje pravidla pro data, audit, retention a přístupová práva</li>
+                <li>Schvaluje bezpečnostní model, deployment hranice</li>
+                <li>Určuje pravidla pro eskalaci, lidský dohled a zákaznický dopad</li>
               </ul>
             </div>
           </div>
         </article>
 
         <article class="subpage-block">
-          <h2>Implementační streamy podle části řešení</h2>
-          <p>
-            Některé části běží sekvenčně, jiné paralelně. Zákazník nejvíc ovlivňuje rychlost dodáním zdrojů,
-            přístupů, ownerů a validací; O2 drží návrh řešení, konfiguraci, integrace, testování a provozní readiness.
-          </p>
-          <div class="subpage-grid delivery-model-grid">
+          <h2>Doporučený O2 capability model</h2>
+          <div class="subpage-grid">
             <div class="placeholder-fieldset">
-              <strong>Znalostní a datový stream</strong>
+              <strong>Role na straně O2</strong>
               <ul class="subpage-list">
-                <li>Ingestion dokumentů, FAQ, procesních popisů a metadat</li>
-                <li>Chunking, indexace, embeddings, retrieval pravidla a oprávnění</li>
-                <li>Validace citací, relevance a aktuálnosti zdrojů</li>
+                <li>B2B product owner pro EVA a Virtual Buddy</li>
+                <li>Data Engineer (znalostní báze, datové zdroje)</li>
+                <li>Analytik (scénáře, inkrementální schopnosti)</li>
+                <li>Tester (e2e, QA Engineer senior)</li>
+                <li>SW Engineer (živé datové zdroje, MCP)</li>
+                <li>AI Engineer (consumer agent, datové integrace, prompty)</li>
               </ul>
             </div>
             <div class="placeholder-fieldset">
-              <strong>Konverzační a kanálový stream</strong>
+              <strong>Role očekávané od zákazníka</strong>
               <ul class="subpage-list">
-                <li>UI kanál, widget, interní rozhraní, voice nebo aplikační frontend</li>
-                <li>Dialogové flows, prompt patterns, fallback</li>
-                <li>UAT scénáře pro business uživatele, operátory nebo zaměstnance</li>
+                <li>Business owner s právem rozhodovat o scope a prioritách</li>
+                <li>Domain expert pro validaci odpovědí, scénářů a procesních pravidel</li>
+                <li>Content owner pro FAQ, dokumentaci, znalostní bázi nebo procesní zdroje</li>
+                <li>IT/API owner pro přístupy, prostředí, testovací data a integrační omezení, integrace na BE systémy</li>
+                <li>Security/compliance owner pro data</li>
+                <li>Provozní owner pro akceptaci</li>
               </ul>
             </div>
-            <div class="placeholder-fieldset">
-              <strong>Integrační a security stream</strong>
+            <div class="placeholder-fieldset cadence-fieldset">
+              <strong>Společná provozní cadence</strong>
               <ul class="subpage-list">
-                <li>API napojení, logování, síťové a deployment hranice</li>
-                <li>Testovací data, prostředí, oprávnění a non-functional požadavky</li>
-                <li>Security review, compliance kontroly a schválení provozního modelu</li>
-              </ul>
-            </div>
-            <div class="placeholder-fieldset">
-              <strong>Quality a operations stream</strong>
-              <ul class="subpage-list">
-                <li>SARA pravidla, AI testing, regresní testy a quality gates</li>
-                <li>Monitoring, reporting, alerting, incident proces a runbooky</li>
-                <li>Go-live readiness, pilot tuning a rozhodnutí o scale</li>
+                <li>Týdenní delivery steering během aktivních implementací</li>
+                <li>Týdenní operations review během pilotu a prvního měsíce po go-live</li>
+                <li>Měsíční product a commercial portfolio review</li>
+                <li>Kvartální customer value review a plánování expanze</li>
               </ul>
             </div>
           </div>
         </article>
 
         <article class="subpage-block">
-          <h2>Orientační milníky pro MVP&nbsp;</h2>
-          <p>U Buddyho
-            rozhoduje kvalita znalostních zdrojů, oprávnění, security review a počet interních scénářů ve scope.
-          </p>
-          <div class="milestone-timeline" aria-label="Orientační delivery milníky">
-            <div class="milestone-item">
-              <span>Týden 0</span>
-              <strong>Kick-off a potvrzení decision ownerů</strong>
-              <p>Je dohodnut scope, stakeholders, governance&nbsp;</p>
+          <h2>Rozdíl součinnosti pro EVA a Virtual Buddy</h2>
+          <div class="subpage-grid">
+            <div class="placeholder-fieldset">
+              <strong>EVA</strong>
+              <ul class="subpage-list">
+                <li>Vyžaduje přesné vymezení zákaznických cest, fallbacků a eskalací</li>
+                <li>U vyšších variant potřebuje API, identitu, autorizaci a testovací scénáře</li>
+                <li>Business musí validovat nejen odpověď, ale i správnost provedené akce</li>
+              </ul>
             </div>
-            <div class="milestone-item">
-              <span>Týdny 1-2</span>
-              <strong>Shortlist use cases a KPI baseline</strong>
-              <p>Definovány interní znalostní scénáře, cílové metriky a business case předpoklady.</p>
-            </div>
-            <div class="milestone-item">
-              <span>Týdny 3-4</span>
-              <strong>Schválení solution blueprintu</strong>
-              <p>Architektura, integrace, IAM, logování, fallback a compliance potřeby jsou validované.</p>
-            </div>
-            <div class="milestone-item">
-              <span>Týdny 5-8</span>
-              <strong>MVP scénáře připravené pro UAT</strong>
-              <p>EVA zákaznické flows nebo Buddy knowledge scénáře jsou implementované s potřebnými daty, monitoringem a handover poznámkami.</p>
-            </div>
-            <div class="milestone-item">
-              <span>Týdny 9-10</span>
-              <strong>UAT, security validation a runbooky dokončené</strong>
-              <p>Business users, security owners a provoz potvrzují připravenost na spuštění.</p>
-            </div>
-            <div class="milestone-item">
-              <span>Týdny 11-12</span>
-              <strong>Kontrolovaný pilot go-live</strong>
-              <p>Vybraná skupina zaměstnanců pracuje s řešením&nbsp;</p>
-            </div>
-            <div class="milestone-item">
-              <span>Týdny 13-14</span>
-              <strong>Vyhodnocení pilotu a scale decision</strong>
-              <p>KPI, defekty, eskalace a zpětná vazba zákazníků nebo zaměstnanců určují rollout doporučení.</p>
+            <div class="placeholder-fieldset">
+              <strong>Virtual Buddy</strong>
+              <ul class="subpage-list">
+                <li>Vyžaduje kvalitní znalostní zdroje a jasné vlastnictví dokumentace</li>
+                <li>Klíčová je správa oprávnění a pravidla, kdo má vidět který obsah</li>
+                <li>Validace se soustředí hlavně na relevanci, citace, úplnost a aktuálnost odpovědí</li>
+              </ul>
             </div>
           </div>
         </article>
 
+        <article class="subpage-block">
+          <h2>Minimální vstupy pro první pilot v režimu SaaS&nbsp;</h2>
+          <div class="subpage-grid delivery-model-grid">
+            <div class="placeholder-fieldset">
+              <strong>1. Scope</strong>
+              <ul class="subpage-list">
+                <li>3-5 prioritních use cases</li>
+                <li>Cílová skupina pilotu</li>
+                <li>Metriky úspěchu</li>
+              </ul>
+            </div>
+            <div class="placeholder-fieldset">
+              <strong>2. Zdroje</strong>
+              <ul class="subpage-list">
+                <li>FAQ, dokumenty nebo procesní popisy</li>
+                <li>Autoritativní vlastníci obsahu</li>
+                <li>Pravidla aktualizace zdrojů</li>
+              </ul>
+            </div>
+            <div class="placeholder-fieldset">
+              <strong>3. Technika</strong>
+              <ul class="subpage-list">
+                <li>Kanál pilotu a prostředí</li>
+                <li>Přístupy ke zdrojům nebo API</li>
+                <li>Testovací data a kontakty</li>
+              </ul>
+            </div>
+            <div class="placeholder-fieldset">
+              <strong>4. Governance</strong>
+              <ul class="subpage-list">
+                <li>Rozhodovací owner</li>
+                <li>Akceptační proces</li>
+                <li>Pravidla změn a eskalací</li>
+              </ul>
+            </div>
+          </div>
+        </article>
       </section>
 
       <section class="section inline-editor-tools" aria-label="Uložení úprav stránky">
@@ -192,8 +190,7 @@
         'main p',
         'main li',
         'main strong',
-        'main span',
-        'main .milestone-item span'
+        'main span'
       ];
 
       function initializeInlineEditing() {
